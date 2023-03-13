@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Game.Objects.Transd;
+using FabricWars.Scenes.Board;
 using FabricWars.Utils.Attributes;
 using UnityEngine;
 
@@ -50,7 +51,7 @@ namespace FabricWars.Game.Items
             dragObj = this;
             while (true)
             {
-                var targetPos = GameManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var targetPos = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 transform.position = new Vector3(targetPos.x, targetPos.y, transform.position.z);
             
                 yield return new WaitForFixedUpdate();

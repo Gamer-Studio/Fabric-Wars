@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FabricWars.Game.Items;
 using UnityEngine.AddressableAssets;
 

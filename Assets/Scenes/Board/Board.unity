@@ -342,6 +342,7 @@ MonoBehaviour:
   type: 1
   toggle: {fileID: 425315036}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 425315034}
   _active: 0
 --- !u!114 &483139809
@@ -593,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -149.99998}
+  m_AnchoredPosition: {x: 0, y: -150}
   m_SizeDelta: {x: 0, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525454827
@@ -747,6 +748,7 @@ MonoBehaviour:
   type: 4
   toggle: {fileID: 711286399}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 711286400}
   _active: 0
 --- !u!114 &711286399
@@ -906,7 +908,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 1
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2567,6 +2569,7 @@ MonoBehaviour:
   type: 2
   toggle: {fileID: 957666404}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 957666405}
   _active: 0
 --- !u!114 &957666404
@@ -2855,6 +2858,7 @@ MonoBehaviour:
   type: 8
   toggle: {fileID: 1240195930}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 1240195931}
   _active: 0
 --- !u!114 &1240195930
@@ -3040,6 +3044,7 @@ MonoBehaviour:
   type: 1
   toggle: {fileID: 1686240296}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 1686240297}
   _active: 0
 --- !u!114 &1686240296

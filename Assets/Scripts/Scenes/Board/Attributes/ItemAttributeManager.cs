@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using FabricWars.Game.Items;
+using FabricWars.Utils;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 
 namespace FabricWars.Scenes.Board.Attributes
@@ -7,7 +10,8 @@ namespace FabricWars.Scenes.Board.Attributes
     {
         public static ItemAttributeManager instance { get; private set; }
 
-        public List<ItemAttributeSlot> slots;
+        public List<SerializablePair<ItemAttribute, GaugeInt>> attributeInventory;
+        [SerializeField] private List<ItemAttributeSlot> slots;
 
         private void Awake()
         {
@@ -19,7 +23,5 @@ namespace FabricWars.Scenes.Board.Attributes
             
             instance = this;
         }
-        
-        
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace FabricWars.Game.Items
 {
-    [Flags]
     public enum ItemAttribute
     {
         Causality = 1 << 0,

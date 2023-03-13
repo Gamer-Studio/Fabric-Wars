@@ -214,7 +214,6 @@ GameObject:
   - component: {fileID: 425315034}
   - component: {fileID: 425315036}
   - component: {fileID: 425315037}
-  - component: {fileID: 425315038}
   m_Layer: 5
   m_Name: AttributeSlot_1
   m_TagString: Untagged
@@ -340,38 +339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   toggle: {fileID: 425315036}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
   shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 425315034}
+  type: 1
   _active: 0
---- !u!61 &425315038
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425315032}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: ceee4e55e43687648b70196e1a9ce70d, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &483139809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,6 +708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050cb3ac0b6e4609be6d84a8f56d5dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attributeInventory: []
   slots:
   - {fileID: 425315037}
   - {fileID: 957666403}
@@ -807,11 +781,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
   toggle: {fileID: 711286399}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
   shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 711286400}
+  type: 4
   _active: 0
 --- !u!114 &711286399
 MonoBehaviour:
@@ -2588,11 +2562,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
   toggle: {fileID: 957666404}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
   shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 957666405}
+  type: 2
   _active: 0
 --- !u!114 &957666404
 MonoBehaviour:
@@ -2877,11 +2851,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 8
   toggle: {fileID: 1240195930}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
   shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 1240195931}
+  type: 8
   _active: 0
 --- !u!114 &1240195930
 MonoBehaviour:
@@ -3221,11 +3195,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
   toggle: {fileID: 1686240296}
   activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
   shaderConfig: {fileID: 11400000, guid: 9ce0c5d12d3d41e429578287543f7c20, type: 2}
   image: {fileID: 1686240297}
+  type: 1
   _active: 0
 --- !u!114 &1686240296
 MonoBehaviour:

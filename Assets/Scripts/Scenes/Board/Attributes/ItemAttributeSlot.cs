@@ -9,15 +9,19 @@ namespace FabricWars.Scenes.Board.Attributes
 {
     public class ItemAttributeSlot : MonoBehaviour
     {
+        // Property Ids
         private static readonly int Color = Shader.PropertyToID("_MainColor");
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
         private static readonly int MaskingColor = Shader.PropertyToID("_MaskingColor");
 
-        public ItemAttribute type = ItemAttribute.None;
+        // components
         [SerializeField] private Toggle toggle;
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
+        
+        // data
+        public ItemAttribute type = ItemAttribute.None;
         [SerializeField, GetSet("active")] private bool _active;
 
         public bool active

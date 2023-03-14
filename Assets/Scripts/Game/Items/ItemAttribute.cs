@@ -16,6 +16,7 @@ namespace FabricWars.Game.Items
     {
         public static Color GetColor(this ItemAttribute attribute) => attribute switch
         {
+            ItemAttribute.None => Color.white,
             ItemAttribute.Causality => Color.magenta,
             ItemAttribute.Life => Color.green,
             ItemAttribute.Water => Color.blue,

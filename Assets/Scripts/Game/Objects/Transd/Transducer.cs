@@ -26,7 +26,6 @@ namespace FabricWars.Game.Objects.Transd
                     
                     for (int i = 0, m = value.GetPhysicsShapeCount(); i < m; i++)
                     {
-                        Debug.Log(value.GetPhysicsShape(i).Count);
                         _collider.SetPath(i, value.GetPhysicsShape(i));
                     }
                 }

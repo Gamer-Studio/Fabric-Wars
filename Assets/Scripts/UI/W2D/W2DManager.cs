@@ -20,7 +20,6 @@ namespace FabricWars.UI.W2D
         }
 
         [SerializeField] private Transform beforeTarget;
-        public GameObject test;
 
         private void Update()
         {
@@ -47,7 +46,6 @@ namespace FabricWars.UI.W2D
                         hit.transform.SendMessage("Hover", true, SendMessageOptions.DontRequireReceiver);
                     }
                     beforeTarget = hit.transform;
-                    test.transform.position = new Vector3(hit.point.x, hit.point.y,test.transform.position.z);
                 }
                 else
                 {

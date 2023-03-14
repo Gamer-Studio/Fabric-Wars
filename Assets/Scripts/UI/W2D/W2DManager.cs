@@ -28,7 +28,7 @@ namespace FabricWars.UI.W2D
             {
                 
                 var ray = mainCamera.ViewportPointToRay(mainCamera.ScreenToViewportPoint(Input.mousePosition));
-                var hit = Physics2D.Raycast(ray.origin, ray.direction);
+                var hit = Physics2D.Raycast(ray.origin, Vector2.zero);
                 
                 if (hit.transform)
                 {

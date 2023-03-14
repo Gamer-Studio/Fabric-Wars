@@ -34,6 +34,7 @@ namespace FabricWars.Scenes.Board.Attributes
                 _active = value;
                 if (image && image.material)
                 {
+                    image.material.SetColor(Color, type.GetColor());
                     image.material.SetBool("_Active", value);
                 }
             }
@@ -44,7 +45,6 @@ namespace FabricWars.Scenes.Board.Attributes
             if (activeShader && image)
             {
                 var mat = image.material = new Material(activeShader);
-                mat.SetColor(Color, type.GetColor());
                 mat.SetTexture(MainTex, shaderConfig.texture);
                 mat.SetColor(MaskingColor, shaderConfig.maskColor);
             }

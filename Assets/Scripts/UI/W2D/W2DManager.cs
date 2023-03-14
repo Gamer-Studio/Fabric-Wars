@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 namespace FabricWars.UI.W2D
@@ -7,6 +9,7 @@ namespace FabricWars.UI.W2D
     public class W2DManager : MonoBehaviour
     {
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private CinemachineVirtualCamera vCam;
 
         private void Start()
         {
@@ -17,14 +20,16 @@ namespace FabricWars.UI.W2D
         }
 
         [SerializeField] private Transform beforeTarget;
+        public GameObject test;
 
         private void Update()
         {
             if (mainCamera)
             {
-                var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                
+                var ray = mainCamera.ViewportPointToRay(mainCamera.ScreenToViewportPoint(Input.mousePosition));
                 var hit = Physics2D.Raycast(ray.origin, ray.direction);
-
+                
                 if (hit.transform)
                 {
                     if (Input.GetMouseButtonDown(0))
@@ -42,6 +47,7 @@ namespace FabricWars.UI.W2D
                         hit.transform.SendMessage("Hover", true, SendMessageOptions.DontRequireReceiver);
                     }
                     beforeTarget = hit.transform;
+                    test.transform.position = new Vector3(hit.point.x, hit.point.y,test.transform.position.z);
                 }
                 else
                 {

@@ -19,5 +19,7 @@ namespace FabricWars.Utils.Serialization
             key = this.key;
             value = this.value;
         }
+
+        public static implicit operator SerializablePair<K, V>((K key, V value) pair) => new (pair.key, pair.value);
     }
 }

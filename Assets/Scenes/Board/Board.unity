@@ -230,7 +230,7 @@ RectTransform:
   m_GameObject: {fileID: 425315032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525454826}
@@ -239,7 +239,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425315034
 MonoBehaviour:
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 425315036}
-  activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   image: {fileID: 425315034}
   type: 1
@@ -628,8 +628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.5}
-  m_SizeDelta: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &525454828
 CanvasRenderer:
@@ -652,18 +652,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 4
-    m_Right: 4
-    m_Top: 4
-    m_Bottom: 4
+    m_Left: 8
+    m_Right: 8
+    m_Top: 8
+    m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 8
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 1
+  m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
 --- !u!114 &525454831
 MonoBehaviour:
@@ -727,7 +727,7 @@ RectTransform:
   m_GameObject: {fileID: 711286396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525454826}
@@ -736,7 +736,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &711286398
 MonoBehaviour:
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 711286399}
-  activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   image: {fileID: 711286400}
   type: 4
@@ -2508,7 +2508,7 @@ RectTransform:
   m_GameObject: {fileID: 957666401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525454826}
@@ -2517,7 +2517,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957666403
 MonoBehaviour:
@@ -2532,7 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 957666404}
-  activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   image: {fileID: 957666405}
   type: 2
@@ -2797,7 +2797,7 @@ RectTransform:
   m_GameObject: {fileID: 1240195927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525454826}
@@ -2806,7 +2806,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240195929
 MonoBehaviour:
@@ -2821,10 +2821,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 1240195930}
-  activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   image: {fileID: 1240195931}
-  type: 8
+  type: 0
   _active: 0
 --- !u!114 &1240195930
 MonoBehaviour:
@@ -3141,7 +3141,7 @@ RectTransform:
   m_GameObject: {fileID: 1686240293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525454826}
@@ -3150,7 +3150,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1686240295
 MonoBehaviour:
@@ -3165,10 +3165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 1686240296}
-  activeShader: {fileID: -6465566751694194690, guid: 189c397c8b316c74ebedc6675e4fe31e, type: 3}
+  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   image: {fileID: 1686240297}
-  type: 1
+  type: 0
   _active: 0
 --- !u!114 &1686240296
 MonoBehaviour:

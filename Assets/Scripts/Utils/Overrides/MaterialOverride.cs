@@ -1,4 +1,5 @@
 ﻿using System;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 
 namespace FabricWars.Utils.Overrides
@@ -27,5 +28,11 @@ namespace FabricWars.Utils.Overrides
 
         public static void SetBool(this Material material, string name, bool value) =>
             material.SetInt(name, value ? 1 : 0);
+
+        // TODO
+        public static Material SetConfig(this Material material, params SerializablePair<int, object>[] configs)
+        {
+            return material;
+        }
     }
 }

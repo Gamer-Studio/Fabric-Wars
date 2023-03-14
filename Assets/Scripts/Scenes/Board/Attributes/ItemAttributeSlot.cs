@@ -29,6 +29,8 @@ namespace FabricWars.Scenes.Board.Attributes
             get => _active;
             set
             {
+                if(type == ItemAttribute.None) return;
+                
                 _active = value;
                 if (image && image.material)
                 {
@@ -47,13 +49,7 @@ namespace FabricWars.Scenes.Board.Attributes
                 mat.SetColor(MaskingColor, shaderConfig.maskColor);
             }
 
-            if (toggle != null) toggle.onValueChanged.AddListener(val =>
-            {
-                if (type != ItemAttribute.None)
-                {
-                    active = val;
-                }
-            });
+            if (toggle != null) toggle.onValueChanged.AddListener(val => active = val);
         }
     }
 }

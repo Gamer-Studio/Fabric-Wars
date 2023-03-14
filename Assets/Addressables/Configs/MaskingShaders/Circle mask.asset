@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Circle mask
   m_EditorClassIdentifier: 
   maskColor: {r: 1, g: 1, b: 1, a: 0}
-  texture: {fileID: 2800000, guid: a7cad44b45993b341a38dccc5795cc9c, type: 3}
+  texture: {fileID: 2800000, guid: f789acd6e2429a14e856d5ed4e85d31a, type: 3}

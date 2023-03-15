@@ -1,5 +1,4 @@
 ﻿using FabricWars.Game.Entities.Objects;
-using FabricWars.Game.Objects;
 using UnityEngine;
 
 namespace FabricWars.Game.Entities.Functions

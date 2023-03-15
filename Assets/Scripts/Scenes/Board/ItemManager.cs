@@ -5,15 +5,19 @@ using UnityEngine.Pool;
 
 namespace FabricWars.Scenes.Board
 {
-    public class ItemManager : MonoBehaviour
+    public sealed class ItemManager : MonoBehaviour
     {
         public static ItemManager instance { get; private set; }
         
+        // Base Object
         [SerializeField] private GameObject originalItemPrefab;
+        
+        // Container
         [SerializeField] private Transform itemContainer;
         [SerializeField] private Transform releasedItemContainer;
         [SerializeField] private List<ItemObject> releasedObjects = new();
         [SerializeField] private List<ItemObject> pooledObjects = new();
+        
         private ObjectPool<ItemObject> _pool;
 
         private void Awake()

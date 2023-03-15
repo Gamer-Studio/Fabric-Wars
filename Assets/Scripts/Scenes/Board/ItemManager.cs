@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FabricWars.Game.Items;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace FabricWars.Game.Items
+namespace FabricWars.Scenes.Board
 {
-    public partial class ItemManager : MonoBehaviour
+    public class ItemManager : MonoBehaviour
     {
         public static ItemManager instance { get; private set; }
         
@@ -42,7 +42,7 @@ namespace FabricWars.Game.Items
                     pooledObjects.Remove(item);
                     releasedObjects.Add(item);
                     item.transform.parent = releasedItemContainer;
-                    item.type = None;
+                    item.type = Item.None;
                     item.gameObject.SetActive(false);
                 },
                 item => Debug.Log($"item {item.name} destroy"),

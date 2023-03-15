@@ -19,23 +19,32 @@ namespace FabricWars.Scenes.Board.Attributes
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
-        
+        [SerializeField] private Image backgroundImage;
+
         // data
         [SerializeField, GetSet("type")] private ItemAttribute _type = ItemAttribute.None;
+
         public ItemAttribute type
         {
             get => _type;
             set
             {
-                if (value != ItemAttribute.None) image.enabled = true;
+                if (value != ItemAttribute.None)
+                {
+                    image.enabled = true;
+                    backgroundImage.enabled = true;
+                }
+
                 _type = value;
+                
                 if (image && image.material)
                 {
+                    backgroundImage.color = type.GetColor().A(25 / 255f);
                     image.material.SetColor(Color, value.GetColor());
                 }
             }
         }
-        
+
         [SerializeField, GetSet("active")] private bool _active;
 
         public bool active
@@ -43,8 +52,8 @@ namespace FabricWars.Scenes.Board.Attributes
             get => _active;
             set
             {
-                if(type == ItemAttribute.None) return;
-                
+                if (type == ItemAttribute.None) return;
+
                 _active = value;
                 if (image && image.material)
                 {
@@ -57,16 +66,19 @@ namespace FabricWars.Scenes.Board.Attributes
         {
             if (activeShader && image)
             {
+                var mat = image.material = new Material(activeShader);
+
                 if (type == ItemAttribute.None)
                 {
                     image.enabled = false;
+                    backgroundImage.enabled = false;
                 }
                 else
                 {
-                    var mat = image.material = new Material(activeShader);
                     mat.SetColor(Color, type.GetColor());
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
+                    backgroundImage.color = type.GetColor().A(25 / 255f);
                 }
             }
 

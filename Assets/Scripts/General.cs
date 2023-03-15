@@ -18,7 +18,7 @@ namespace FabricWars
                 items[item.name] = item;
             }).WaitForCompletion();
             
-            ItemManager.InitItems();
+            Item.InitItems();
             
             inited = true;
         }

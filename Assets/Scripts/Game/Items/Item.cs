@@ -1,11 +1,12 @@
 ﻿using System;
+using FabricWars.Scenes.Board;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 
 namespace FabricWars.Game.Items
 {
     [CreateAssetMenu(fileName = "new Item", menuName = "Game/default Item", order = 0)]
-    public class Item : ScriptableObject
+    public partial class Item : ScriptableObject
     {
         public int weight = 0;
         public Sprite sprite;

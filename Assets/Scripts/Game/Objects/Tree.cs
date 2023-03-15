@@ -1,4 +1,5 @@
 ﻿using FabricWars.Game.Items;
+using FabricWars.Scenes.Board;
 using UnityEngine;
 
 namespace FabricWars.Game.Objects
@@ -15,7 +16,7 @@ namespace FabricWars.Game.Objects
             var y = Random.Range(-1, 2);
             if (x == 0 && y == 0) y = 1;
             
-            var item = ItemManager.instance.Create(ItemManager.Log, new Vector2(position.x + x * 0.5f, position.y + y * 0.5f));
+            var item = ItemManager.instance.Create(Item.Log, new Vector2(position.x + x * 0.5f, position.y + y * 0.5f));
 
             item.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
         }

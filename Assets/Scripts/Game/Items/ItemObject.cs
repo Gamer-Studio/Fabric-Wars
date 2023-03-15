@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FabricWars.Game.Objects.Core;
+using FabricWars.Game.Entities.Core;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Attributes;
 using UnityEngine;

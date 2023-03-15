@@ -1,9 +1,9 @@
 ﻿using FabricWars.Utils;
 using UnityEngine;
 
-namespace FabricWars.Game.Entities.Objects
+namespace FabricWars.Game.Entities
 {
-    public class CollectableEntity : EntityObject
+    public class CollectableEntity : Entity
     {
         private static readonly int Cutoff = Shader.PropertyToID("cutoff");
 

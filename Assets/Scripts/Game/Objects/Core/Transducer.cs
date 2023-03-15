@@ -5,7 +5,7 @@ using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 
-namespace FabricWars.Game.Objects.Transd
+namespace FabricWars.Game.Objects.Core
 {
     public class Transducer : Structure
     {

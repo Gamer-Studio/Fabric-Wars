@@ -2,9 +2,9 @@
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 
-namespace FabricWars.Utils.Overrides
+namespace FabricWars.Utils.Extensions
 {
-    public static class MaterialOverride
+    public static class MaterialExtensions
     {
         public static bool GetBool(this Material material, int nameID)
         {

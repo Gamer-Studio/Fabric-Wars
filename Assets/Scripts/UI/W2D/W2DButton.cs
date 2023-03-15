@@ -1,5 +1,5 @@
 ﻿using FabricWars.Utils.Attributes;
-using FabricWars.Utils.Overrides;
+using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;

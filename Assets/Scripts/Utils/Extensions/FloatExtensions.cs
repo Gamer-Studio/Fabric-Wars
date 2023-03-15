@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FabricWars.Utils.Overrides
+namespace FabricWars.Utils.Extensions
 {
-    public static class FloatOverride
+    public static class FloatExtensions
     {
         public static float tolerance = 0.1f;
         

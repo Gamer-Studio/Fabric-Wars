@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 
-namespace FabricWars.Utils.Overrides
+namespace FabricWars.Utils.Extensions
 {
-    public static class TypeOverride
+    public static class TypeExtensions
     {
         public static bool ImplicitlyConvertsTo(this Type type, Type destinationType)
         {

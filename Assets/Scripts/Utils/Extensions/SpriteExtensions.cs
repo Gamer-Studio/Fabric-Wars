@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace FabricWars.Utils.Overrides
+namespace FabricWars.Utils.Extensions
 {
-    public static class SpriteOverride
+    public static class SpriteExtensions
     {
         public static List<Vector2> GetPhysicsShape(this Sprite sprite, int shapeIdx)
         {

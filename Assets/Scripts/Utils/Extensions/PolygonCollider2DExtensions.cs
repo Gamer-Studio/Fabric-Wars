@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace FabricWars.Utils.Overrides
+namespace FabricWars.Utils.Extensions
 {
-    public static class PolygonCollider2DOverride
+    public static class PolygonCollider2DExtensions
     {
         public static void ClearPath(this PolygonCollider2D collider)
         {

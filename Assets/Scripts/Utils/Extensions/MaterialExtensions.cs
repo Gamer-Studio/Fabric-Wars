@@ -29,7 +29,9 @@ namespace FabricWars.Utils.Extensions
         public static void SetBool(this Material material, string name, bool value) =>
             material.SetInt(name, value ? 1 : 0);
 
-        // TODO
+        /* TODO
+         * configs 의 object값을 switch로 분리한뒤에 foreach 통해서 int 키 값에 따라 통합적으로 변경
+         */
         public static Material SetConfig(this Material material, params SerializablePair<int, object>[] configs)
         {
             return material;

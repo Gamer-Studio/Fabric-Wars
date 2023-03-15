@@ -1,10 +1,11 @@
-﻿using FabricWars.Game.Items;
+﻿using FabricWars.Game.Entities.Objects;
+using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
 using UnityEngine;
 
 namespace FabricWars.Game.Objects
 {
-    public class Tree : CollectableStructure
+    public class Tree : CollectableEntity
     {
         private void OnUse()
         {

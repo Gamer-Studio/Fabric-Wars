@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FabricWars.Game.Items
 {
-    [CreateAssetMenu(fileName = "new Item", menuName = "Game/default Item", order = 0)]
+    [CreateAssetMenu(fileName = "new Item", menuName = "Game/Item/Basic Item", order = 0)]
     public partial class Item : ScriptableObject
     {
         public int weight = 0;

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FabricWars.Game.Entities.Objects;
 using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Attributes;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace FabricWars.Game.Objects.Core
 {
-    public class Transducer : Structure
+    public class Transducer : EntityObject
     {
         public static Transducer defaultInstance;
 

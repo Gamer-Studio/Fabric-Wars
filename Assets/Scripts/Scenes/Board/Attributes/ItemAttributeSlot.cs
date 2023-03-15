@@ -1,7 +1,7 @@
 ﻿using FabricWars.Game.Items;
 using FabricWars.Graphics;
 using FabricWars.Utils.Attributes;
-using FabricWars.Utils.Overrides;
+using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +21,21 @@ namespace FabricWars.Scenes.Board.Attributes
         [SerializeField] private Image image;
         
         // data
-        public ItemAttribute type = ItemAttribute.None;
+        [SerializeField, GetSet("type")] private ItemAttribute _type = ItemAttribute.None;
+        public ItemAttribute type
+        {
+            get => _type;
+            set
+            {
+                if (value != ItemAttribute.None) image.enabled = true;
+                _type = value;
+                if (image && image.material)
+                {
+                    image.material.SetColor(Color, value.GetColor());
+                }
+            }
+        }
+        
         [SerializeField, GetSet("active")] private bool _active;
 
         public bool active
@@ -34,7 +48,6 @@ namespace FabricWars.Scenes.Board.Attributes
                 _active = value;
                 if (image && image.material)
                 {
-                    image.material.SetColor(Color, type.GetColor());
                     image.material.SetBool("_Active", value);
                 }
             }
@@ -44,9 +57,17 @@ namespace FabricWars.Scenes.Board.Attributes
         {
             if (activeShader && image)
             {
-                var mat = image.material = new Material(activeShader);
-                mat.SetTexture(MainTex, shaderConfig.texture);
-                mat.SetColor(MaskingColor, shaderConfig.maskColor);
+                if (type == ItemAttribute.None)
+                {
+                    image.enabled = false;
+                }
+                else
+                {
+                    var mat = image.material = new Material(activeShader);
+                    mat.SetColor(Color, type.GetColor());
+                    mat.SetTexture(MainTex, shaderConfig.texture);
+                    mat.SetColor(MaskingColor, shaderConfig.maskColor);
+                }
             }
 
             if (toggle != null) toggle.onValueChanged.AddListener(val => active = val);

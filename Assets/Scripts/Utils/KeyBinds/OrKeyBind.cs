@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,11 +12,14 @@ namespace FabricWars.Utils.KeyBinds
 
         public override bool IsKeyPressed(out KeyCode[] res)
         {
-            List<KeyCode> list = new();
-            foreach (KeyCode code in keys)
-            {
-                if (Input.GetKey(code)) list.Add(code);
-            }
+            var list = keys.Where(Input.GetKey).ToList();
+            res = list.ToArray();
+            return list.Any();
+        }
+        
+        public override bool IsKeyDown(out KeyCode[] res)
+        {
+            var list = keys.Where(Input.GetKeyDown).ToList();
             res = list.ToArray();
             return list.Any();
         }

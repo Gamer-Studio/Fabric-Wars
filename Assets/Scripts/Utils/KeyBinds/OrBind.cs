@@ -11,9 +11,23 @@ namespace FabricWars.Utils.KeyBinds
         public override bool IsKeyPressed(out KeyCode[] res)
         {
             List<KeyCode> list = new();
-            foreach (KeyBind keybind in binds)
+            foreach (var keybind in binds)
             {
                 if (keybind.IsKeyPressed(out KeyCode[] bindKeys))
+                {
+                    list.AddRange(bindKeys);
+                }
+            }
+            res = list.ToArray();
+            return list.Any();
+        }
+
+        public override bool IsKeyDown(out KeyCode[] res)
+        {
+            List<KeyCode> list = new();
+            foreach (var keybind in binds)
+            {
+                if (keybind.IsKeyDown(out KeyCode[] bindKeys))
                 {
                     list.AddRange(bindKeys);
                 }

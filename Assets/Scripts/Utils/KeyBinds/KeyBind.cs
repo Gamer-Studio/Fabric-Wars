@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace FabricWars.Utils.KeyBinds
 {
@@ -10,16 +11,22 @@ namespace FabricWars.Utils.KeyBinds
 
     public class KeyBind : Bind, IKeyBind
     {
-        KeyCode key;
+        private KeyCode _key;
 
-        public virtual void Init(KeyCode[] codes) => key = codes[0];
+        public virtual void Init(KeyCode[] codes) => _key = codes[0];
 
         public override bool IsKeyPressed(out KeyCode[] res)
         {
-            res = new[] { key };
-            return Input.GetKey(key);
+            res = new[] { _key };
+            return Input.GetKey(_key);
+        }
+        
+        public override bool IsKeyDown (out KeyCode[] res)
+        {
+            res = new[] { _key };
+            return Input.GetKeyDown(_key);
         }
 
-        public virtual KeyCode[] GetKeys() => new[] { key };
+        public virtual KeyCode[] GetKeys() => new[] { _key };
     }
 }

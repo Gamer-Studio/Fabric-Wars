@@ -9,29 +9,38 @@ namespace FabricWars.Utils.KeyBinds
     public class KeyBindManager : DDOLSingleton<KeyBindManager>
     {
         public readonly List<BindObject> binds = new();
-        BindObject LastBind => binds.LastOrDefault();
+        private BindObject LastBind => binds.LastOrDefault();
 
-        void Update()
+        private void Update()
         {
-            for (int i = 0; i < binds.Count; i++)
+            foreach (var bind in binds)
             {
-                BindObject bind = binds[i];
                 RunBind(bind);
             }
-            if(LastBind != null) RunBind(LastBind);
         }
 
-        void RunBind(BindObject bind)
+        private void RunBind(BindObject bind)
         {
-            if (bind.bind.IsKeyPressed(out KeyCode[] keyCodes))
+            var pass = false;
+            
+            if (bind.onlyDown && bind.bind.IsKeyDown(out var codes))
             {
+                pass = true;
+                bind.callback(codes, bind);
+                if(bind.once) binds.Remove(bind);
+            }
+            
+            if (!bind.onlyDown && bind.bind.IsKeyPressed(out var keyCodes))
+            {
+                pass = true;
                 bind.callback(keyCodes, bind);
                 if(bind.once) binds.Remove(bind);
             }
-            else bind.elseCallback();
+            
+            if(!pass) bind.elseCallback();
         }
 
-        T CreateKeyBind<T>(params KeyCode[] keyCodes) where T : IKeyBind, new()
+        private static T CreateKeyBind<T>(params KeyCode[] keyCodes) where T : IKeyBind, new()
         { 
             T keyBind = new ();
             keyBind.Init(keyCodes);

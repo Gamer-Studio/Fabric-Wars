@@ -9,7 +9,6 @@ namespace FabricWars.UI.W2D
     public class W2DManager : MonoBehaviour
     {
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private CinemachineVirtualCamera vCam;
 
         private void Start()
         {

@@ -93,6 +93,7 @@ MonoBehaviour:
     - Preload
     - Locale-ko-KR
     - ItemSO
+    - ItemAttributeSO
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3e0deeeab3ff4dc4986d812af18a7f6c, type: 2}

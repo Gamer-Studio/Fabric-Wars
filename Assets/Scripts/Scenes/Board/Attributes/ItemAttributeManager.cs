@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using FabricWars.Game.Items;
-using FabricWars.Utils;
 using FabricWars.Utils.KeyBinds;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
@@ -12,12 +13,14 @@ namespace FabricWars.Scenes.Board.Attributes
     {
         public static ItemAttributeManager instance { get; private set; }
 
-        public SerializableDictionary<ItemAttribute, ItemAttributeSlot> attributeInventory;
+#if UNITY_EDITOR
+        public SerializableDictionary<ItemAttribute, ItemAttributeSlot> attributes;
+#endif
         
         private ObjectPool<ItemAttributeSlot> _pool;
         [SerializeField] private GameObject originalSlot;
         [SerializeField] private Transform slotContainer;
-        [SerializeField] private List<ItemAttributeSlot> slots;
+        public List<ItemAttributeSlot> slots;
 
         private void Awake()
         {
@@ -27,33 +30,60 @@ namespace FabricWars.Scenes.Board.Attributes
                 return;
             }
 
+            slots = new List<ItemAttributeSlot>();
+
             _pool = new ObjectPool<ItemAttributeSlot>(
                 () => Instantiate(originalSlot, slotContainer).GetComponent<ItemAttributeSlot>(),
-                slot =>
-                {
-                    slots.Add(slot);
-                    slot.name = $"AttributeSlot_{slots.Count}";
-                },
-                slot =>
-                {
-                    slots.Remove(slot);
-                },
-                null, false, 1, 20
+                slots.Add,
+                slot => slots.Remove(slot),
+                null, false, 1, 10
             );
             
             KeyBindManager.instance
-                .Bind(BindOptions.downOnly, KeyCode.Alpha1)
-                .Then(() =>
+                .Bind(BindOptions.downOnly, KeyCodeUtils.Numberics)
+                .Then(obj =>
                 {
-                    Debug.Log("1");
+                    if (KeyCodeUtils.TryToInt(obj[0], out var val) && 
+                        val != 0 && val != -1 &&
+                        val <= slots.Count)
+                    {
+                        var slot = slots[val];
+                        slot.active = !slot.active;
+                    }
                 });
-            
+
             instance = this;
         }
 
-        public bool TryGetSlot(ItemAttribute attr, out ItemAttributeSlot slot) =>
-            attributeInventory.TryGetValue(attr, out slot);
-        
-        
+        public bool TryGetSlot(ItemAttribute type, out ItemAttributeSlot slot)
+        {
+            slot = slots.FirstOrDefault(attrSlot => attrSlot.type == type);
+            
+            return slot != null;
+        }
+
+        public bool AddSlot(ItemAttribute attr, int maxValue, out ItemAttributeSlot slot)
+        {
+            slot = null;
+            if (
+                slots.Count > 8 ||
+                attributes.ContainsKey(attr)
+            ) return false;
+            
+
+            slot = _pool.Get();
+            slot.type = attr;
+            slot.storage.max = maxValue;
+            slot.storage.value = 0;
+            attributes[attr] = slot;
+
+            return true;
+        }
+
+        [ContextMenu("Test")]
+        public void Test()
+        {
+            AddSlot(ItemAttribute.Fire, 1000, out _);
+        }
     }
 }

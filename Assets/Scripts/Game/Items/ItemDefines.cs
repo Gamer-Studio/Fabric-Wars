@@ -5,7 +5,7 @@
         private static bool _inited = false;
         public static Item None, Log, Coin;
         
-        public static void InitItems()
+        public static void Init()
         {
             if (_inited) return;
 

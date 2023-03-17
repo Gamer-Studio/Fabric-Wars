@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FabricWars.Utils.KeyBinds
 {
-    static class KeyCodeUtils
+    public static class KeyCodeUtils
     {
-        public static KeyCode[] 
-            Numberics = new []{ 
+        public static KeyCode[]
+            Numberics =
+            {
                 KeyCode.Alpha0,
                 KeyCode.Alpha1,
                 KeyCode.Alpha2,
@@ -19,19 +18,31 @@ namespace FabricWars.Utils.KeyBinds
                 KeyCode.Alpha8,
                 KeyCode.Alpha9,
             },
-            Horizontal = new[]
+            Horizontal =
             {
-                KeyCode.A, 
-                KeyCode.D, 
-                KeyCode.LeftArrow, 
+                KeyCode.A,
+                KeyCode.D,
+                KeyCode.LeftArrow,
                 KeyCode.RightArrow
             },
-            Vertical = new[]
+            Vertical =
             {
                 KeyCode.W,
                 KeyCode.S,
                 KeyCode.UpArrow,
                 KeyCode.DownArrow
             };
+
+        public static bool TryToInt(KeyCode code, out int value)
+        {
+            if (code is >= KeyCode.Alpha0 and <= KeyCode.Alpha9)
+            {
+                value = code - KeyCode.Alpha0;
+                return true;
+            }
+
+            value = -1;
+            return false;
+        }
     }
 }

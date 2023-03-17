@@ -1,5 +1,6 @@
 ﻿using FabricWars.Game.Items;
 using FabricWars.Graphics;
+using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
@@ -36,11 +37,11 @@ namespace FabricWars.Scenes.Board.Attributes
                 }
 
                 _type = value;
-                
+
                 if (image && image.material)
                 {
-                    backgroundImage.color = type.GetColor().A(25 / 255f);
-                    image.material.SetColor(Color, value.GetColor());
+                    backgroundImage.color = type.color.A(25 / 255f);
+                    image.material.SetColor(Color, value.color.A(100 / 255f));
                 }
             }
         }
@@ -62,6 +63,8 @@ namespace FabricWars.Scenes.Board.Attributes
             }
         }
 
+        public GaugeInt storage = new GaugeInt(0, 100, 100);
+
         private void Awake()
         {
             if (activeShader && image)
@@ -75,12 +78,14 @@ namespace FabricWars.Scenes.Board.Attributes
                 }
                 else
                 {
-                    mat.SetColor(Color, type.GetColor());
+                    mat.SetColor(Color, type.color.A(100 / 255f));
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
-                    backgroundImage.color = type.GetColor().A(25 / 255f);
+                    backgroundImage.color = type.color.A(25 / 255f);
                 }
             }
+
+            storage.onChange.AddListener(gauge => image.fillAmount = gauge.GetFillRatio());
 
             if (toggle != null) toggle.onValueChanged.AddListener(val => active = val);
         }

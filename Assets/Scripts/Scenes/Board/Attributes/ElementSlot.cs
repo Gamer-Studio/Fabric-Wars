@@ -5,10 +5,11 @@ using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
+using Element = FabricWars.Game.Elements.Element;
 
 namespace FabricWars.Scenes.Board.Attributes
 {
-    public class ItemAttributeSlot : MonoBehaviour
+    public class ElementSlot : MonoBehaviour
     {
         // Property Ids
         private static readonly int Color = Shader.PropertyToID("_MainColor");
@@ -16,21 +17,20 @@ namespace FabricWars.Scenes.Board.Attributes
         private static readonly int MaskingColor = Shader.PropertyToID("_MaskingColor");
 
         // components
-        [SerializeField] private Toggle toggle;
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
         [SerializeField] private Image backgroundImage;
 
         // data
-        [SerializeField, GetSet("type")] private ItemAttribute _type = ItemAttribute.None;
+        [SerializeField, GetSet("type")] private Element _type = Element.None;
 
-        public ItemAttribute type
+        public Element type
         {
             get => _type;
             set
             {
-                if (value != ItemAttribute.None)
+                if (value != Element.None)
                 {
                     image.enabled = true;
                     backgroundImage.enabled = true;
@@ -53,7 +53,7 @@ namespace FabricWars.Scenes.Board.Attributes
             get => _active;
             set
             {
-                if (type == ItemAttribute.None) return;
+                if (type == Element.None) return;
 
                 _active = value;
                 if (image && image.material)
@@ -63,15 +63,15 @@ namespace FabricWars.Scenes.Board.Attributes
             }
         }
 
-        public GaugeInt storage = new GaugeInt(0, 100, 100);
+        public GaugeInt storage = new (0, 100, 100);
 
-        private void Awake()
+        private void Start()
         {
             if (activeShader && image)
             {
                 var mat = image.material = new Material(activeShader);
 
-                if (type == ItemAttribute.None)
+                if (type == Element.None)
                 {
                     image.enabled = false;
                     backgroundImage.enabled = false;
@@ -84,10 +84,14 @@ namespace FabricWars.Scenes.Board.Attributes
                     backgroundImage.color = type.color.A(25 / 255f);
                 }
             }
+        }
 
+        public void Init(Element type, GaugeInt storage)
+        {
+            this.type = type;
+            this.storage = storage;
             storage.onChange.AddListener(gauge => image.fillAmount = gauge.GetFillRatio());
-
-            if (toggle != null) toggle.onValueChanged.AddListener(val => active = val);
+            image.fillAmount = storage.GetFillRatio();
         }
     }
 }

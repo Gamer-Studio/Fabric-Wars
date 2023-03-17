@@ -11,7 +11,7 @@ namespace FabricWars.Game.Items
         public int weight = 0;
         public Sprite sprite;
         public bool canCatch = true;
-        public SerializableDictionary<ItemAttribute, int> attributes;
+        public SerializableDictionary<Elements.Element, int> attributes;
 
         public ItemObject Create(Vector2 position)
         {

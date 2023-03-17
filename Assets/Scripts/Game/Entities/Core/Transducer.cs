@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
+using FabricWars.Scenes.Board.Attributes;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
+using Element = FabricWars.Game.Elements.Element;
 
 namespace FabricWars.Game.Entities.Core
 {
@@ -38,6 +40,11 @@ namespace FabricWars.Game.Entities.Core
         {
             base.Awake();
             if(!defaultInstance) defaultInstance = this;
+        }
+
+        protected virtual void Start()
+        {
+            ElementManager.instance.AddSlot(Element.Causality, 10, out _);
         }
 
         private Coroutine _resizeRoutine;

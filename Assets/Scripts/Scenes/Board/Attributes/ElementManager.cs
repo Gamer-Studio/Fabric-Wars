@@ -1,27 +1,29 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using FabricWars.Game.Items;
 using FabricWars.Utils.KeyBinds;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Pool;
+using Element = FabricWars.Game.Elements.Element;
 
 namespace FabricWars.Scenes.Board.Attributes
 {
-    public class ItemAttributeManager : MonoBehaviour
+    public class ElementManager : MonoBehaviour
     {
-        public static ItemAttributeManager instance { get; private set; }
+        public static ElementManager instance { get; private set; }
 
 #if UNITY_EDITOR
-        public SerializableDictionary<ItemAttribute, ItemAttributeSlot> attributes;
+        public SerializableDictionary<Element, ElementSlot> attributes;
 #endif
         
-        private ObjectPool<ItemAttributeSlot> _pool;
+        private ObjectPool<ElementSlot> _pool;
         [SerializeField] private GameObject originalSlot;
         [SerializeField] private Transform slotContainer;
-        public List<ItemAttributeSlot> slots;
-
+        
+        public List<ElementSlot> slots = new ();
+        public List<ElementSlot> activeSlots = new ();
+        
         private void Awake()
         {
             if (instance)
@@ -30,10 +32,8 @@ namespace FabricWars.Scenes.Board.Attributes
                 return;
             }
 
-            slots = new List<ItemAttributeSlot>();
-
-            _pool = new ObjectPool<ItemAttributeSlot>(
-                () => Instantiate(originalSlot, slotContainer).GetComponent<ItemAttributeSlot>(),
+            _pool = new ObjectPool<ElementSlot>(
+                () => Instantiate(originalSlot, slotContainer).GetComponent<ElementSlot>(),
                 slots.Add,
                 slot => slots.Remove(slot),
                 null, false, 1, 10
@@ -43,47 +43,38 @@ namespace FabricWars.Scenes.Board.Attributes
                 .Bind(BindOptions.downOnly, KeyCodeUtils.Numberics)
                 .Then(obj =>
                 {
-                    if (KeyCodeUtils.TryToInt(obj[0], out var val) && 
-                        val != 0 && val != -1 &&
-                        val <= slots.Count)
-                    {
-                        var slot = slots[val];
-                        slot.active = !slot.active;
-                    }
+                    if (!KeyCodeUtils.TryToInt(obj[0], out var val) ||
+                        val is 0 or -1 ||
+                        val > slots.Count) return;
+                    var slot = slots[val - 1];
+                    slot.active = !slot.active;
+                    if (slot.active) activeSlots.Add(slot);
+                    else activeSlots.Remove(slot);
                 });
 
             instance = this;
         }
 
-        public bool TryGetSlot(ItemAttribute type, out ItemAttributeSlot slot)
+        public bool TryGetSlot(Element type, out ElementSlot slot)
         {
             slot = slots.FirstOrDefault(attrSlot => attrSlot.type == type);
             
             return slot != null;
         }
 
-        public bool AddSlot(ItemAttribute attr, int maxValue, out ItemAttributeSlot slot)
+        public bool AddSlot(Element attr, int maxValue, out ElementSlot slot)
         {
             slot = null;
             if (
                 slots.Count > 8 ||
                 attributes.ContainsKey(attr)
             ) return false;
-            
 
             slot = _pool.Get();
-            slot.type = attr;
-            slot.storage.max = maxValue;
-            slot.storage.value = 0;
+            slot.Init(attr, new (0, maxValue, 0));
             attributes[attr] = slot;
 
             return true;
-        }
-
-        [ContextMenu("Test")]
-        public void Test()
-        {
-            AddSlot(ItemAttribute.Fire, 1000, out _);
         }
     }
 }

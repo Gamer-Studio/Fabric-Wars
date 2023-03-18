@@ -1,7 +1,9 @@
 ﻿using System;
+using FabricWars.Game.Elements;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Items
 {
@@ -11,7 +13,7 @@ namespace FabricWars.Game.Items
         public int weight = 0;
         public Sprite sprite;
         public bool canCatch = true;
-        public SerializableDictionary<Elements.Element, int> attributes;
+        public SerializableDictionary<Element, int> elements;
 
         public ItemObject Create(Vector2 position)
         {

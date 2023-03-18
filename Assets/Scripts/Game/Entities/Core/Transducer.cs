@@ -124,9 +124,15 @@ namespace FabricWars.Game.Entities.Core
 
         public void ConsumeItem(ItemObject obj)
         {
-            if (ItemManager.instance)
+            if (!ItemManager.instance) return;
+            
+            ItemManager.instance.Release(obj);
+
+            if (!ElementManager.instance) return;
+            
+            foreach (var (element, value) in obj.type.elements)
             {
-                ItemManager.instance.Release(obj);
+                ElementManager.instance.AddElementValue(element, value);
             }
         }
     }

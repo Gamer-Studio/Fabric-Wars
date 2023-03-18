@@ -5,16 +5,13 @@ using FabricWars.Utils.KeyBinds;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Scenes.Board.Elements
 {
     public class ElementManager : MonoBehaviour
     {
         public static ElementManager instance { get; private set; }
-
-#if UNITY_EDITOR
-        public SerializableDictionary<Element, ElementSlot> attributes;
-#endif
         
         private ObjectPool<ElementSlot> _pool;
         [SerializeField] private GameObject originalSlot;
@@ -34,7 +31,11 @@ namespace FabricWars.Scenes.Board.Elements
             _pool = new ObjectPool<ElementSlot>(
                 () => Instantiate(originalSlot, slotContainer).GetComponent<ElementSlot>(),
                 slots.Add,
-                slot => slots.Remove(slot),
+                slot =>
+                {
+                    activeSlots.Remove(slot);
+                    slots.Remove(slot);
+                },
                 null, false, 1, 10
             );
             
@@ -67,21 +68,33 @@ namespace FabricWars.Scenes.Board.Elements
             return slot != null;
         }
 
-        public bool AddSlot(Element attr, int maxValue, out ElementSlot slot)
+        public bool AddSlot(Element element, int maxValue, out ElementSlot slot)
         {
             slot = null;
-            if (
-                slots.Count > 8 ||
-                attributes.ContainsKey(attr)
-            ) return false;
-
+            if (slots.Count > 8 || IsSlotExist(element)) return false;
+            
             slot = _pool.Get();
-            slot.Init(attr, new (0, maxValue, 0));
-            attributes[attr] = slot;
+            slot.Init(element, new (0, maxValue, 0));
 
             return true;
         }
 
+        public void RemoveSlot(Element element)
+        {
+            if (slots.Count == 0) return;
+            
+            if (!IsSlotExist(element)) return;
+
+            var slot = slots.FirstOrDefault(attrSlot => attrSlot.element == element);
+            
+            _pool.Release(slot);
+        }
+
+        public bool IsSlotExist(Element element)
+        {
+            return slots.Any(attrSlot => attrSlot.element == element);
+        }
+        
         public void SetElementValue(Element element, int value)
         {
             if (TryGetSlot(element, out var slot))
@@ -95,6 +108,11 @@ namespace FabricWars.Scenes.Board.Elements
             if (TryGetSlot(element, out var slot))
             {
                 slot.storage.value += value;
+            }
+            else
+            {
+                AddSlot(element, 10, out slot);
+                slot.storage.value = value;
             }
         }
 

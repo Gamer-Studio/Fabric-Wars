@@ -65,7 +65,7 @@ namespace FabricWars.Scenes.Board.Elements
             }
         }
 
-        public GaugeInt storage = new(0, 100, 100);
+        public GaugeInt storage = new(0, 100, 0);
 
         private void Start()
         {
@@ -89,7 +89,7 @@ namespace FabricWars.Scenes.Board.Elements
             }
         }
         
-        private bool syncStorageValue = false;
+        private bool _syncStorageValue = false;
         
         [SerializeField, GetSet("activeValue")] private int _activeValue = 0;
 
@@ -98,7 +98,7 @@ namespace FabricWars.Scenes.Board.Elements
             get => _activeValue;
             set
             {
-                if (!elementActive) return;
+                if (!elementActive || _syncStorageValue) return;
                 
                 _activeValue = value > storage.value ? storage.value : value;
                 image.fillAmount = (float)(_activeValue - storage.min) / (storage.max - storage.min);
@@ -113,7 +113,7 @@ namespace FabricWars.Scenes.Board.Elements
             {
                 backgroundFillImage.fillAmount = gauge.GetFillRatio();
 
-                if (syncStorageValue) activeValue = storage.value;
+                if (_syncStorageValue) activeValue = storage.value;
                 else if (activeValue > gauge.value) activeValue = gauge.value;
             });
             backgroundFillImage.fillAmount = storage.GetFillRatio();
@@ -124,14 +124,14 @@ namespace FabricWars.Scenes.Board.Elements
         {
             elementActive = !elementActive;
             image.enabled = elementActive;
-            syncStorageValue = elementActive;
+            _syncStorageValue = elementActive;
         }
 
         public void Activate(int value)
         {
             if(value < 0) value = 0;
             
-            syncStorageValue = false;
+            _syncStorageValue = false;
             elementActive = true;
             image.enabled = true;
             activeValue = storage.value < value ? storage.value : value;

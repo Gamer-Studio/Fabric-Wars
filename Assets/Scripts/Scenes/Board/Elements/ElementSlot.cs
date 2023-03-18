@@ -1,13 +1,12 @@
-﻿using FabricWars.Game.Items;
+﻿using FabricWars.Game.Elements;
 using FabricWars.Graphics;
 using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
-using Element = FabricWars.Game.Elements.Element;
 
-namespace FabricWars.Scenes.Board.Attributes
+namespace FabricWars.Scenes.Board.Elements
 {
     public class ElementSlot : MonoBehaviour
     {
@@ -20,6 +19,7 @@ namespace FabricWars.Scenes.Board.Attributes
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
+        [SerializeField] private Image fillImage;
         [SerializeField] private Image backgroundImage;
 
         // data
@@ -41,6 +41,7 @@ namespace FabricWars.Scenes.Board.Attributes
                 if (image && image.material)
                 {
                     backgroundImage.color = type.color.A(25 / 255f);
+                    fillImage.color = type.color.A(100 / 255f);
                     image.material.SetColor(Color, value.color.A(100 / 255f));
                 }
             }
@@ -74,6 +75,7 @@ namespace FabricWars.Scenes.Board.Attributes
                 if (type == Element.None)
                 {
                     image.enabled = false;
+                    fillImage.enabled = false;
                     backgroundImage.enabled = false;
                 }
                 else
@@ -90,8 +92,17 @@ namespace FabricWars.Scenes.Board.Attributes
         {
             this.type = type;
             this.storage = storage;
-            storage.onChange.AddListener(gauge => image.fillAmount = gauge.GetFillRatio());
-            image.fillAmount = storage.GetFillRatio();
+            storage.onChange.AddListener(gauge => fillImage.fillAmount = gauge.GetFillRatio());
+            fillImage.fillAmount = storage.GetFillRatio();
+        }
+
+        public void Activate()
+        {
+        }
+
+        public void Activate(int value)
+        {
+            
         }
     }
 }

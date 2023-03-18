@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FabricWars.Game.Items;
+using FabricWars.Game.Elements;
 using FabricWars.Utils.KeyBinds;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Pool;
-using Element = FabricWars.Game.Elements.Element;
 
-namespace FabricWars.Scenes.Board.Attributes
+namespace FabricWars.Scenes.Board.Elements
 {
     public class ElementManager : MonoBehaviour
     {
@@ -43,13 +42,24 @@ namespace FabricWars.Scenes.Board.Attributes
                 .Bind(BindOptions.downOnly, KeyCodeUtils.Numberics)
                 .Then(obj =>
                 {
+                    if (EVIDialogue.isActiveAndEnabled) return;
+
                     if (!KeyCodeUtils.TryToInt(obj[0], out var val) ||
                         val is 0 or -1 ||
                         val > slots.Count) return;
+                    
                     var slot = slots[val - 1];
-                    slot.active = !slot.active;
-                    if (slot.active) activeSlots.Add(slot);
-                    else activeSlots.Remove(slot);
+                    
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        GetElementInputValue(slot);
+                    }
+                    else
+                    {
+                        slot.active = !slot.active;
+                        if (slot.active) activeSlots.Add(slot);
+                        else activeSlots.Remove(slot);
+                    }
                 });
 
             instance = this;
@@ -91,6 +101,13 @@ namespace FabricWars.Scenes.Board.Attributes
             {
                 slot.storage.value += value;
             }
+        }
+
+        // TODO: 이걸로 유저가 설정한 원소(Element) 수량 가져와서  ElementSlot에 해당 값만큼 설정해서 활성화하게 할 생각
+        [SerializeField] private ElementValueInputDialogue EVIDialogue;
+        private int GetElementInputValue(ElementSlot slot)
+        {
+            return 0;
         }
     }
 }

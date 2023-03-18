@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
-using FabricWars.Scenes.Board.Attributes;
+using FabricWars.Scenes.Board.Elements;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
@@ -42,8 +42,10 @@ namespace FabricWars.Game.Entities.Core
             if(!defaultInstance) defaultInstance = this;
         }
 
-        protected virtual void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             ElementManager.instance.AddSlot(Element.Causality, 10, out _);
         }
 

@@ -15,4 +15,4 @@ MonoBehaviour:
   products:
   - key: {fileID: 11400000, guid: 1c24fee2cfa34a94daf8c108563d3a17, type: 2}
     value: 1
-  cooldown: 3
+  cooldown: 1

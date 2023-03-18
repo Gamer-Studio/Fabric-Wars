@@ -16,7 +16,7 @@ namespace FabricWars
         {
             if (inited) return;
 
-            Addressables.LoadAssetsAsync<Element>(new AssetLabelReference { labelString = "ItemAttributeSO" },
+            Addressables.LoadAssetsAsync<Element>(new AssetLabelReference { labelString = "ElementSO" },
                 attr => elements[attr.name] = attr).WaitForCompletion();
             
             Element.Init();

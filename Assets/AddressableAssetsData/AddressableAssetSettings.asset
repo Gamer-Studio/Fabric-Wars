@@ -94,6 +94,7 @@ MonoBehaviour:
     - Locale-ko-KR
     - ItemSO
     - ItemAttributeSO
+    - ScopedRecipe
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3e0deeeab3ff4dc4986d812af18a7f6c, type: 2}

@@ -76,5 +76,21 @@ namespace FabricWars.Scenes.Board.Attributes
 
             return true;
         }
+
+        public void SetElementValue(Element element, int value)
+        {
+            if (TryGetSlot(element, out var slot))
+            {
+                slot.storage.value = value;
+            }
+        }
+        
+        public void AddElementValue(Element element, int value)
+        {
+            if (TryGetSlot(element, out var slot))
+            {
+                slot.storage.value += value;
+            }
+        }
     }
 }

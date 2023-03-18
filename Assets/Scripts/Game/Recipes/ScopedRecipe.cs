@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FabricWars.Game.Recipes
 {
-    [CreateAssetMenu(fileName = "new Scoped Recipe", menuName = "Game/Recipe/Entity Recipe", order = 1)]
+    [CreateAssetMenu(fileName = "new Scoped Recipe", menuName = "Game/Recipe/Scoped Recipe", order = 1)]
     public class ScopedRecipe : Recipe
     {
         public GameObject entity;

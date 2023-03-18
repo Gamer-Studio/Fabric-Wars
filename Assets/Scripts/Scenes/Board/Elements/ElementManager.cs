@@ -21,7 +21,7 @@ namespace FabricWars.Scenes.Board.Elements
         [SerializeField] private Transform slotContainer;
         
         public List<ElementSlot> slots = new ();
-        public List<ElementSlot> activeSlots = new ();
+        [SerializeField] private List<ElementSlot> activeSlots = new ();
         
         private void Awake()
         {
@@ -50,16 +50,11 @@ namespace FabricWars.Scenes.Board.Elements
                     
                     var slot = slots[val - 1];
                     
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        GetElementInputValue(slot);
-                    }
-                    else
-                    {
-                        slot.active = !slot.active;
-                        if (slot.active) activeSlots.Add(slot);
-                        else activeSlots.Remove(slot);
-                    }
+                    if (Input.GetKey(KeyCode.LeftShift)) slot.Activate(GetElementInputValue(slot));
+                    else slot.Activate();
+                    
+                    if (slot.elementActive) activeSlots.Add(slot);
+                    else activeSlots.Remove(slot);
                 });
 
             instance = this;
@@ -67,7 +62,7 @@ namespace FabricWars.Scenes.Board.Elements
 
         public bool TryGetSlot(Element type, out ElementSlot slot)
         {
-            slot = slots.FirstOrDefault(attrSlot => attrSlot.type == type);
+            slot = slots.FirstOrDefault(attrSlot => attrSlot.element == type);
             
             return slot != null;
         }
@@ -108,6 +103,12 @@ namespace FabricWars.Scenes.Board.Elements
         private int GetElementInputValue(ElementSlot slot)
         {
             return 0;
+        }
+
+        public IEnumerable<(Element element, int value)> GetActiveElements()
+        {
+            return from slot in activeSlots
+                select (slot.element, slot.activeValue);
         }
     }
 }

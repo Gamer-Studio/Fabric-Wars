@@ -4,6 +4,7 @@ using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace FabricWars.Scenes.Board.Elements
@@ -19,15 +20,15 @@ namespace FabricWars.Scenes.Board.Elements
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
-        [SerializeField] private Image fillImage;
+        [FormerlySerializedAs("fillImage")] [SerializeField] private Image backgroundFillImage;
         [SerializeField] private Image backgroundImage;
 
         // data
-        [SerializeField, GetSet("type")] private Element _type = Element.None;
+        [SerializeField, GetSet("element")] private Element _element = Element.None;
 
-        public Element type
+        public Element element
         {
-            get => _type;
+            get => _element;
             set
             {
                 if (value != Element.None)
@@ -36,27 +37,27 @@ namespace FabricWars.Scenes.Board.Elements
                     backgroundImage.enabled = true;
                 }
 
-                _type = value;
+                _element = value;
 
                 if (image && image.material)
                 {
-                    backgroundImage.color = type.color.A(25 / 255f);
-                    fillImage.color = type.color.A(100 / 255f);
+                    backgroundImage.color = element.color.A(25 / 255f);
+                    backgroundFillImage.color = element.color.A(100 / 255f);
                     image.material.SetColor(Color, value.color.A(100 / 255f));
                 }
             }
         }
 
-        [SerializeField, GetSet("active")] private bool _active;
+        [SerializeField, GetSet("elementActive")] private bool _elementActive;
 
-        public bool active
+        public bool elementActive
         {
-            get => _active;
+            get => _elementActive;
             set
             {
-                if (type == Element.None) return;
+                if (element == Element.None) return;
 
-                _active = value;
+                _elementActive = value;
                 if (image && image.material)
                 {
                     image.material.SetBool("_Active", value);
@@ -64,7 +65,7 @@ namespace FabricWars.Scenes.Board.Elements
             }
         }
 
-        public GaugeInt storage = new (0, 100, 100);
+        public GaugeInt storage = new(0, 100, 100);
 
         private void Start()
         {
@@ -72,37 +73,68 @@ namespace FabricWars.Scenes.Board.Elements
             {
                 var mat = image.material = new Material(activeShader);
 
-                if (type == Element.None)
+                if (element == Element.None)
                 {
                     image.enabled = false;
-                    fillImage.enabled = false;
+                    backgroundFillImage.enabled = false;
                     backgroundImage.enabled = false;
                 }
                 else
                 {
-                    mat.SetColor(Color, type.color.A(100 / 255f));
+                    mat.SetColor(Color, element.color.A(100 / 255f));
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
-                    backgroundImage.color = type.color.A(25 / 255f);
+                    backgroundImage.color = element.color.A(25 / 255f);
                 }
             }
         }
+        
+        private bool syncStorageValue = false;
+        
+        [SerializeField, GetSet("activeValue")] private int _activeValue = 0;
 
-        public void Init(Element type, GaugeInt storage)
+        public int activeValue
         {
-            this.type = type;
-            this.storage = storage;
-            storage.onChange.AddListener(gauge => fillImage.fillAmount = gauge.GetFillRatio());
-            fillImage.fillAmount = storage.GetFillRatio();
+            get => _activeValue;
+            set
+            {
+                if (!elementActive) return;
+                
+                _activeValue = value > storage.value ? storage.value : value;
+                image.fillAmount = (float)(_activeValue - storage.min) / (storage.max - storage.min);
+            }
         }
+
+        public void Init(Element element, GaugeInt storage)
+        {
+            this.element = element;
+            this.storage = storage;
+            storage.onChange.AddListener(gauge =>
+            {
+                backgroundFillImage.fillAmount = gauge.GetFillRatio();
+
+                if (syncStorageValue) activeValue = storage.value;
+                else if (activeValue > gauge.value) activeValue = gauge.value;
+            });
+            backgroundFillImage.fillAmount = storage.GetFillRatio();
+        }
+        
 
         public void Activate()
         {
+            elementActive = !elementActive;
+            image.enabled = elementActive;
+            syncStorageValue = elementActive;
         }
 
         public void Activate(int value)
         {
+            if(value < 0) value = 0;
             
+            syncStorageValue = false;
+            elementActive = true;
+            image.enabled = true;
+            activeValue = storage.value < value ? storage.value : value;
         }
     }
 }

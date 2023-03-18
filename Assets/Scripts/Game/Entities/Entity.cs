@@ -25,7 +25,6 @@ namespace FabricWars.Game.Entities
             {
                 foreach (var function in AddFunctionOnStartup)
                 {
-                    Debug.Log(function.name);
                     AddFunction(function);
                 }
             }

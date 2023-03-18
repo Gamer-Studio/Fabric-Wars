@@ -2,10 +2,8 @@
 using System.Linq;
 using FabricWars.Game.Elements;
 using FabricWars.Utils.KeyBinds;
-using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 
 namespace FabricWars.Scenes.Board.Elements
 {

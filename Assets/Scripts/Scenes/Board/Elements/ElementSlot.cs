@@ -20,7 +20,9 @@ namespace FabricWars.Scenes.Board.Elements
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image image;
-        [FormerlySerializedAs("fillImage")] [SerializeField] private Image backgroundFillImage;
+
+        [SerializeField] private Image backgroundFillImage;
+
         [SerializeField] private Image backgroundImage;
 
         // data
@@ -48,7 +50,8 @@ namespace FabricWars.Scenes.Board.Elements
             }
         }
 
-        [SerializeField, GetSet("elementActive")] private bool _elementActive;
+        [SerializeField, GetSet("elementActive")]
+        private bool _elementActive;
 
         public bool elementActive
         {
@@ -58,10 +61,6 @@ namespace FabricWars.Scenes.Board.Elements
                 if (element == Element.None) return;
 
                 _elementActive = value;
-                if (image && image.material)
-                {
-                    image.material.SetBool("_Active", value);
-                }
             }
         }
 
@@ -84,22 +83,24 @@ namespace FabricWars.Scenes.Board.Elements
                     mat.SetColor(Color, element.color.A(100 / 255f));
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
+                    image.material.SetBool("_Active", true);
                     backgroundImage.color = element.color.A(25 / 255f);
                 }
             }
         }
-        
-        private bool _syncStorageValue = false;
-        
-        [SerializeField, GetSet("activeValue")] private int _activeValue = 0;
+
+        private bool _storageValueSync = false;
+
+        [SerializeField, GetSet("activeValue")]
+        private int _activeValue = 0;
 
         public int activeValue
         {
             get => _activeValue;
             set
             {
-                if (!elementActive || _syncStorageValue) return;
-                
+                if (!elementActive || !_storageValueSync) return;
+
                 _activeValue = value > storage.value ? storage.value : value;
                 image.fillAmount = (float)(_activeValue - storage.min) / (storage.max - storage.min);
             }
@@ -113,27 +114,25 @@ namespace FabricWars.Scenes.Board.Elements
             {
                 backgroundFillImage.fillAmount = gauge.GetFillRatio();
 
-                if (_syncStorageValue) activeValue = storage.value;
+                if (_storageValueSync) activeValue = storage.value;
                 else if (activeValue > gauge.value) activeValue = gauge.value;
             });
             backgroundFillImage.fillAmount = storage.GetFillRatio();
         }
-        
+
 
         public void Activate()
         {
             elementActive = !elementActive;
-            image.enabled = elementActive;
-            _syncStorageValue = elementActive;
+            _storageValueSync = elementActive;
         }
 
         public void Activate(int value)
         {
-            if(value < 0) value = 0;
-            
-            _syncStorageValue = false;
+            if (value < 0) value = 0;
+
+            _storageValueSync = false;
             elementActive = true;
-            image.enabled = true;
             activeValue = storage.value < value ? storage.value : value;
         }
     }

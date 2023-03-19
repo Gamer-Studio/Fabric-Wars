@@ -1,6 +1,7 @@
 ﻿using FabricWars.Game.Elements;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Recipes
 {
@@ -10,7 +11,6 @@ namespace FabricWars.Game.Recipes
         public GameObject entity;
         public SerializablePair<Element, int>[] consumes;
 
-        public SerializablePair<Element, int>[] minScope;
-        public SerializablePair<Element, int>[] maxScope;
+        public SerializablePair<Element, int>[] scopes;
     }
 }

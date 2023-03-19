@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Graphics.W2D
 {
@@ -18,7 +19,8 @@ namespace FabricWars.Graphics.W2D
             }
         }
 
-        [SerializeField] private Transform beforeTarget;
+        [SerializeField] private Transform _beforeTarget;
+        internal Transform beforeTarget => _beforeTarget;
 
         private void Update()
         {
@@ -35,23 +37,23 @@ namespace FabricWars.Graphics.W2D
                     if (Input.GetMouseButtonUp(0))
                         hit.transform.SendMessage("OnClick", false, SendMessageOptions.DontRequireReceiver);
 
-                    if (beforeTarget != hit.transform)
+                    if (_beforeTarget != hit.transform)
                     {
-                        if (beforeTarget)
+                        if (_beforeTarget)
                         {
-                            beforeTarget.SendMessage("Hover", false, SendMessageOptions.DontRequireReceiver);
+                            _beforeTarget.SendMessage("Hover", false, SendMessageOptions.DontRequireReceiver);
                         }
 
                         hit.transform.SendMessage("Hover", true, SendMessageOptions.DontRequireReceiver);
                     }
-                    beforeTarget = hit.transform;
+                    _beforeTarget = hit.transform;
                 }
                 else
                 {
-                    if (beforeTarget)
+                    if (_beforeTarget)
                     {
-                        beforeTarget.SendMessage("Hover", false, SendMessageOptions.DontRequireReceiver);
-                        beforeTarget = null;
+                        _beforeTarget.SendMessage("Hover", false, SendMessageOptions.DontRequireReceiver);
+                        _beforeTarget = null;
                     }
                 }
             }

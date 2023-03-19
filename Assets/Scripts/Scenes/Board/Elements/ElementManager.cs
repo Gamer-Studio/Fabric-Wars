@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
+using FabricWars.Graphics.W2D;
 using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;
@@ -23,8 +24,7 @@ namespace FabricWars.Scenes.Board.Elements
         public List<ElementSlot> slots = new();
         [SerializeField] private List<ElementSlot> activeSlots = new();
 
-        [Header("Entity Builder")] 
-        private Camera _mainCamera;
+        [Header("Entity Builder")] private Camera _mainCamera;
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Transform objectContainer;
 
@@ -71,10 +71,14 @@ namespace FabricWars.Scenes.Board.Elements
             instance = this;
         }
 
+        [SerializeField] private W2DManager w2dManager;
+
         private void Update()
         {
             if (Input.GetMouseButtonUp(0) && tilemap != null)
             {
+                if (w2dManager == null || w2dManager.beforeTarget != null) return;
+                
                 var mPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 var targetPos = new Vector3Int(
                     (int)mPos.x - (mPos.x < 0 ? 1 : 0),
@@ -84,7 +88,7 @@ namespace FabricWars.Scenes.Board.Elements
                 if (tilemap.GetTile(targetPos) != null)
                 {
                     var recipes = new List<ScopedRecipe>();
-                    
+
                     foreach (var slot in activeSlots)
                     {
                         if (recipes.Count > 0)
@@ -97,8 +101,10 @@ namespace FabricWars.Scenes.Board.Elements
                                     {
                                         return activeSlot.activeValue < scope.value;
                                     }
+
                                     return true;
                                 }
+
                                 return false;
                             });
                             break;
@@ -108,7 +114,7 @@ namespace FabricWars.Scenes.Board.Elements
                         {
                             if (slot.activeValue >= scope) recipes.Add(recipe);
                         }
-                            
+
                         recipes.AddRange(from pair in General.recipeScopes[Element.None] select pair.recipe);
                     }
 
@@ -177,7 +183,7 @@ namespace FabricWars.Scenes.Board.Elements
             }
             else
             {
-                if(value > 0) AddSlot(element, 10, out slot);
+                if (value > 0) AddSlot(element, 10, out slot);
                 slot.storage.value = value;
             }
         }

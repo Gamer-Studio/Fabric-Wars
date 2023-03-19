@@ -9,13 +9,10 @@ namespace FabricWars.Editor
     public static class Initializer
     {
         static Initializer(){
-            EditorApplication.playModeStateChanged += state =>
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
             {
-                if (state == PlayModeStateChange.EnteredPlayMode && SceneManager.GetActiveScene().name != "Init")
-                {
-                    General.Initialization();
-                }
-            };
+                General.Initialization();
+            }
         }
     }
 }

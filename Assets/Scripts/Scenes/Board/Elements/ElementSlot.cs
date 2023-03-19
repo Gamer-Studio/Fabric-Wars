@@ -126,6 +126,7 @@ namespace FabricWars.Scenes.Board.Elements
         {
             elementActive = !elementActive;
             _storageValueSync = elementActive;
+            activeValue = storage.value;
         }
 
         public void Activate(int value)

@@ -16,16 +16,14 @@ namespace FabricWars.Scenes.Board.Elements
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
         private static readonly int MaskingColor = Shader.PropertyToID("_MaskingColor");
 
-        // components
+        [Header("Components")]
         [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
-        [SerializeField] private Image image;
-
+        [SerializeField] private Image activeFillImage;
         [SerializeField] private Image backgroundFillImage;
-
         [SerializeField] private Image backgroundImage;
 
-        // data
+        [Header("Properties")]
         [SerializeField, GetSet("element")] private Element _element = Element.None;
 
         public Element element
@@ -35,17 +33,17 @@ namespace FabricWars.Scenes.Board.Elements
             {
                 if (value != Element.None)
                 {
-                    image.enabled = true;
+                    activeFillImage.enabled = true;
                     backgroundImage.enabled = true;
                 }
 
                 _element = value;
 
-                if (image && image.material)
+                if (activeFillImage && activeFillImage.material)
                 {
                     backgroundImage.color = element.color.A(25 / 255f);
                     backgroundFillImage.color = element.color.A(100 / 255f);
-                    image.material.SetColor(Color, value.color.A(100 / 255f));
+                    activeFillImage.material.SetColor(Color, value.color.A(100 / 255f));
                 }
             }
         }
@@ -61,6 +59,8 @@ namespace FabricWars.Scenes.Board.Elements
                 if (element == Element.None) return;
 
                 _elementActive = value;
+                activeFillImage.enabled = value;
+                activeFillImage.fillAmount = backgroundFillImage.fillAmount;
             }
         }
 
@@ -68,13 +68,13 @@ namespace FabricWars.Scenes.Board.Elements
 
         private void Start()
         {
-            if (activeShader && image)
+            if (activeShader && activeFillImage)
             {
-                var mat = image.material = new Material(activeShader);
+                var mat = activeFillImage.material = new Material(activeShader);
 
                 if (element == Element.None)
                 {
-                    image.enabled = false;
+                    activeFillImage.enabled = false;
                     backgroundFillImage.enabled = false;
                     backgroundImage.enabled = false;
                 }
@@ -83,7 +83,7 @@ namespace FabricWars.Scenes.Board.Elements
                     mat.SetColor(Color, element.color.A(100 / 255f));
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
-                    image.material.SetBool("_Active", true);
+                    activeFillImage.material.SetBool("_Active", true);
                     backgroundImage.color = element.color.A(25 / 255f);
                 }
             }
@@ -102,7 +102,7 @@ namespace FabricWars.Scenes.Board.Elements
                 if (!elementActive || !_storageValueSync) return;
 
                 _activeValue = value > storage.value ? storage.value : value;
-                image.fillAmount = (float)(_activeValue - storage.min) / (storage.max - storage.min);
+                activeFillImage.fillAmount = (float)(_activeValue - storage.min) / (storage.max - storage.min);
             }
         }
 
@@ -118,6 +118,7 @@ namespace FabricWars.Scenes.Board.Elements
                 else if (activeValue > gauge.value) activeValue = gauge.value;
             });
             backgroundFillImage.fillAmount = storage.GetFillRatio();
+            activeFillImage.fillAmount = 0;
         }
 
 

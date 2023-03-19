@@ -131,6 +131,8 @@ namespace FabricWars.Game.Entities.Core
                 ElementManager.instance.AddElementValue(element, value);
             }
             
+            ElementManager.instance.AddElementValue(Element.Causality, 1);
+            
             ItemManager.instance.Release(obj);
         }
     }

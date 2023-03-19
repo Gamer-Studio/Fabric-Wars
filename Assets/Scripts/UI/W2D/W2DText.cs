@@ -38,7 +38,7 @@ namespace FabricWars.UI.W2D
             {
                 if (_meshRenderer) _meshRenderer.sortingOrder = value;
 #if UNITY_EDITOR
-                sortingOrder = value;
+                _sortingOrder = value;
 #endif
             }
         }

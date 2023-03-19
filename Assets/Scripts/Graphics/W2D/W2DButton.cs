@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace FabricWars.UI.W2D
+namespace FabricWars.Graphics.W2D
 {
     [RequireComponent(typeof(Collider2D)), AddComponentMenu("W2D/W2D Button")]
     public class W2DButton : MonoBehaviour

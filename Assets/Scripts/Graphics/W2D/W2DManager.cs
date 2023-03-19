@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-namespace FabricWars.UI.W2D
+namespace FabricWars.Graphics.W2D
 {
     [AddComponentMenu("W2D/W2D Manager")]
     public class W2DManager : MonoBehaviour

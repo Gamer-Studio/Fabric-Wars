@@ -3,7 +3,7 @@ using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using UnityEngine;
 
-namespace FabricWars.UI.W2D
+namespace FabricWars.Graphics.W2D
 {
     [AddComponentMenu("W2D/W2D ProgressBar")]
     public class W2DProgressBar : MonoBehaviour

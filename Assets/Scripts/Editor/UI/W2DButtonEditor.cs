@@ -1,5 +1,5 @@
 ﻿using System;
-using FabricWars.UI.W2D;
+using FabricWars.Graphics.W2D;
 using UnityEditor;
 using UnityEngine;
 

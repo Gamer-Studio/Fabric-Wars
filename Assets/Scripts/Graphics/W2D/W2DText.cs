@@ -3,7 +3,7 @@ using FabricWars.Utils.Attributes;
 using UnityEngine;
 using UnityEngine.Localization;
 
-namespace FabricWars.UI.W2D
+namespace FabricWars.Graphics.W2D
 {
     [AddComponentMenu("W2D/W2D Text")]
     public class W2DText : MonoBehaviour

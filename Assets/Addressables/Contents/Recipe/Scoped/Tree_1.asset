@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933b278f926a482496faff9c1ac3a071, type: 3}
   m_Name: Tree_1
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
-  consumes: []
-  minScope: []
-  maxScope: []
+  entity: {fileID: 322692411829617752, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
+  consumes:
+  - key: {fileID: 11400000, guid: 1c24fee2cfa34a94daf8c108563d3a17, type: 2}
+    value: 1
+  scopes:
+  - key: {fileID: 11400000, guid: 1c24fee2cfa34a94daf8c108563d3a17, type: 2}
+    value: 1

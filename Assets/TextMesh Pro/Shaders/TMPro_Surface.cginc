@@ -43,7 +43,7 @@ void PixShader(Input input, inout SurfaceOutput o)
 #endif
 
 	// Signed distance
-	float c = tex2D(main_tex, input.uv_MainTex).a;
+	float c = tex2D(_MainTex, input.uv_MainTex).a;
 	float sd = (.5 - c - input.param.x) * scale + .5;
 	float outline = _OutlineWidth*_ScaleRatioA * scale;
 	float softness = _OutlineSoftness*_ScaleRatioA * scale;

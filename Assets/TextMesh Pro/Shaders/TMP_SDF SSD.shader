@@ -224,7 +224,7 @@ SubShader {
         {
             UNITY_SETUP_INSTANCE_ID(input);
 
-            float c = tex2D(main_tex, input.atlas).a;
+            float c = tex2D(_MainTex, input.atlas).a;
 
             float2 pixelSize = float2(ddx(input.atlas.y), ddy(input.atlas.y));
             pixelSize *= _TextureWidth * .75;

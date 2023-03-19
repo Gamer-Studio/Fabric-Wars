@@ -63,14 +63,14 @@ SubShader {
 			float2 texcoord1 : TEXCOORD1;
 		};
 
-		struct v2_f {
+		struct v2f {
 			float4 vertex		: POSITION;
 			fixed4 color		: COLOR;
 			float2 texcoord0	: TEXCOORD0;
 			float4 mask			: TEXCOORD2;
 		};
 
-		sampler2D 	main_tex;
+		sampler2D 	_MainTex;
 		fixed4		_Color;
 		float		_DiffusePower;
 
@@ -80,9 +80,9 @@ SubShader {
 		uniform float		_MaskSoftnessX;
 		uniform float		_MaskSoftnessY;
 
-		v2_f vert (appdata_t v)
+		v2f vert (appdata_t v)
 		{
-			v2_f OUT;
+			v2f OUT;
 			float4 vert = v.vertex;
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
@@ -105,9 +105,9 @@ SubShader {
 			return OUT;
 		}
 
-		fixed4 frag (v2_f IN) : COLOR
+		fixed4 frag (v2f IN) : COLOR
 		{
-			fixed4 color = fixed4(IN.color.rgb, IN.color.a * tex2D(main_tex, IN.texcoord0).a);
+			fixed4 color = fixed4(IN.color.rgb, IN.color.a * tex2D(_MainTex, IN.texcoord0).a);
 
 			// Alternative implementation to UnityGet2DClipping with support for softness.
 			#if UNITY_UI_CLIP_RECT

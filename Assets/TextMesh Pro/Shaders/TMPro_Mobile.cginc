@@ -97,7 +97,7 @@ float4 PixShader(pixel_t input) : SV_Target
 {
     UNITY_SETUP_INSTANCE_ID(input);
 
-    float d = tex2D(main_tex, input.texcoord0.xy).a;
+    float d = tex2D(_MainTex, input.texcoord0.xy).a;
 
     float2 UV = input.texcoord0.xy;
     float scale = rsqrt(abs(ddx(UV.x) * ddy(UV.y) - ddy(UV.x) * ddx(UV.y))) * input.param.y;

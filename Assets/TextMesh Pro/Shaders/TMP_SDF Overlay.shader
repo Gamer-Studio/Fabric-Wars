@@ -237,7 +237,7 @@ SubShader {
 		{
 			UNITY_SETUP_INSTANCE_ID(input);
 
-			float c = tex2D(main_tex, input.atlas).a;
+			float c = tex2D(_MainTex, input.atlas).a;
 
 		#ifndef UNDERLAY_ON
 			clip(c - input.param.x);

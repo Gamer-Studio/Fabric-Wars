@@ -197,7 +197,7 @@ SubShader {
 		{
 			UNITY_SETUP_INSTANCE_ID(input);
 
-			half d = tex2D(main_tex, input.texcoord0.xy).a * input.param.x;
+			half d = tex2D(_MainTex, input.texcoord0.xy).a * input.param.x;
 			half4 c = input.faceColor * saturate(d - input.param.w);
 
 		#ifdef OUTLINE_ON

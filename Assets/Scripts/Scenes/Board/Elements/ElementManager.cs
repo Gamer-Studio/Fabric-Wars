@@ -10,6 +10,7 @@ using SRF;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace FabricWars.Scenes.Board.Elements
 {
@@ -78,7 +79,7 @@ namespace FabricWars.Scenes.Board.Elements
             if (Input.GetMouseButtonUp(0) && tilemap != null)
             {
                 if (w2dManager == null || w2dManager.beforeTarget != null) return;
-                
+
                 var mPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 var targetPos = new Vector3Int(
                     (int)mPos.x - (mPos.x < 0 ? 1 : 0),
@@ -121,6 +122,7 @@ namespace FabricWars.Scenes.Board.Elements
                     if (recipes.Count > 0)
                     {
                         var result = recipes.Random();
+
 
                         foreach (var (element, consume) in result.consumes)
                         {
@@ -183,8 +185,11 @@ namespace FabricWars.Scenes.Board.Elements
             }
             else
             {
-                if (value > 0) AddSlot(element, 10, out slot);
-                slot.storage.value = value;
+                if (value > 0 &&
+                    AddSlot(element, 10, out slot))
+                {
+                    slot.storage.value = value;
+                }
             }
         }
 

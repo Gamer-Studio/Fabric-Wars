@@ -1,11 +1,11 @@
 ﻿using System.Collections;
+using FabricWars.Game.Elements;
 using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
 using FabricWars.Scenes.Board.Elements;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
-using Element = FabricWars.Game.Elements.Element;
 
 namespace FabricWars.Game.Entities.Core
 {
@@ -26,12 +26,13 @@ namespace FabricWars.Game.Entities.Core
                 if (value.GetPhysicsShapeCount() > 0 && _collider)
                 {
                     _collider.pathCount = value.GetPhysicsShapeCount();
-                    
+
                     for (int i = 0, m = value.GetPhysicsShapeCount(); i < m; i++)
                     {
                         _collider.SetPath(i, value.GetPhysicsShape(i));
                     }
                 }
+
                 if (_renderer) _renderer.sprite = value;
             }
         }
@@ -39,18 +40,18 @@ namespace FabricWars.Game.Entities.Core
         protected override void Awake()
         {
             base.Awake();
-            if(!defaultInstance) defaultInstance = this;
+            if (!defaultInstance) defaultInstance = this;
         }
 
         protected override void Start()
         {
             base.Start();
-            
+
             ElementManager.instance.AddSlot(Element.Causality, 10, out _);
         }
 
         private Coroutine _resizeRoutine;
-        
+
         private void Hover(bool inputValue)
         {
             if (_resizeRoutine != null)
@@ -58,7 +59,7 @@ namespace FabricWars.Game.Entities.Core
                 StopCoroutine(_resizeRoutine);
                 _resizeRoutine = null;
             }
-            
+
             _resizeRoutine = StartCoroutine(ResizeTransducer(inputValue));
         }
 
@@ -66,8 +67,8 @@ namespace FabricWars.Game.Entities.Core
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if(!ItemObject.dragObj) return;
-            
+            if (!ItemObject.dragObj) return;
+
             if (col.CompareTag("Item") && ItemObject.dragObj.gameObject == col.gameObject)
             {
                 if (_resizeRoutine != null)
@@ -83,7 +84,8 @@ namespace FabricWars.Game.Entities.Core
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (ItemObject.dragObj == null || (other.CompareTag("Item") && ItemObject.dragObj.gameObject == other.gameObject))
+            if (ItemObject.dragObj == null ||
+                (other.CompareTag("Item") && ItemObject.dragObj.gameObject == other.gameObject))
             {
                 if (_resizeRoutine != null)
                 {
@@ -99,7 +101,7 @@ namespace FabricWars.Game.Entities.Core
         [SerializeField] private int minSize = 1;
         [SerializeField] private int maxSize = 3;
         [SerializeField] private float resizeSpeed = 1;
-        
+
         private IEnumerator ResizeTransducer(bool dir)
         {
             while (true)
@@ -108,9 +110,9 @@ namespace FabricWars.Game.Entities.Core
                 {
                     var scale = transform.localScale;
                     var resizeVal = (dir ? Time.deltaTime : -Time.deltaTime) * resizeSpeed;
-                
+
                     transform.localScale = new Vector3(scale.x + resizeVal, scale.y + resizeVal, scale.z);
-                
+
                     yield return new WaitForFixedUpdate();
                 }
                 else
@@ -125,14 +127,15 @@ namespace FabricWars.Game.Entities.Core
         public void ConsumeItem(ItemObject obj)
         {
             if (!ElementManager.instance && !ItemManager.instance) return;
-            
+
             foreach (var (element, value) in obj.type.elements)
             {
-                ElementManager.instance.AddElementValue(element, value);
+                var eValue = Random.Range(0, value + 1);
+                ElementManager.instance.AddElementValue(element, eValue);
             }
-            
+
             ElementManager.instance.AddElementValue(Element.Causality, 1);
-            
+
             ItemManager.instance.Release(obj);
         }
     }

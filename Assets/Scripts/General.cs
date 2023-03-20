@@ -26,13 +26,16 @@ namespace FabricWars
                     elements[element.name] = element;
                     recipeScopes[element] = new List<(int, ScopedRecipe)>();
                 }).WaitForCompletion();
+            
+            Debug.Log($"Loaded {elements.Count} elements");
 
             Element.Init();
-            Debug.Log("Loaded " + elements.Count + " item attributes");
-
+            
             Addressables.LoadAssetsAsync<Item>(new AssetLabelReference { labelString = "ItemSO" },
                 item => items[item.name] = item).WaitForCompletion();
 
+            Debug.Log($"Loaded {items.Count} items");
+            
             Item.Init();
 
             Addressables.LoadAssetsAsync<ScopedRecipe>(new AssetLabelReference { labelString = "ScopedRecipe" },
@@ -50,6 +53,8 @@ namespace FabricWars
                         recipeScopes[Element.None].Add((0, recipe));
                     }
                 }).WaitForCompletion();
+            
+            Debug.Log($"Loaded {recipeScopes.Count} scoped recipes");
             
             inited = true;
         }

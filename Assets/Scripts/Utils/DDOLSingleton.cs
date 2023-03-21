@@ -2,7 +2,7 @@
 
 namespace FabricWars.Utils
 {
-    public class DDOLSingleton <T> : MonoBehaviour where T : MonoBehaviour
+    public class DDOLSingleton <T> : MonoBehaviour where T : DDOLSingleton<T>
     {
         private static T _instance;
         public static T instance
@@ -18,6 +18,7 @@ namespace FabricWars.Utils
                         position = Vector3.zero
                     }
                 };
+                
                 DontDestroyOnLoad(obj);
                 
                 var comp = obj.AddComponent<T>();

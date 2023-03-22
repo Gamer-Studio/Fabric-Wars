@@ -36,6 +36,11 @@ namespace FabricWars.Scenes.Board.Elements
                 Destroy(this);
                 return;
             }
+            
+            // Test
+            var dic = new Dictionary<string, KeyCode>();
+            JsonUtility.ToJson(dic);
+            //
 
             _mainCamera = Camera.main;
 

@@ -12,11 +12,21 @@ namespace FabricWars
         public Settings()
         {
             Debug.Log("Loading Settings");
+            //var keyData = JsonUtility.FromJson<SettingsJson>(File.ReadAllText("Settings.json"));
         }
 
         ~Settings()
         {
             Debug.Log("Unloading Settings");
+
+            if (!Application.isEditor)
+            {
+                
+            }
+            else
+            {
+                Debug.Log("Not saving key mappings");
+            }
         }
     }
 }

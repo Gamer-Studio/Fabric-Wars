@@ -1,19 +1,31 @@
-﻿namespace FabricWars.Game.Items
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
+namespace FabricWars.Game.Items
 {
     public partial class Item
     {
-        private static bool _inited = false;
+        private static bool _loaded = false;
+        
+        public static readonly Dictionary<string, Item> allocated = new();
+        
         public static Item None, Log, Coin;
         
-        public static void Init()
+        public static void Load()
         {
-            if (_inited) return;
+            if (_loaded) return;
+            
+            Addressables.LoadAssetsAsync<Item>(new AssetLabelReference { labelString = "ItemSO" },
+                item => allocated[item.name] = item).WaitForCompletion();
 
-            None = General.items["None"];
-            Log = General.items["Log"];
-            Coin = General.items["Coin"];
+            allocated.TryGetValue("None", out None);
+            allocated.TryGetValue("Log", out Log);
+            allocated.TryGetValue("Coin", out Coin);
 
-            _inited = true;
+            Debug.Log($"{allocated.Count} items loaded");
+            
+            _loaded = true;
         }
     }
 }

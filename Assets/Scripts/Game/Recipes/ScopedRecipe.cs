@@ -1,7 +1,6 @@
 ﻿using FabricWars.Game.Elements;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Recipes
 {

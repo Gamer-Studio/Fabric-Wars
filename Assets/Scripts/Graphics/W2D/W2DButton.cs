@@ -1,8 +1,6 @@
 ﻿using FabricWars.Utils.Attributes;
-using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 namespace FabricWars.Graphics.W2D
 {

@@ -4,7 +4,6 @@ using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace FabricWars.Scenes.Board.Elements

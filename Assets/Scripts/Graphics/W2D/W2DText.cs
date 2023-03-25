@@ -1,5 +1,4 @@
-﻿using System;
-using FabricWars.Utils.Attributes;
+﻿using FabricWars.Utils.Attributes;
 using UnityEngine;
 using UnityEngine.Localization;
 

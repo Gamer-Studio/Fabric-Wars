@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
@@ -10,7 +9,6 @@ using SRF;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Tilemaps;
-using Random = UnityEngine.Random;
 
 namespace FabricWars.Scenes.Board.Elements
 {

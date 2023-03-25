@@ -1,6 +1,4 @@
-﻿using System;
-using FabricWars.Utils;
-using FabricWars.Utils.Attributes;
+﻿using FabricWars.Utils.Attributes;
 using UnityEngine;
 
 namespace FabricWars.Graphics.W2D

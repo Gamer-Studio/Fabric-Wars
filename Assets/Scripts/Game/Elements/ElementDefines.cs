@@ -6,16 +6,13 @@ namespace FabricWars.Game.Elements
 {
     public partial class Element
     {
-        private static bool _loaded = false;
         
         public static readonly Dictionary<string, Element> allocated = new();
 
         public static Element None, Causality, Life, Water, Fire, Gold;
 
-        public static IEnumerable<Element> Load()
+        internal static IEnumerable<Element> Load()
         {
-            if (_loaded) return null;
-            
             // Loading addressable elements data
             var loadedData = new List<Element>();
             
@@ -35,7 +32,6 @@ namespace FabricWars.Game.Elements
             allocated.TryGetValue("Gold", out Gold);
             
             Debug.Log($"{loadedData.Count} elements loaded");
-            _loaded = true;
             
             return loadedData;
         }

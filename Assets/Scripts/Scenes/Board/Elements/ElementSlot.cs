@@ -1,5 +1,5 @@
 ﻿using FabricWars.Game.Elements;
-using FabricWars.Graphics;
+using FabricWars.Graphics.Shaders;
 using FabricWars.Utils;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;

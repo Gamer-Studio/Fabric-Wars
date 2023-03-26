@@ -1,4 +1,6 @@
-﻿using FabricWars.Utils;
+﻿using FabricWars.Game.Items;
+using FabricWars.Scenes.Board;
+using FabricWars.Utils;
 using UnityEngine;
 
 namespace FabricWars.Game.Entities
@@ -7,23 +9,28 @@ namespace FabricWars.Game.Entities
     {
         private static readonly int Cutoff = Shader.PropertyToID("cutoff");
 
+        [Header("Components")]
         [SerializeField] private SpriteRenderer fillSprite;
 
-        public GaugeInt storage = new GaugeInt(0, 1, 1);
+        [Header("CollectableEntity Configuration")]
+        public Item dropItem = Item.None;
+        public int dropMaxAmount = 1;
+        public int dropMinAmount = 1;
+        public GaugeInt repeatCount = new(0, 1, 1);
 
         protected override void Awake()
         {
             base.Awake();
 
-            storage.onChange.AddListener(gauge => { fillSprite.material.SetFloat(Cutoff, gauge.GetFillRatio()); });
+            repeatCount.onChange.AddListener(gauge => { fillSprite.material.SetFloat(Cutoff, gauge.GetFillRatio()); });
         }
 
         private void OnClick(bool val)
         {
             if (val)
             {
-                storage.value -= 1;
-                var ratio = storage.GetFillRatio();
+                repeatCount.value -= 1;
+                var ratio = repeatCount.GetFillRatio();
                 if (ratio >= 0)
                 {
                     SendMessage("OnUse", SendMessageOptions.DontRequireReceiver);
@@ -40,10 +47,33 @@ namespace FabricWars.Game.Entities
 
         private void OnUse()
         {
+            if(!ItemManager.instance) return;
+            if(dropItem == null || dropItem == Item.None) return;
+            
+            var position = transform.position;
+            int dropCount;
+
+            if (dropMaxAmount == dropMinAmount) dropCount = dropMaxAmount;
+            else
+            {
+                dropCount = Random.Range(dropMinAmount, dropMaxAmount);
+            }
+            
+            for (var i = 0; i < dropCount; i++)
+            {
+                var x = Random.Range(-1, 2);
+                var y = Random.Range(-1, 2);
+                if (x == 0 && y == 0) y = 1;
+            
+                var item = ItemManager.instance.Create(dropItem, new Vector2(position.x + x * 0.5f, position.y + y * 0.5f));
+
+                item.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            }
         }
 
         private void OnBreak()
         {
+            Destroy(gameObject);
         }
     }
 }

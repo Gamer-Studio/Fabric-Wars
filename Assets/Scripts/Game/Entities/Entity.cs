@@ -7,13 +7,14 @@ namespace FabricWars.Game.Entities
 {
     public partial class Entity : MonoBehaviour
     {
-        public GaugeInt health;
-
+        [Header("Functions")]
         [SerializeField] private EntityFunction[] AddFunctionOnStartup;
-
         [SerializeField] private List<EntityFunction> activeFunctions = new();
         private readonly Dictionary<EntityFunction, Coroutine> _functions = new ();
-
+        
+        [Header("Entity Configuration")]
+        public GaugeInt health = new(0, 10, 10);
+        
         protected virtual void Awake()
         {
             

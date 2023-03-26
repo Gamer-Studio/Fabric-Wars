@@ -751,7 +751,6 @@ MonoBehaviour:
   tilemap: {fileID: 946506932}
   objectContainer: {fileID: 222930987}
   w2dManager: {fileID: 1719033827}
-  tile: {fileID: 0}
   EVIDialogue: {fileID: 308929349}
 --- !u!114 &534972188
 MonoBehaviour:
@@ -2691,6 +2690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b939a68ea24d42aea62ae37de94154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AddFunctionOnStartup: []
+  activeFunctions: []
   health:
     max: 1000
     min: 0
@@ -2698,8 +2699,6 @@ MonoBehaviour:
     onChange:
       m_PersistentCalls:
         m_Calls: []
-  AddFunctionOnStartup: []
-  activeFunctions: []
   _collider: {fileID: 1911710293}
   _renderer: {fileID: 1911710292}
   _sprite: {fileID: 21300000, guid: 85af7aa76955e2e4096d30adb4ddf14c, type: 3}
@@ -2913,14 +2912,6 @@ PrefabInstance:
     - target: {fileID: 322692411829617755, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 322692411829617758, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
-      propertyPath: storage.max
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 322692411829617758, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
-      propertyPath: storage._value
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}

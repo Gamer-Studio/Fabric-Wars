@@ -45,23 +45,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 322692411829617752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80bb946a416443f88b422cb3be23d86f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b4f11529c974ca29f143dc0fa09fb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health:
-    max: 0
-    min: 0
-    _value: 0
-    onChange:
-      m_PersistentCalls:
-        m_Calls: []
   AddFunctionOnStartup: []
   activeFunctions: []
-  fillSprite: {fileID: 322692411928711429}
-  storage:
+  health:
     max: 10
     min: 0
     _value: 10
+    onChange:
+      m_PersistentCalls:
+        m_Calls: []
+  fillSprite: {fileID: 322692411928711429}
+  dropItem: {fileID: 11400000, guid: 5c538bfa0ca315b4d914b6e557872d83, type: 2}
+  dropMaxAmount: 3
+  dropMinAmount: 1
+  repeatCount:
+    max: 3
+    min: 0
+    _value: 3
     onChange:
       m_PersistentCalls:
         m_Calls: []

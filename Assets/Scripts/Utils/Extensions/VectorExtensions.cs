@@ -9,6 +9,10 @@ namespace FabricWars.Utils.Extensions
         public static Vector3 X(this Vector3 position, float x) => new(x, position.y, position.z);
         public static Vector3 Y(this Vector3 position, float y) => new(position.x, y, position.z);
         public static Vector3 Z(this Vector3 position, float z) => new(position.x, position.y, z);
+        public static Vector3 XY(this Vector3 position, float x, float y) => new(x, y, position.z);
+        public static Vector3 XZ(this Vector3 position, float x, float z) => new(x, position.y, z);
+        public static Vector3 YZ(this Vector3 position, float y, float z) => new(position.x, y, z);
+        public static Vector3 XYZ(this Vector3 position, float x, float y, float z) => new(x, y, z);
         public static Vector3 Add(this Vector3 position, float x, float y, float z) => new(x + position.x, y + position.y, z + position.z);
         public static Vector3 Multiply(this Vector3 position, float x, float y, float z) => new(x * position.x, y * position.y, z * position.z);
         public static Vector3 Negate(this Vector3 position) => new(-position.x, -position.y, -position.z);

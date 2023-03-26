@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - ItemSO
   - m_GUID: 3a59e4b5194157d4b8b5fa77f3673bfe
-    m_Address: ItemAttributes
+    m_Address: Elements
     m_ReadOnly: 0
     m_SerializedLabels:
     - ItemAttributeSO
@@ -33,6 +33,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ScopedRecipe
+  - m_GUID: 1e819a3e36c6aa1428f6e9d06de5b35d
+    m_Address: Enitity
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EntityPrefab
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2dabba4622584f74bb69abfc2d2c9ac1, type: 2}
   m_SchemaSet:

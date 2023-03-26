@@ -750,7 +750,8 @@ MonoBehaviour:
   activeSlots: []
   tilemap: {fileID: 946506932}
   objectContainer: {fileID: 222930987}
-  w2dManager: {fileID: 0}
+  w2dManager: {fileID: 1719033827}
+  tile: {fileID: 0}
   EVIDialogue: {fileID: 308929349}
 --- !u!114 &534972188
 MonoBehaviour:
@@ -2912,6 +2913,14 @@ PrefabInstance:
     - target: {fileID: 322692411829617755, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 322692411829617758, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
+      propertyPath: storage.max
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 322692411829617758, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}
+      propertyPath: storage._value
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b0527efbaa8a2344b73b34e660a8ac6, type: 3}

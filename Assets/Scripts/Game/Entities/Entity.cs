@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FabricWars.Game.Entities
 {
-    public class Entity : MonoBehaviour
+    public partial class Entity : MonoBehaviour
     {
         public GaugeInt health;
 

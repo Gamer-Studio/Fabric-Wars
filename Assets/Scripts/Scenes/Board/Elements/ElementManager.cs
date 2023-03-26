@@ -76,9 +76,10 @@ namespace FabricWars.Scenes.Board.Elements
         }
 
         [SerializeField] private W2DManager w2dManager;
-
+        
         private void Update()
         {
+            // Entity creation (Element craft)
             if (Input.GetMouseButtonUp(0) && tilemap != null)
             {
                 if (w2dManager == null || w2dManager.beforeTarget != null) return;
@@ -88,7 +89,7 @@ namespace FabricWars.Scenes.Board.Elements
                     (int)mPos.x - (mPos.x < 0 ? 1 : 0),
                     (int)mPos.y - (mPos.y < 0 ? 1 : 0)
                 );
-
+                
                 if (tilemap.GetTile(targetPos) != null)
                 {
                     var recipes = new List<ScopedRecipe>();

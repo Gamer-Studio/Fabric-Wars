@@ -29,6 +29,7 @@ namespace FabricWars.Scenes.Board
         private Coroutine _moveCamera;
         [SerializeField] private float maxZoomSize = 10;
         [SerializeField] private float minZoomSize = 2;
+        [SerializeField] private float zoomSpeed = 2;
 
         private void Update()
         {
@@ -36,11 +37,11 @@ namespace FabricWars.Scenes.Board
             {
                 var wheel = Input.GetAxis("Mouse ScrollWheel");
                 if (Input.GetKey(KeyCode.LeftControl) &&
-                    ((virtualCamera.m_Lens.OrthographicSize < minZoomSize && wheel < 0) ||
+                    !((virtualCamera.m_Lens.OrthographicSize < minZoomSize && wheel < 0) ||
                      (virtualCamera.m_Lens.OrthographicSize > maxZoomSize && wheel > 0))
                     )
                 {
-                    virtualCamera.m_Lens.OrthographicSize += wheel * 2;
+                    virtualCamera.m_Lens.OrthographicSize += wheel * zoomSpeed;
                 }
 
                 switch (Input.GetKey(KeyCode.Mouse2))

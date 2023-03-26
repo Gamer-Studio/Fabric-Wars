@@ -8,6 +8,7 @@ using FabricWars.Utils.KeyBinds;
 using SRF;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace FabricWars.Scenes.Board.Elements
@@ -23,8 +24,9 @@ namespace FabricWars.Scenes.Board.Elements
         public List<ElementSlot> slots = new();
         [SerializeField] private List<ElementSlot> activeSlots = new();
 
-        [Header("Entity Builder")] private Camera _mainCamera;
-        [SerializeField] private Tilemap tilemap;
+        [Header("Entity Builder")] 
+        public Camera mainCamera;
+        public Tilemap tilemap;
         [SerializeField] private Transform objectContainer;
 
         private void Awake()
@@ -40,7 +42,7 @@ namespace FabricWars.Scenes.Board.Elements
             JsonUtility.ToJson(dic);
             //
 
-            _mainCamera = Camera.main;
+            mainCamera = Camera.main;
 
             _pool = new ObjectPool<ElementSlot>(
                 () => Instantiate(originalSlot, slotContainer).GetComponent<ElementSlot>(),
@@ -84,7 +86,7 @@ namespace FabricWars.Scenes.Board.Elements
             {
                 if (w2dManager == null || w2dManager.beforeTarget != null) return;
 
-                var mPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var mPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 var targetPos = new Vector3Int(
                     (int)mPos.x - (mPos.x < 0 ? 1 : 0),
                     (int)mPos.y - (mPos.y < 0 ? 1 : 0)

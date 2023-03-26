@@ -749,6 +749,7 @@ MonoBehaviour:
   slotContainer: {fileID: 525454826}
   slots: []
   activeSlots: []
+  mainCamera: {fileID: 0}
   tilemap: {fileID: 946506932}
   objectContainer: {fileID: 222930987}
   w2dManager: {fileID: 1719033827}

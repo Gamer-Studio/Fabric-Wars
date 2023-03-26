@@ -16,7 +16,6 @@ namespace FabricWars.Scenes.Board.Elements
         private static readonly int MaskingColor = Shader.PropertyToID("_MaskingColor");
 
         [Header("Components")]
-        [SerializeField] private Shader activeShader;
         [SerializeField] private MaskingShader shaderConfig;
         [SerializeField] private Image activeFillImage;
         [SerializeField] private Image backgroundFillImage;
@@ -67,9 +66,9 @@ namespace FabricWars.Scenes.Board.Elements
 
         private void Start()
         {
-            if (activeShader && activeFillImage)
+            if (activeFillImage)
             {
-                var mat = activeFillImage.material = new Material(activeShader);
+                var mat = activeFillImage.material = new Material(activeFillImage.material.shader);
 
                 if (element == Element.None)
                 {
@@ -82,7 +81,6 @@ namespace FabricWars.Scenes.Board.Elements
                     mat.SetColor(Color, element.color.A(100 / 255f));
                     mat.SetTexture(MainTex, shaderConfig.texture);
                     mat.SetColor(MaskingColor, shaderConfig.maskColor);
-                    activeFillImage.material.SetBool("_Active", true);
                     backgroundImage.color = element.color.A(25 / 255f);
                 }
             }

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 59a1339e014611c4dbdbd314217f288c, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65d76f674fd47c7b05ab1af118c6936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeShader: {fileID: -6465566751694194690, guid: c1b495193efc8c64990decc5444dfa9c, type: 3}
   shaderConfig: {fileID: 11400000, guid: 38634666a0dc48b458362fcb271485a4, type: 2}
   activeFillImage: {fileID: 7504907746617433120}
   backgroundFillImage: {fileID: 8929516737692470635}

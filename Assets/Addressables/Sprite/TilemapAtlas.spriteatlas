@@ -54,6 +54,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 114f44f05a9ee454da61c37900653cfe, type: 3}
   - {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
+  - {fileID: 21300000, guid: fab4c753fc367b049bcdb4df98c72cb8, type: 3}
   - {fileID: 514736855, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: -305032329, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: 717101772, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
@@ -79,6 +80,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - gradient
   - Log
+  - sand
   - Ground_3
   - Ground_2
   - Ground_1

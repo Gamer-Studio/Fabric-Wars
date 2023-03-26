@@ -18,22 +18,16 @@ namespace FabricWars.Game.Entities
         public int dropMinAmount = 1;
         public GaugeInt repeatCount = new(0, 1, 1);
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            repeatCount.onChange.AddListener(gauge => { fillSprite.material.SetFloat(Cutoff, gauge.GetFillRatio()); });
-        }
-
         private void OnClick(bool val)
         {
             if (val)
             {
                 repeatCount.value -= 1;
                 var ratio = repeatCount.GetFillRatio();
+                fillSprite.material.SetFloat(Cutoff, ratio);
                 if (ratio >= 0)
                 {
-                    SendMessage("OnUse", SendMessageOptions.DontRequireReceiver);
+                    OnUse();
                 }
 
                 if (ratio <= 0)
@@ -45,7 +39,7 @@ namespace FabricWars.Game.Entities
 
         // Unity broadcast event interface
 
-        private void OnUse()
+        public virtual void OnUse()
         {
             if(!ItemManager.instance) return;
             if(dropItem == null || dropItem == Item.None) return;

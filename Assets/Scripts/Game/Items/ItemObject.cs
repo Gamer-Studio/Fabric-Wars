@@ -48,6 +48,8 @@ namespace FabricWars.Game.Items
 
         private IEnumerator StartDrag()
         {
+            if (!type.canCatch) yield break;
+            
             dragObj = this;
             while (true)
             {

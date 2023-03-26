@@ -44,12 +44,15 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: f731309a0ec0785499fb1b4d6de1e246, type: 3}
+    - {fileID: 102900000, guid: 7f026164d5d3b6947bd186a636ba6b5d, type: 3}
+    - {fileID: 102900000, guid: d3709bc0013c73a4b94351648d0cdc82, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 114f44f05a9ee454da61c37900653cfe, type: 3}
+  - {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
   - {fileID: 514736855, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: -305032329, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: 717101772, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
@@ -65,7 +68,16 @@ SpriteAtlas:
   - {fileID: -803159568, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: 514680031, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: -688167579, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
+  - {fileID: 21300000, guid: 401ceda5667ccfc45bb9933f59ef6986, type: 3}
+  - {fileID: 21300000, guid: f789acd6e2429a14e856d5ed4e85d31a, type: 3}
+  - {fileID: 21300000, guid: 85af7aa76955e2e4096d30adb4ddf14c, type: 3}
+  - {fileID: 21300000, guid: b93db7d7f3779e245a655bef7b84299c, type: 3}
+  - {fileID: 21300000, guid: 49ce1829ed24636438640b0379ebdf89, type: 3}
+  - {fileID: 21300000, guid: 1fe7fa4a8a64477428efaebb5bbed049, type: 3}
+  - {fileID: 21300000, guid: 4fde579ca04ac474f97b72aa443eb775, type: 3}
   m_PackedSpriteNamesToIndex:
+  - gradient
+  - Log
   - Ground_3
   - Ground_2
   - Ground_1
@@ -81,6 +93,13 @@ SpriteAtlas:
   - Ground_13
   - Ground_10
   - Ground_11
+  - Tree
+  - Circle
+  - NumberButton_Outline@2x
+  - blank
+  - Coin
+  - None
+  - RoundSquare
   m_RenderDataMap: {}
   m_Tag: TilemapAtlas
   m_IsVariant: 0

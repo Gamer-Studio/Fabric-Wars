@@ -8,7 +8,7 @@ namespace FabricWars.Game.Items
     {
         public static readonly Dictionary<string, Item> allocated = new();
         
-        public static Item None, Log, Coin;
+        public static Item None, Log, Coin, Earth;
         
         internal static void Load()
         {
@@ -18,6 +18,7 @@ namespace FabricWars.Game.Items
             allocated.TryGetValue("None", out None);
             allocated.TryGetValue("Log", out Log);
             allocated.TryGetValue("Coin", out Coin);
+            allocated.TryGetValue("Earth", out Earth);
 
             Debug.Log($"{allocated.Count} items loaded");
         }

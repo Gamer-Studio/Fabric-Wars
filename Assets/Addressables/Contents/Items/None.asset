@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 0
   sprite: {fileID: 21300000, guid: 1fe7fa4a8a64477428efaebb5bbed049, type: 3}
-  canCatch: 1
-  attributes:
-    m_keys: 
+  canCatch: 0
+  elements:
+    m_keys: []
     m_values: 

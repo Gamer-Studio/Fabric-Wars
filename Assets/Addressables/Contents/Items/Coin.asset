@@ -15,6 +15,7 @@ MonoBehaviour:
   weight: 1
   sprite: {fileID: 21300000, guid: 49ce1829ed24636438640b0379ebdf89, type: 3}
   canCatch: 1
-  attributes:
-    m_keys: 10000000
+  elements:
+    m_keys:
+    - {fileID: 11400000, guid: 754bc1f829e205d439fa261fccd84551, type: 2}
     m_values: 01000000

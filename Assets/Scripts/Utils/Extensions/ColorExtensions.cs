@@ -23,7 +23,7 @@ namespace FabricWars.Utils.Extensions
             return new Color(color.r, color.g, color.b, color.a);
         }
 
-        public static Color R(this Color color, float r) => new Color(r, color.g, color.b, color.a);
+        public static Color R(this Color color, float r) => new(r, color.g, color.b, color.a);
 
         public static Color G(this Color color, Func<float, float> g)
         {
@@ -31,7 +31,7 @@ namespace FabricWars.Utils.Extensions
             return new Color(color.r, newG, color.b, color.a);
         }
 
-        public static Color G(this Color color, float g) => new Color(color.r, g, color.b, color.a);
+        public static Color G(this Color color, float g) => new(color.r, g, color.b, color.a);
 
         public static Color B(this Color color, Func<float, float> b)
         {
@@ -39,7 +39,7 @@ namespace FabricWars.Utils.Extensions
             return new Color(color.r, color.g, newB, color.a);
         }
 
-        public static Color B(this Color color, float b) => new Color(color.r, color.g, b, color.a);
+        public static Color B(this Color color, float b) => new(color.r, color.g, b, color.a);
 
         public static Color A(this Color color, Func<float, float> a)
         {
@@ -47,6 +47,6 @@ namespace FabricWars.Utils.Extensions
             return new Color(color.r, color.g, color.b, newA);
         }
 
-        public static Color A(this Color color, float a) => new Color(color.r, color.g, color.b, a);
+        public static Color A(this Color color, float a) => new(color.r, color.g, color.b, a);
     }
 }

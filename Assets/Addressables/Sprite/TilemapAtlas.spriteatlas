@@ -54,6 +54,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 114f44f05a9ee454da61c37900653cfe, type: 3}
   - {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
+  - {fileID: 21300000, guid: 022eefc2c6fafbd4397c3c77aae62fbf, type: 3}
   - {fileID: 21300000, guid: fab4c753fc367b049bcdb4df98c72cb8, type: 3}
   - {fileID: 514736855, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: -305032329, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
@@ -70,17 +71,23 @@ SpriteAtlas:
   - {fileID: -803159568, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: 514680031, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
   - {fileID: -688167579, guid: 54032ac4389c07f45881662fd93fedb8, type: 3}
+  - {fileID: 21300000, guid: 38117ec6409fdab48a9895597079fa0e, type: 3}
   - {fileID: 21300000, guid: f789acd6e2429a14e856d5ed4e85d31a, type: 3}
+  - {fileID: 21300000, guid: c88fcb67afcd5054cb725811cd67f9cd, type: 3}
+  - {fileID: 21300000, guid: a8133177e1c95194ea522bc56bf5f6ff, type: 3}
+  - {fileID: 21300000, guid: 7b4fa4776e1128a438dbba10490e4477, type: 3}
   - {fileID: 21300000, guid: 85af7aa76955e2e4096d30adb4ddf14c, type: 3}
   - {fileID: 21300000, guid: b93db7d7f3779e245a655bef7b84299c, type: 3}
   - {fileID: 21300000, guid: 49ce1829ed24636438640b0379ebdf89, type: 3}
   - {fileID: 21300000, guid: 1fe7fa4a8a64477428efaebb5bbed049, type: 3}
   - {fileID: 21300000, guid: 4fde579ca04ac474f97b72aa443eb775, type: 3}
+  - {fileID: 21300000, guid: 7e034e9d259f4d84997493b3d8100957, type: 3}
   - {fileID: 21300000, guid: fe6a4c0e67805a54c93d353d73324b33, type: 3}
   m_PackedSpriteNamesToIndex:
   - gradient
   - Log
-  - sand
+  - Gold
+  - Sand
   - Ground_3
   - Ground_2
   - Ground_1
@@ -96,12 +103,17 @@ SpriteAtlas:
   - Ground_13
   - Ground_10
   - Ground_11
+  - Dirt
   - Circle
+  - Seed
+  - Coal
+  - Iron
   - NumberButton_Outline@2x
   - blank
   - Coin
   - None
   - RoundSquare
+  - Sapling
   - Stone
   m_RenderDataMap: {}
   m_Tag: TilemapAtlas

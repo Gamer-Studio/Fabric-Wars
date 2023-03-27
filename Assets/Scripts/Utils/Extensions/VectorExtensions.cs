@@ -26,12 +26,19 @@ namespace FabricWars.Utils.Extensions
             position1.y + (position2.y - position1.y) * amount, 
             position1.z + (position2.z - position1.z) * amount
             );
+        
         public static Vector3 LerpUnclamped(this Vector3 position1, Vector3 position2, float amount) => new(
             position1.x + (position2.x - position1.x) * amount, 
             position1.y + (position2.y - position1.y) * amount, 
             position1.z + (position2.z - position1.z) * amount
             );
 
+        public static Vector3 Vector3Distance(this Vector3 position, Vector3 target) => new(
+            target.x - position.x,
+            target.y - position.y,
+            target.z - position.z
+        );
+        
         public static void Deconstruct(this Vector3 position, out float x, out float y, out float z)
         {
             x = position.x;

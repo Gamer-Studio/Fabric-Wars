@@ -20,7 +20,7 @@ namespace FabricWars.Game.Entities
                 allocated.Add(entity.name, entity);
             });
             
-            Debug.Log($"{allocated.Count} scoped recipes loaded");
+            Debug.Log($"{allocated.Count} entities loaded");
             
             _loaded = true;
         }

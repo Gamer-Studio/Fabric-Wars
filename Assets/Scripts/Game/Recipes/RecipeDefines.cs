@@ -13,6 +13,8 @@ namespace FabricWars.Game.Recipes
         internal static void LoadScopedRecipe(IEnumerable<Element> loadedElements)
         {
             foreach (var element in loadedElements) allocatedScopedRecipe.Add(element, new List<(int scope, ScopedRecipe recipe)>());
+
+            var recipes = new List<ScopedRecipe>();
             
             Addressables.LoadAssetsAsync<ScopedRecipe>(new AssetLabelReference { labelString = "ScopedRecipe" },
                 recipe =>
@@ -28,9 +30,11 @@ namespace FabricWars.Game.Recipes
                     {
                         allocatedScopedRecipe[Element.None].Add((0, recipe));
                     }
+                    
+                    recipes.Add(recipe);
                 }).WaitForCompletion();
             
-            Debug.Log($"{allocatedScopedRecipe.Count} scoped recipes loaded");
+            Debug.Log($"{recipes.Count} scoped recipes loaded");
         }
     }
 }

@@ -57,16 +57,21 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   fillSprite: {fileID: 184390958781437649}
-  dropItem: {fileID: 11400000, guid: 78e450ec713a6414998499a5628b9282, type: 2}
-  dropMaxAmount: 3
-  dropMinAmount: 1
-  repeatCount:
-    max: 3
-    min: 0
-    _value: 3
-    onChange:
-      m_PersistentCalls:
-        m_Calls: []
+  dropTable:
+    repeatCount:
+      max: 3
+      min: 0
+      _value: 3
+      onChange:
+        m_PersistentCalls:
+          m_Calls: []
+    infos:
+    - item: {fileID: 11400000, guid: 78e450ec713a6414998499a5628b9282, type: 2}
+      max: 3
+      min: 1
+    - item: {fileID: 11400000, guid: c91c41391dd45e44b8c4bec439d5c42f, type: 2}
+      max: 1
+      min: 1
 --- !u!212 &184390958675002251
 SpriteRenderer:
   m_ObjectHideFlags: 0

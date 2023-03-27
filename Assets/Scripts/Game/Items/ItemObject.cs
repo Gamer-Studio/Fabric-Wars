@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Game.Entities.Core;
 using FabricWars.Scenes.Board;

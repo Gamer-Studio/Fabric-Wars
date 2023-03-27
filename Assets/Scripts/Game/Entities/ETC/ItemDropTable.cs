@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FabricWars.Game.Items;
 using FabricWars.Utils;
-using Random = UnityEngine.Random;
 
 namespace FabricWars.Game.Entities.ETC
 {

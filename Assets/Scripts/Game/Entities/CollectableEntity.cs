@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using FabricWars.Game.Entities.ETC;
-using FabricWars.Game.Items;
+﻿using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
-using FabricWars.Utils;
 using UnityEngine;
 
 namespace FabricWars.Game.Entities

@@ -8,7 +8,6 @@ using FabricWars.Utils.KeyBinds;
 using SRF;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace FabricWars.Scenes.Board.Elements

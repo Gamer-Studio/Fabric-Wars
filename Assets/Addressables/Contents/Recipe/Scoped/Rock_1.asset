@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933b278f926a482496faff9c1ac3a071, type: 3}
   m_Name: Rock_1
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
-  consumes: []
-  scopes: []
+  entity: {fileID: 184390958675002252, guid: b5ae85a8a1677cd4abc93747e63c8810, type: 3}
+  consumes:
+  - key: {fileID: 11400000, guid: 1c24fee2cfa34a94daf8c108563d3a17, type: 2}
+    value: 1
+  scopes:
+  - key: {fileID: 11400000, guid: 1c24fee2cfa34a94daf8c108563d3a17, type: 2}
+    value: 1

@@ -3,12 +3,15 @@ using FabricWars.Game.Elements;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
+using UnityEngine.Localization.Tables;
 
 namespace FabricWars.Game.Items
 {
     [CreateAssetMenu(fileName = "new Item", menuName = "Game/Item/Basic Item", order = 0)]
     public partial class Item : ScriptableObject
     {
+        private static readonly LocalizationTable contentTable;
+
         public int weight = 0;
         public Sprite sprite;
         public bool canCatch = true;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FabricWars.Game.Items;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -56,6 +57,14 @@ namespace FabricWars.Scenes.Board
             instance = this;
         }
 
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && itemHolding)
+            {
+                
+            }
+        }
+
         public ItemObject Create(Item itemType, Vector2 position)
         {
             var obj = _pool.Get();
@@ -72,6 +81,6 @@ namespace FabricWars.Scenes.Board
             }
         }
 
-        public bool ItemHolding() => ItemObject.dragObj;
+        public bool itemHolding => ItemObject.dragObj != null;
     }
 }

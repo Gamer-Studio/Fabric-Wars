@@ -64,13 +64,13 @@ namespace FabricWars.Game.Items
                 {
                     foreach (var obj in _bumped)
                     {
-                        if (tilemap.HasTile(obj.transform.position))
+                        if (!tilemap.HasTile(obj.transform.position))
                         {
                             obj.transform.position = transducer.transform.position.Z(obj.transform.position.z);
                         }
                     }
 
-                    if (tilemap.HasTile(targetPos))
+                    if (!tilemap.HasTile(targetPos))
                     {
                         var pos = transducer.transform.position;
                         transform.position = transform.position.XY(pos.x, pos.y);

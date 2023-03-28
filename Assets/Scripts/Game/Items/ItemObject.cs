@@ -38,29 +38,47 @@ namespace FabricWars.Game.Items
 
         private static Coroutine _dragFunc;
         public static ItemObject dragObj { get; private set; }
+        private static GameObject _pointer;
+
+        private GameObject pointer
+        {
+            get => _pointer != null
+                ? _pointer
+                : _pointer = new GameObject { name = "ItemObject_Pointer", transform = { position = Vector3.zero } };
+        }
+
+        private static Vector3Int ToTilemapPosition(Vector3 position) => new(
+            (int)position.x - (position.x < 0 ? 1 : 0),
+            (int)position.y - (position.y < 0 ? 1 : 0)
+        );
 
         private void OnClick(bool inputValue)
         {
             if (inputValue)
             {
+                pointer.transform.position = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 _dragFunc = StartCoroutine(StartDrag());
             }
             else
             {
                 var transducer = Transducer.defaultInstance;
                 var mPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                var targetPos = new Vector3Int(
-                    (int)mPos.x - (mPos.x < 0 ? 1 : 0),
-                    (int)mPos.y - (mPos.y < 0 ? 1 : 0)
-                );
+                var targetPos = ToTilemapPosition(mPos);
 
                 if (transducer != null)
                 {
+                    foreach (var obj in _bumped)
+                    {
+                        if (tilemap.GetTile(ToTilemapPosition(obj.transform.position)) == null)
+                        {
+                            obj.transform.position = transducer.transform.position.Z(obj.transform.position.z);
+                        }
+                    }
+
                     if (tilemap.GetTile(targetPos) == null)
                     {
                         var pos = transducer.transform.position;
                         transform.position = transform.position.XY(pos.x, pos.y);
-                        foreach (var obj in _bumped) obj.transform.position = transform.position;
                     }
 
                     if (transducer.bumpedObject == gameObject)
@@ -77,8 +95,8 @@ namespace FabricWars.Game.Items
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if(this != dragObj) return;
-            
+            if (this != dragObj) return;
+
             if (col.gameObject.CompareTag("Item"))
             {
                 var comp = col.gameObject.GetComponent<ItemObject>();
@@ -97,9 +115,13 @@ namespace FabricWars.Game.Items
             while (true)
             {
                 var targetPos = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                var distance = transform.position.Vector3Distance(targetPos);
+                var prevPos = pointer.transform.position;
+                var distance = prevPos.Vector3Distance(targetPos);
 
-                transform.position = transform.position.Add(distance.x, distance.y, 0);
+                prevPos = prevPos.XY(targetPos.x, targetPos.y);
+                pointer.transform.position = prevPos;
+
+                transform.position = transform.position.XY(targetPos.x, targetPos.y);
                 foreach (var obj in _bumped)
                 {
                     obj.transform.position = obj.transform.position.Add(distance.x, distance.y, 0);

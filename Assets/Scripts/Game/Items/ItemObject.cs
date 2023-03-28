@@ -47,11 +47,6 @@ namespace FabricWars.Game.Items
                 : _pointer = new GameObject { name = "ItemObject_Pointer", transform = { position = Vector3.zero } };
         }
 
-        private static Vector3Int ToTilemapPosition(Vector3 position) => new(
-            (int)position.x - (position.x < 0 ? 1 : 0),
-            (int)position.y - (position.y < 0 ? 1 : 0)
-        );
-
         private void OnClick(bool inputValue)
         {
             if (inputValue)
@@ -63,19 +58,19 @@ namespace FabricWars.Game.Items
             {
                 var transducer = Transducer.defaultInstance;
                 var mPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                var targetPos = ToTilemapPosition(mPos);
+                var targetPos = tilemap.ToTilemapPosition(mPos);
 
                 if (transducer != null)
                 {
                     foreach (var obj in _bumped)
                     {
-                        if (tilemap.GetTile(ToTilemapPosition(obj.transform.position)) == null)
+                        if (tilemap.HasTile(obj.transform.position))
                         {
                             obj.transform.position = transducer.transform.position.Z(obj.transform.position.z);
                         }
                     }
 
-                    if (tilemap.GetTile(targetPos) == null)
+                    if (tilemap.HasTile(targetPos))
                     {
                         var pos = transducer.transform.position;
                         transform.position = transform.position.XY(pos.x, pos.y);

@@ -23,8 +23,7 @@ namespace FabricWars.Scenes.Board.Elements
         public List<ElementSlot> slots = new();
         [SerializeField] private List<ElementSlot> activeSlots = new();
 
-        [Header("Entity Builder")] 
-        public Camera mainCamera;
+        [Header("Entity Builder")] public Camera mainCamera;
         public Tilemap tilemap;
         [SerializeField] private Transform objectContainer;
 
@@ -35,7 +34,7 @@ namespace FabricWars.Scenes.Board.Elements
                 Destroy(this);
                 return;
             }
-            
+
             // Test
             var dic = new Dictionary<string, KeyCode>();
             JsonUtility.ToJson(dic);
@@ -77,7 +76,7 @@ namespace FabricWars.Scenes.Board.Elements
         }
 
         [SerializeField] private W2DManager w2dManager;
-        
+
         private void Update()
         {
             // Entity creation (Element craft)
@@ -86,12 +85,11 @@ namespace FabricWars.Scenes.Board.Elements
                 if (w2dManager == null || w2dManager.beforeTarget != null) return;
 
                 var mPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                var targetPos = new Vector3Int(
-                    (int)mPos.x - (mPos.x < 0 ? 1 : 0),
-                    (int)mPos.y - (mPos.y < 0 ? 1 : 0)
-                );
-                
-                if (tilemap.GetTile(targetPos) != null)
+
+                if (tilemap.HasTile(mPos.XY(
+                        mPos.x < 0 ? mPos.x - 0.5f : mPos.x + 0.5f,
+                        mPos.y < 0 ? mPos.y - 0.5f : mPos.y + 0.5f
+                    )))
                 {
                     var recipes = new List<ScopedRecipe>();
 

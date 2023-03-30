@@ -11,40 +11,34 @@ namespace FabricWars.Game.Bullets
 
         // pool
         private static BulletManager manager => BulletManager.instance;
-        private ObjectPool<GameObject> _pool = null;
-        private Transform _poolContainer = null;
-        
-        protected virtual ObjectPool<GameObject> pool
-        {
-            get => _pool ??= new ObjectPool<GameObject>(
-                () =>
+        private ObjectPool<GameObject> pool => new (
+            () =>
+            {
+                if (_poolContainer == null)
                 {
-                    if (_poolContainer == null)
+                    _poolContainer = new GameObject
                     {
-                        _poolContainer = new GameObject
+                        name = $"{GetType().Name}_Pool",
+                        transform =
                         {
-                            name = $"{GetType().Name}_Pool",
-                            transform =
-                            {
-                                parent = manager.transform,
-                                position = Vector3.zero,
-                                rotation = Quaternion.identity
-                            }
-                        }.transform;
-                    }
-                    
-                    return Instantiate(componentBase, _poolContainer);
-                },
-                comp => comp.SetActive(true),
-                comp =>
-                {
-                    comp.SetActive(false);
-                    comp.transform.parent = _poolContainer;
+                            parent = manager.transform,
+                            position = Vector3.zero,
+                            rotation = Quaternion.identity
+                        }
+                    }.transform;
                 }
-            );
-            set => _pool = value;
-        }
-
+                    
+                return Instantiate(componentBase, _poolContainer);
+            },
+            comp => comp.SetActive(true),
+            comp =>
+            {
+                comp.SetActive(false);
+                comp.transform.parent = _poolContainer;
+            }
+        );
+        
+        private Transform _poolContainer = null;
 
         public override GameObject Attach(Bullet bullet)
         {
@@ -57,7 +51,7 @@ namespace FabricWars.Game.Bullets
 
         public override void Release(GameObject component)
         {
-            _pool.Release(component);
+            pool.Release(component);
         }
     }
 }

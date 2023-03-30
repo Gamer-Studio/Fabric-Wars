@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FabricWars.Game.Bullets;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Entities;
 using FabricWars.Game.Items;
@@ -29,6 +30,7 @@ namespace FabricWars
             Item.Load();
             Entity.Load();
             Recipe.LoadScopeRecipe(loadedElements);
+            BulletComponent.Load();
         }
     }
 }

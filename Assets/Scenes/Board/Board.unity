@@ -428,6 +428,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &482448932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482448933}
+  m_Layer: 0
+  m_Name: BulletManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &482448933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482448932}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1140085375}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &483139809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284,6 +2315,7 @@ Transform:
   - {fileID: 946506929}
   - {fileID: 222930987}
   - {fileID: 515479976}
+  - {fileID: 482448933}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2661,9 +2693,9 @@ GameObject:
   - component: {fileID: 1911710292}
   - component: {fileID: 1911710290}
   - component: {fileID: 1911710293}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Transducer
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2793,7 +2825,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: ceee4e55e43687648b70196e1a9ce70d, type: 2}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3026,10 +3058,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 222930987}
     m_Modifications:
-    - target: {fileID: 184390958675002250, guid: b5ae85a8a1677cd4abc93747e63c8810, type: 3}
-      propertyPath: dropTable.infos.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 184390958675002252, guid: b5ae85a8a1677cd4abc93747e63c8810, type: 3}
       propertyPath: m_Name
       value: Rock

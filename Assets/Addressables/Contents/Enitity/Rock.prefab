@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 184390958675002250}
   - component: {fileID: 184390958675002251}
   - component: {fileID: 184390958675002248}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,9 +68,6 @@ MonoBehaviour:
     infos:
     - item: {fileID: 11400000, guid: 78e450ec713a6414998499a5628b9282, type: 2}
       max: 3
-      min: 1
-    - item: {fileID: 11400000, guid: c91c41391dd45e44b8c4bec439d5c42f, type: 2}
-      max: 1
       min: 1
 --- !u!212 &184390958675002251
 SpriteRenderer:
@@ -168,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 184390958781437654}
   - component: {fileID: 184390958781437649}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

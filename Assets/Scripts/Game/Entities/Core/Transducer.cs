@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Items;
 using FabricWars.Scenes.Board;
@@ -6,6 +7,7 @@ using FabricWars.Scenes.Board.Elements;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FabricWars.Game.Entities.Core
 {
@@ -52,7 +54,8 @@ namespace FabricWars.Game.Entities.Core
 
         private Coroutine _resizeRoutine;
 
-        private void Hover(bool inputValue)
+        // Unity message event
+        public void Hover(bool inputValue)
         {
             if (_resizeRoutine != null)
             {
@@ -61,41 +64,6 @@ namespace FabricWars.Game.Entities.Core
             }
 
             _resizeRoutine = StartCoroutine(ResizeTransducer(inputValue));
-        }
-
-        public GameObject bumpedObject { get; private set; }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (!ItemObject.dragObj) return;
-
-            if (col.CompareTag("Item") && ItemObject.dragObj.gameObject == col.gameObject)
-            {
-                if (_resizeRoutine != null)
-                {
-                    StopCoroutine(_resizeRoutine);
-                    _resizeRoutine = null;
-                }
-
-                bumpedObject = col.gameObject;
-                _resizeRoutine = StartCoroutine(ResizeTransducer(true));
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (ItemObject.dragObj == null ||
-                (other.CompareTag("Item") && ItemObject.dragObj.gameObject == other.gameObject))
-            {
-                if (_resizeRoutine != null)
-                {
-                    StopCoroutine(_resizeRoutine);
-                    _resizeRoutine = null;
-                }
-
-                bumpedObject = null;
-                _resizeRoutine = StartCoroutine(ResizeTransducer(false));
-            }
         }
 
         [SerializeField] private int minSize = 1;
@@ -137,6 +105,15 @@ namespace FabricWars.Game.Entities.Core
             ElementManager.instance.AddElementValue(Element.Causality, 1);
 
             ItemManager.instance.Release(obj);
+        }
+
+        // Unity message event
+        private void InjectItems(List<ItemObject> items)
+        {
+            foreach (var item in items)
+            {
+                ConsumeItem(item);
+            }
         }
     }
 }

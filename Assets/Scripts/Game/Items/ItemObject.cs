@@ -38,20 +38,30 @@ namespace FabricWars.Game.Items
 
         private static Coroutine _dragFunc;
         public static ItemObject dragObj { get; private set; }
-        private static GameObject _pointer;
+        private static ItemPointerController _pointer;
 
-        private GameObject pointer
+        private ItemPointerController pointer
         {
-            get => _pointer != null
-                ? _pointer
-                : _pointer = new GameObject { name = "ItemObject_Pointer", transform = { position = Vector3.zero } };
+            get
+            {
+                if (_pointer == null)
+                {
+                    var obj = new GameObject { name = "ItemObject_Pointer", transform = { position = Vector3.zero }, tag = "GameController", layer = 5};
+                    var col = obj.AddComponent<CircleCollider2D>();
+                    obj.AddComponent<Rigidbody2D>();
+                    col.radius = 0.1f;
+                    col.isTrigger = true;
+                    _pointer = obj.AddComponent<ItemPointerController>();
+                }
+                return _pointer;
+            }
         }
 
         private void OnClick(bool inputValue)
         {
             if (inputValue)
             {
-                pointer.transform.position = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                pointer.transform.position = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition).Z(0);
                 _dragFunc = StartCoroutine(StartDrag());
             }
             else
@@ -62,7 +72,7 @@ namespace FabricWars.Game.Items
 
                 if (transducer != null)
                 {
-                    foreach (var obj in _bumped)
+                    foreach (var obj in _bumpedItems)
                     {
                         if (!tilemap.HasTile(obj.transform.position))
                         {
@@ -75,38 +85,28 @@ namespace FabricWars.Game.Items
                         var pos = transducer.transform.position;
                         transform.position = transform.position.XY(pos.x, pos.y);
                     }
-
-                    if (transducer.bumpedObject == gameObject)
-                    {
-                        transducer.ConsumeItem(this);
-                        foreach (var obj in _bumped)
-                        {
-                            transducer.ConsumeItem(obj);
-                        }
-                    }
                 }
             }
         }
 
+
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (this != dragObj) return;
+            if (this != dragObj || !col.gameObject.CompareTag("Item")) return;
 
-            if (col.gameObject.CompareTag("Item"))
-            {
-                var comp = col.gameObject.GetComponent<ItemObject>();
-                if (!_bumped.Contains(comp) && comp.type == type) _bumped.Add(comp);
-            }
+            var comp = col.gameObject.GetComponent<ItemObject>();
+            if (!_bumpedItems.Contains(comp) && comp.type == type) _bumpedItems.Add(comp);
         }
 
-        public static readonly List<ItemObject> _bumped = new();
+        public static readonly List<ItemObject> _bumpedItems = new();
 
         private IEnumerator StartDrag()
         {
             if (!type.canCatch) yield break;
 
-            _bumped.Clear();
+            _bumpedItems.Clear();
             dragObj = this;
+            _bumpedItems.Add(this);
             while (true)
             {
                 var targetPos = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -117,7 +117,7 @@ namespace FabricWars.Game.Items
                 pointer.transform.position = prevPos;
 
                 transform.position = transform.position.XY(targetPos.x, targetPos.y);
-                foreach (var obj in _bumped)
+                foreach (var obj in _bumpedItems)
                 {
                     obj.transform.position = obj.transform.position.Add(distance.x, distance.y, 0);
                 }

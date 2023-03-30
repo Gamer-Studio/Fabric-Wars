@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 322692411829617758}
   - component: {fileID: 322692411829617759}
   - component: {fileID: 322692411829617756}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 322692411928711426}
   - component: {fileID: 322692411928711429}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

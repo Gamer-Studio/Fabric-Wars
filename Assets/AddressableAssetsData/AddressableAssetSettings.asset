@@ -93,7 +93,7 @@ MonoBehaviour:
     - Preload
     - Locale-ko-KR
     - ItemSO
-    - ScopedRecipe
+    - ScopeRecipe
     - ElementSO
     - EntityPrefab
   m_SchemaTemplates: []

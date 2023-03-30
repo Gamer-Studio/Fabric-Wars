@@ -91,7 +91,7 @@ namespace FabricWars.Scenes.Board.Elements
                         mPos.y < 0 ? mPos.y - 0.5f : mPos.y + 0.5f
                     )))
                 {
-                    var recipes = new List<ScopedRecipe>();
+                    var recipes = new List<ScopeRecipe>();
 
                     foreach (var slot in activeSlots)
                     {
@@ -114,12 +114,12 @@ namespace FabricWars.Scenes.Board.Elements
                             break;
                         }
 
-                        foreach (var (scope, recipe) in General.recipeScopes[slot.element])
+                        foreach (var (scope, recipe) in General.scopeRecipes[slot.element])
                         {
                             if (slot.activeValue >= scope) recipes.Add(recipe);
                         }
 
-                        recipes.AddRange(from pair in General.recipeScopes[Element.None] select pair.recipe);
+                        recipes.AddRange(from pair in General.scopeRecipes[Element.None] select pair.recipe);
                     }
 
                     if (recipes.Count > 0)

@@ -8,33 +8,33 @@ namespace FabricWars.Game.Recipes
     public partial class Recipe
     {
         // Scoped recipe section
-        public static readonly Dictionary<Element, List<(int scope, ScopedRecipe recipe)>> allocatedScopedRecipe = new();
+        public static readonly Dictionary<Element, List<(int scope, ScopeRecipe recipe)>> allocatedScopeRecipe = new();
         
-        internal static void LoadScopedRecipe(IEnumerable<Element> loadedElements)
+        internal static void LoadScopeRecipe(IEnumerable<Element> loadedElements)
         {
-            foreach (var element in loadedElements) allocatedScopedRecipe.Add(element, new List<(int scope, ScopedRecipe recipe)>());
+            foreach (var element in loadedElements) allocatedScopeRecipe.Add(element, new List<(int scope, ScopeRecipe recipe)>());
 
-            var recipes = new List<ScopedRecipe>();
+            var recipes = new List<ScopeRecipe>();
             
-            Addressables.LoadAssetsAsync<ScopedRecipe>(new AssetLabelReference { labelString = "ScopedRecipe" },
+            Addressables.LoadAssetsAsync<ScopeRecipe>(new AssetLabelReference { labelString = "ScopeRecipe" },
                 recipe =>
                 {
                     var noRequireElement = true;
                     foreach (var (element, scope) in recipe.scopes)
                     {
-                        allocatedScopedRecipe[element].Add((scope, recipe));
+                        allocatedScopeRecipe[element].Add((scope, recipe));
                         noRequireElement = false;
                     }
                     
                     if (noRequireElement)
                     {
-                        allocatedScopedRecipe[Element.None].Add((0, recipe));
+                        allocatedScopeRecipe[Element.None].Add((0, recipe));
                     }
                     
                     recipes.Add(recipe);
                 }).WaitForCompletion();
             
-            Debug.Log($"{recipes.Count} scoped recipes loaded");
+            Debug.Log($"{recipes.Count} scope recipes loaded");
         }
     }
 }

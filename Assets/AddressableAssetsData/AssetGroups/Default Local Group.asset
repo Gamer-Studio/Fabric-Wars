@@ -26,13 +26,13 @@ MonoBehaviour:
     m_Address: Elements
     m_ReadOnly: 0
     m_SerializedLabels:
-    - ItemAttributeSO
     - ElementSO
   - m_GUID: 186c998f4ec3cc945b6e88d8476acf84
     m_Address: Scoped
     m_ReadOnly: 0
     m_SerializedLabels:
     - ScopedRecipe
+    - ScopeRecipe
   - m_GUID: 1e819a3e36c6aa1428f6e9d06de5b35d
     m_Address: Enitity
     m_ReadOnly: 0

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FabricWars.Utils;
+﻿using FabricWars.Utils;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -7,15 +6,25 @@ namespace FabricWars.Game.Bullets
 {
     public class BulletManager : ManagerSingleton<BulletManager>
     {
-        private ObjectPool<Bullet> bulletPool;
         [SerializeField] private GameObject bulletBase;
-        
-        [SerializeField] private Transform poolBaseContainer;
-        public Dictionary<BulletComponent, (Transform container, List<GameObject> pool)> bulletComponentPool = new ();
+
+        public ObjectPool<Bullet> bulletPool { get; private set; }
+        private Transform _bulletBaseContainer;
 
         protected override void Awake()
         {
             base.Awake();
+
+            _bulletBaseContainer = new GameObject
+            {
+                name = "Bullet Base Pool",
+                transform =
+                {
+                    parent = transform,
+                    position = Vector3.zero,
+                    rotation = Quaternion.identity
+                }
+            }.transform;
             
             bulletPool = new ObjectPool<Bullet>(
                 () =>
@@ -25,16 +34,13 @@ namespace FabricWars.Game.Bullets
                 },
                 bullet =>
                 {
-                    
+                    bullet.gameObject.SetActive(true);
+                    bullet.StartBuild();
                 },
                 bullet =>
                 {
-                    var deconstructComponents = bullet.Release();
-
-                    foreach (var (type, obj) in deconstructComponents)
-                    {
-                        
-                    }
+                    bullet.transform.SetParent(_bulletBaseContainer);
+                    bullet.Release();
                 },
                 bullet =>
                 {
@@ -42,11 +48,6 @@ namespace FabricWars.Game.Bullets
                 },
                 true, 10, 10000
                 );
-        }
-
-        public GameObject GetBulletComponent(BulletComponent bulletComponent)
-        {
-            return null;
         }
     }
 }

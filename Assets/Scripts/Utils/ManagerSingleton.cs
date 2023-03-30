@@ -2,19 +2,31 @@
 
 namespace FabricWars.Utils
 {
-    public class ManagerSingleton <T> : MonoBehaviour where T : ManagerSingleton<T>
+    public class ManagerSingleton<T> : MonoBehaviour where T : ManagerSingleton<T>
     {
-        public static T instance { get; private set; }
+        private static T _instance;
+
+        public static T instance => _instance != null
+            ? _instance
+            : _instance = new GameObject
+            {
+                name = $"ManagerSingleton_{typeof(T).Name}",
+                transform =
+                {
+                    position = Vector3.zero,
+                    rotation = Quaternion.identity
+                }
+            }.AddComponent<T>();
 
         protected virtual void Awake()
         {
-            if (instance != null)
+            if (_instance != null)
             {
                 Destroy(this);
                 return;
             }
-            
-            instance = this as T;
+
+            _instance = this as T;
         }
     }
 }

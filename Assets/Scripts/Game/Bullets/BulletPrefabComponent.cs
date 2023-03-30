@@ -11,6 +11,7 @@ namespace FabricWars.Game.Bullets
 
         // pool
         private static BulletManager manager => BulletManager.instance;
+        private Transform _poolContainer = null;
         private ObjectPool<GameObject> pool => new (
             () =>
             {
@@ -37,8 +38,6 @@ namespace FabricWars.Game.Bullets
                 comp.transform.parent = _poolContainer;
             }
         );
-        
-        private Transform _poolContainer = null;
 
         public override GameObject Attach(Bullet bullet)
         {

@@ -1,6 +1,8 @@
-﻿using FabricWars.Game.Entities.ETC;
+﻿using System.Linq;
+using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace FabricWars.Game.Entities
 {
@@ -41,10 +43,11 @@ namespace FabricWars.Game.Entities
                     item.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
                 }
             }
-            
+
             fillSprite.material.SetFloat(Cutoff, dropTable.repeatCount.GetFillRatio());
 
-            if(dropTable.repeatCount.value == dropTable.repeatCount.min) SendMessage("OnBreak", SendMessageOptions.DontRequireReceiver);
+            if (dropTable.repeatCount.value == dropTable.repeatCount.min)
+                SendMessage("OnBreak", SendMessageOptions.DontRequireReceiver);
         }
 
         private void OnBreak()

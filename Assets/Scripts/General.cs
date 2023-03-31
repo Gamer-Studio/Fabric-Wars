@@ -18,6 +18,7 @@ namespace FabricWars
         public static Dictionary<string, GameObject> entities => Entity.allocated;
         public static Dictionary<Element, List<(int scope, ScopeRecipe recipe)>> scopeRecipes =>
             Recipe.allocatedScopeRecipe;
+        public static Dictionary<string, BulletComponent> bullets => BulletComponent.allocated;
 
         public static void Initialization()
         {

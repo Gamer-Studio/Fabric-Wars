@@ -9,7 +9,7 @@ namespace FabricWars.Game.Elements
         
         public static readonly Dictionary<string, Element> allocated = new();
 
-        public static Element None, Causality, Life, Water, Fire, Gold;
+        public static Element None, Karma, Life, Water, Fire, Gold;
 
         internal static IEnumerable<Element> Load()
         {
@@ -25,7 +25,7 @@ namespace FabricWars.Game.Elements
             
             // Allocate elements
             allocated.TryGetValue("None", out None);
-            allocated.TryGetValue("Causality", out Causality);
+            allocated.TryGetValue("Karma", out Karma);
             allocated.TryGetValue("Life", out Life);
             allocated.TryGetValue("Water", out Water);
             allocated.TryGetValue("Fire", out Fire);

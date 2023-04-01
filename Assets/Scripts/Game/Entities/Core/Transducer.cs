@@ -49,7 +49,7 @@ namespace FabricWars.Game.Entities.Core
         {
             base.Start();
 
-            ElementManager.instance.AddSlot(Element.Causality, 10, out _);
+            ElementManager.instance.AddSlot(Element.Karma, 10, out _);
         }
 
         private Coroutine _resizeRoutine;
@@ -102,7 +102,7 @@ namespace FabricWars.Game.Entities.Core
                 ElementManager.instance.AddElementValue(element, eValue);
             }
 
-            ElementManager.instance.AddElementValue(Element.Causality, 1);
+            ElementManager.instance.AddElementValue(Element.Karma, 1);
 
             ItemManager.instance.Release(obj);
         }

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Karma
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 1, a: 0}
+  icon: {fileID: 21300000, guid: a384b24911d75534ab11e736d5edd636, type: 3}

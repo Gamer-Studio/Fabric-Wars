@@ -2847,6 +2847,8 @@ MonoBehaviour:
     onChange:
       m_PersistentCalls:
         m_Calls: []
+  team:
+    id: 1
 --- !u!1 &1911710287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2903,6 +2905,8 @@ MonoBehaviour:
     onChange:
       m_PersistentCalls:
         m_Calls: []
+  team:
+    id: 0
   _collider: {fileID: 1911710293}
   _renderer: {fileID: 1911710292}
   _sprite: {fileID: 21300000, guid: 85af7aa76955e2e4096d30adb4ddf14c, type: 3}

@@ -92,10 +92,11 @@ MonoBehaviour:
     - Locale-en-US
     - Preload
     - Locale-ko-KR
-    - ItemSO
+    - Item
     - ScopeRecipe
-    - ElementSO
-    - EntityPrefab
+    - Element
+    - Entity
+    - BulletComponent
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 3e0deeeab3ff4dc4986d812af18a7f6c, type: 2}

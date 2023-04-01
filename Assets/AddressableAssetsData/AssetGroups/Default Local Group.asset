@@ -22,11 +22,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ItemSO
+    - Item
   - m_GUID: 3a59e4b5194157d4b8b5fa77f3673bfe
     m_Address: Elements
     m_ReadOnly: 0
     m_SerializedLabels:
     - ElementSO
+    - Element
   - m_GUID: 186c998f4ec3cc945b6e88d8476acf84
     m_Address: Scoped
     m_ReadOnly: 0
@@ -38,6 +40,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - EntityPrefab
+    - Entity
+  - m_GUID: febadb9403e352b4c9085930b4623f84
+    m_Address: Component
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - BulletComponent
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2dabba4622584f74bb69abfc2d2c9ac1, type: 2}
   m_SchemaSet:

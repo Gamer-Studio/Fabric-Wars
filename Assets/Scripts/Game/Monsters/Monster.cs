@@ -1,10 +1,15 @@
 ﻿using System.Collections;
+using FabricWars.Utils;
 using UnityEngine;
 
 namespace FabricWars.Game.Monsters
 {
     public class Monster : MonoBehaviour
     {
+        [Header("Monster properties")]
+        public GaugeInt health;
+        public float moveSpeed;
+        
         // Builder
         public const float WaitForCreation = 5;
         private bool _inBuilding = false;

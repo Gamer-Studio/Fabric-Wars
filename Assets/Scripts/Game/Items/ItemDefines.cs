@@ -12,7 +12,7 @@ namespace FabricWars.Game.Items
         
         internal static void Load()
         {
-            Addressables.LoadAssetsAsync<Item>(new AssetLabelReference { labelString = "ItemSO" },
+            Addressables.LoadAssetsAsync<Item>(new AssetLabelReference { labelString = "Item" },
                 item => allocated[item.name] = item).WaitForCompletion();
 
             allocated.TryGetValue("None", out None);

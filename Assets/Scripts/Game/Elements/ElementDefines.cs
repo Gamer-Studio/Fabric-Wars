@@ -16,7 +16,7 @@ namespace FabricWars.Game.Elements
             // Loading addressable elements data
             var loadedData = new List<Element>();
             
-            Addressables.LoadAssetsAsync<Element>(new AssetLabelReference { labelString = "ElementSO" },
+            Addressables.LoadAssetsAsync<Element>(new AssetLabelReference { labelString = "Element" },
                 element =>
                 {
                     allocated[element.name] = element;

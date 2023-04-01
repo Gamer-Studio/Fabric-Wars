@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FabricWars.Game.Entities.Functions;
 using FabricWars.Utils;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace FabricWars.Game.Entities
         
         [Header("Entity Configuration")]
         public GaugeInt health = new(0, 10, 10);
+        public Team team = Team.Player;
         
         protected virtual void Awake()
         {
@@ -29,6 +31,11 @@ namespace FabricWars.Game.Entities
                     AddFunction(function);
                 }
             }
+        }
+
+        private void Update()
+        {
+            Debug.Log(Team.Player.id);
         }
 
         public void AddFunction(EntityFunction function)

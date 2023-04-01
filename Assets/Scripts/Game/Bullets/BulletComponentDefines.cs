@@ -11,7 +11,7 @@ namespace FabricWars.Game.Bullets
         public static void Load()
         {
             Addressables
-                .LoadAssetsAsync<BulletComponent>(new AssetLabelReference { labelString = "" },
+                .LoadAssetsAsync<BulletComponent>(new AssetLabelReference { labelString = "BulletComponent" },
                     comp => allocated[comp.name] = comp).WaitForCompletion();
             
             Debug.Log("Loaded " + allocated.Count + " bullet components");

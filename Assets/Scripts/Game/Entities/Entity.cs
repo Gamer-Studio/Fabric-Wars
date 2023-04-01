@@ -33,11 +33,6 @@ namespace FabricWars.Game.Entities
             }
         }
 
-        private void Update()
-        {
-            Debug.Log(Team.Player.id);
-        }
-
         public void AddFunction(EntityFunction function)
         {
             activeFunctions.Add(function);

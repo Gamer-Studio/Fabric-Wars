@@ -10,7 +10,7 @@ namespace FabricWars.Game.Entities
         
         public static void Load()
         {
-            Addressables.LoadAssetsAsync<GameObject>(new AssetLabelReference{labelString = "EntityPrefab"}, entity =>
+            Addressables.LoadAssetsAsync<GameObject>(new AssetLabelReference{labelString = "Entity"}, entity =>
             {
                 if (allocated.ContainsKey(entity.name)) return;
                 allocated.Add(entity.name, entity);

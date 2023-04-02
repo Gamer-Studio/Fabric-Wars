@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
+using FabricWars.Utils.Attributes;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Entities
 {
@@ -10,9 +12,27 @@ namespace FabricWars.Game.Entities
     {
         private static readonly int Cutoff = Shader.PropertyToID("cutoff");
 
-        [Header("Components")] [SerializeField]
-        private SpriteRenderer fillSprite;
+        [Header("Components")] 
+        [SerializeField] private SpriteRenderer fillRenderer;
 
+#if UNITY_EDITOR
+        [SerializeField] private ShadowCaster2D shadow;
+        [SerializeField, GetSet("sprite")] private Sprite _sprite;
+
+        public Sprite sprite
+        {
+            get => _sprite;
+            set
+            {
+                if (TryGetComponent<SpriteRenderer>(out var renderer)) renderer.sprite = value;
+                if(fillRenderer != null) fillRenderer.sprite = value;
+                if (shadow != null)
+                {
+                }
+            }
+        }
+#endif
+        
         [Header("CollectableEntity Configuration")]
         public ItemDropTable dropTable = new();
 
@@ -44,7 +64,7 @@ namespace FabricWars.Game.Entities
                 }
             }
 
-            fillSprite.material.SetFloat(Cutoff, dropTable.repeatCount.GetFillRatio());
+            fillRenderer.material.SetFloat(Cutoff, dropTable.repeatCount.GetFillRatio());
 
             if (dropTable.repeatCount.value == dropTable.repeatCount.min)
                 SendMessage("OnBreak", SendMessageOptions.DontRequireReceiver);

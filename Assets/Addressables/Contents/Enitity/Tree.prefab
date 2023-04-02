@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 322692411829617759}
   - component: {fileID: 322692411829617756}
   - component: {fileID: 909225387}
+  - component: {fileID: 7340205008514566429}
   m_Layer: 11
   m_Name: Tree
   m_TagString: Entity
@@ -59,7 +60,9 @@ MonoBehaviour:
         m_Calls: []
   team:
     id: 0
-  fillSprite: {fileID: 322692411928711429}
+  fillRenderer: {fileID: 322692411928711429}
+  shadow: {fileID: 7340205008514566429}
+  _sprite: {fileID: 21300000, guid: 401ceda5667ccfc45bb9933f59ef6986, type: 3}
   dropTable:
     repeatCount:
       max: 3
@@ -370,6 +373,36 @@ MonoBehaviour:
   - {x: 0.1101352, y: -0.39565015, z: 0}
   - {x: 0.30354416, y: -0.18232656, z: 0}
   - {x: -0.016387105, y: 0.37891316, z: 0}
+--- !u!114 &7340205008514566429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322692411829617752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.5000001, y: 0.5, z: 0}
+  - {x: 0.5000001, y: -0.5, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -117924
+  m_LocalBounds:
+    m_Center: {x: 0.000000059604645, y: 0, z: 0}
+    m_Extent: {x: 0.50000006, y: 0.5, z: 0}
 --- !u!1 &322692411928711427
 GameObject:
   m_ObjectHideFlags: 0

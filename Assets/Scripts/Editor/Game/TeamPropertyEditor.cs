@@ -34,6 +34,7 @@ namespace FabricWars.Editor.Game
                 fieldInfo.SetValue(property.serializedObject.targetObject, new Team((byte)id));
             }
             EditorGUI.EndChangeCheck();
+            property.serializedObject.ApplyModifiedProperties();
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d1d891d2454cf98f9517a814bdc1d5, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
+  contentTable:
+    m_keys:
+    - ko
+    - en
+    m_values:
+    - {fileID: 11400000, guid: b9fff726548921141b5369af6bbc7588, type: 2}
+    - {fileID: 11400000, guid: e6a98435d872d064b9790cc860162858, type: 2}
   weight: 1
   sprite: {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
   canCatch: 1

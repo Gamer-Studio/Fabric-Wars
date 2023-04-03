@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: Content Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Content
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: c9bbd783e8657a9439111ade0759547c
+  m_Entries:
+  - m_Id: 5100271493120
+    m_Key: log.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5805455630336
+    m_Key: log.description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

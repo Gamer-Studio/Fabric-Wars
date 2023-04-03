@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Attributes;
@@ -14,24 +15,6 @@ namespace FabricWars.Game.Entities
 
         [Header("Components")] 
         [SerializeField] private SpriteRenderer fillRenderer;
-
-#if UNITY_EDITOR
-        [SerializeField] private ShadowCaster2D shadow;
-        [SerializeField, GetSet("sprite")] private Sprite _sprite;
-
-        public Sprite sprite
-        {
-            get => _sprite;
-            set
-            {
-                if (TryGetComponent<SpriteRenderer>(out var renderer)) renderer.sprite = value;
-                if(fillRenderer != null) fillRenderer.sprite = value;
-                if (shadow != null)
-                {
-                }
-            }
-        }
-#endif
         
         [Header("CollectableEntity Configuration")]
         public ItemDropTable dropTable = new();
@@ -74,5 +57,18 @@ namespace FabricWars.Game.Entities
         {
             Destroy(gameObject);
         }
+        
+        #if UNITY_EDITOR
+        [ContextMenu("Set Light line")]
+        public void Light()
+        {
+            var sprite = GetComponent<SpriteRenderer>().sprite;
+            var light = GetComponent<Light2D>();
+
+            var shape = new List<Vector2>();
+            sprite.GetPhysicsShape(0, shape);
+            light.SetShapePath((from point in shape select new Vector3(point.x, point.y)).ToArray());
+        }
+        #endif
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Elements
 {
@@ -6,6 +7,6 @@ namespace FabricWars.Game.Elements
     public partial class Element : ScriptableObject
     {
         public Color color;
-        public Sprite icon;
+        public Sprite mark;
     }
 }

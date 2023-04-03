@@ -132,7 +132,10 @@ namespace FabricWars.Scenes.Board.Elements
                             AddElementValue(element, -consume);
                         }
 
-                        Instantiate(result.entity, mPos.Z(0), new Quaternion(), objectContainer);
+                        var entity = result.Instantiate();
+                        entity.transform.position = mPos.Z(0);
+                        entity.transform.rotation = Quaternion.identity;
+                        entity.transform.SetParent(objectContainer);
                     }
                 }
             }

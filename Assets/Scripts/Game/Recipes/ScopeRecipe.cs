@@ -9,7 +9,11 @@ namespace FabricWars.Game.Recipes
     {
         public GameObject entity;
         public SerializablePair<Element, int>[] consumes;
-
         public SerializablePair<Element, int>[] scopes;
+
+        public virtual GameObject Instantiate()
+        {
+            return Instantiate(entity);
+        }
     }
 }

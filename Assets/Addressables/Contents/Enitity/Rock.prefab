@@ -57,7 +57,9 @@ MonoBehaviour:
     onChange:
       m_PersistentCalls:
         m_Calls: []
-  fillSprite: {fileID: 184390958781437649}
+  team:
+    id: 0
+  fillRenderer: {fileID: 184390958781437649}
   dropTable:
     repeatCount:
       max: 3

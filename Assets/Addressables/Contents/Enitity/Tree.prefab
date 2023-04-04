@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 322692411829617756}
   - component: {fileID: 909225387}
   - component: {fileID: 8305626367105232950}
+  - component: {fileID: 861636879}
   m_Layer: 11
   m_Name: Tree
   m_TagString: Entity
@@ -302,10 +303,31 @@ MonoBehaviour:
   - {x: 0.12603486, y: -0.37523878, z: 0}
   m_ShapePathHash: -1328286883
   m_Mesh: {fileID: 0}
-  m_InstanceId: -241650
+  m_InstanceId: -265580
   m_LocalBounds:
     m_Center: {x: -0.003226757, y: -0.00043290854, z: 0}
     m_Extent: {x: 0.31601465, y: 0.37480587, z: 0}
+--- !u!50 &861636879
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322692411829617752}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &322692411928711427
 GameObject:
   m_ObjectHideFlags: 0

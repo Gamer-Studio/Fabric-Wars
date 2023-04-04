@@ -3,6 +3,7 @@ using System.Linq;
 using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
@@ -59,15 +60,18 @@ namespace FabricWars.Game.Entities
         }
         
         #if UNITY_EDITOR
-        [ContextMenu("Set Light line")]
-        public void Light()
+        [ContextMenu("Update Collider")]
+        public void UpdateCollider()
         {
-            var sprite = GetComponent<SpriteRenderer>().sprite;
-            var light = GetComponent<Light2D>();
+            var sprite = fillRenderer.sprite;
+            var col = GetComponent<PolygonCollider2D>();
 
-            var shape = new List<Vector2>();
-            sprite.GetPhysicsShape(0, shape);
-            light.SetShapePath((from point in shape select new Vector3(point.x, point.y)).ToArray());
+            col.ClearPath();
+            
+            for (var i = 0; i < sprite.GetPhysicsShapeCount(); i++)
+            {
+                col.SetPath(i, sprite.GetPhysicsShape(i));
+            }
         }
         #endif
     }

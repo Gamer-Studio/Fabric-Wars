@@ -73,7 +73,6 @@ MonoBehaviour:
     - item: {fileID: 11400000, guid: 78e450ec713a6414998499a5628b9282, type: 2}
       max: 3
       min: 1
-  shadow: {fileID: 4876328777632747062}
 --- !u!212 &184390958675002251
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -259,19 +258,21 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
-  - {x: -0.21722823, y: -0.07007158, z: 0}
-  - {x: -0.07295698, y: 0.3759267, z: 0}
-  - {x: 0.064300686, y: 0.37304127, z: 0}
-  - {x: 0.37015584, y: -0.12778011, z: 0}
-  - {x: 0.31306872, y: -0.37943348, z: 0}
-  - {x: -0.18610996, y: -0.3707772, z: 0}
-  - {x: -0.37366265, y: -0.18610995, z: 0}
-  m_ShapePathHash: 784440673
+  - {x: -0.1875, y: -0.375, z: 0}
+  - {x: -0.375, y: -0.171875, z: 0}
+  - {x: -0.375, y: 0.0625, z: 0}
+  - {x: -0.0625, y: 0.375, z: 0}
+  - {x: 0.0625, y: 0.375, z: 0}
+  - {x: 0.1875, y: 0.25, z: 0}
+  - {x: 0.375, y: -0.125, z: 0}
+  - {x: 0.375, y: -0.3125, z: 0}
+  - {x: 0.3125, y: -0.375, z: 0}
+  m_ShapePathHash: -1333427713
   m_Mesh: {fileID: 0}
-  m_InstanceId: -293948
+  m_InstanceId: -293986
   m_LocalBounds:
-    m_Center: {x: -0.0017533898, y: -0.0017533898, z: 0}
-    m_Extent: {x: 0.37190926, y: 0.3776801, z: 0}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.375, y: 0.375, z: 0}
 --- !u!1 &184390958781437655
 GameObject:
   m_ObjectHideFlags: 0

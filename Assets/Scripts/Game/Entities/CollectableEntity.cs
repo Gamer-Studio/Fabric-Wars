@@ -57,8 +57,6 @@ namespace FabricWars.Game.Entities
         }
         
         #if UNITY_EDITOR
-        [SerializeField] private ShadowCaster2D shadow;
-        
         [ContextMenu("Update Collider")]
         public void UpdateCollider()
         {
@@ -71,14 +69,6 @@ namespace FabricWars.Game.Entities
             {
                 col.SetPath(i, sprite.GetPhysicsShape(i));
             }
-        }
-
-        [ContextMenu("Update Shadow")]
-        public void UpdateShadow()
-        {
-            var shape = (from point in fillRenderer.sprite.GetPhysicsShape(0) select point.ToVector3()).ToArray();
-            
-            shadow.SetShapePath(shape);
         }
         #endif
     }

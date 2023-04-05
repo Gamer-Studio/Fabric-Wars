@@ -28,7 +28,7 @@ namespace FabricWars.Editor.Game
                         height = EditorGUIUtility.singleLineHeight,
                         y = position.y +
                             (EditorGUIUtility.singleLineHeight * 2 + EditorGUIUtility.standardVerticalSpacing)
-                    }, "Id",
+                    }, "Team Id",
                     team.id, EditorStyles.numberField);
 
                 fieldInfo.SetValue(property.serializedObject.targetObject, new Team((byte)id));

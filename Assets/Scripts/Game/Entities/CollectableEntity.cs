@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using FabricWars.Game.Entities.ETC;
+﻿using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace FabricWars.Game.Entities
 {
@@ -11,9 +9,9 @@ namespace FabricWars.Game.Entities
     {
         private static readonly int Cutoff = Shader.PropertyToID("cutoff");
 
-        [Header("Components")] 
-        [SerializeField] private SpriteRenderer fillRenderer;
-        
+        [Header("Components")] [SerializeField]
+        private SpriteRenderer fillRenderer;
+
         [Header("CollectableEntity Configuration")]
         public ItemDropTable dropTable = new();
 
@@ -55,8 +53,8 @@ namespace FabricWars.Game.Entities
         {
             Destroy(gameObject);
         }
-        
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         [ContextMenu("Update Collider")]
         public void UpdateCollider()
         {
@@ -64,12 +62,12 @@ namespace FabricWars.Game.Entities
             var col = GetComponent<PolygonCollider2D>();
 
             col.pathCount = sprite.GetPhysicsShapeCount();
-            
+
             for (var i = 0; i < col.pathCount; i++)
             {
                 col.SetPath(i, sprite.GetPhysicsShape(i));
             }
         }
-        #endif
+#endif
     }
 }

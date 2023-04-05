@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using FabricWars.Assets.Scripts.UI;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
 using FabricWars.Graphics.W2D;
-using FabricWars.Utils;
 using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;
@@ -57,8 +55,8 @@ namespace FabricWars.Scenes.Board.Elements
             );
 
             KeyBindManager.instance
-                .Bind(KeyCode.DownArrow)
-                .And(KeyCodeUtils.Numberics)
+                .Bind(new BindOptions{onlyDown = true}, KeyCodeUtils.Numberics)
+                //.And(KeyCodeUtils.Numberics)
                 .Then(obj =>
                 {
                     if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;

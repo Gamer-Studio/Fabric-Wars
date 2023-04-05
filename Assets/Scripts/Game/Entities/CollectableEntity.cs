@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FabricWars.Game.Entities.ETC;
 using FabricWars.Scenes.Board;
-using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Entities
 {
@@ -60,18 +57,28 @@ namespace FabricWars.Game.Entities
         }
         
         #if UNITY_EDITOR
+        [SerializeField] private ShadowCaster2D shadow;
+        
         [ContextMenu("Update Collider")]
         public void UpdateCollider()
         {
             var sprite = fillRenderer.sprite;
             var col = GetComponent<PolygonCollider2D>();
 
-            col.ClearPath();
+            col.pathCount = sprite.GetPhysicsShapeCount();
             
-            for (var i = 0; i < sprite.GetPhysicsShapeCount(); i++)
+            for (var i = 0; i < col.pathCount; i++)
             {
                 col.SetPath(i, sprite.GetPhysicsShape(i));
             }
+        }
+
+        [ContextMenu("Update Shadow")]
+        public void UpdateShadow()
+        {
+            var shape = (from point in fillRenderer.sprite.GetPhysicsShape(0) select point.ToVector3()).ToArray();
+            
+            shadow.SetShapePath(shape);
         }
         #endif
     }

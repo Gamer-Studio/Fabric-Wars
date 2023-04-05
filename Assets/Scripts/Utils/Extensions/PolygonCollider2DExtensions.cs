@@ -6,10 +6,7 @@ namespace FabricWars.Utils.Extensions
     {
         public static void ClearPath(this PolygonCollider2D collider)
         {
-            for (var i = 0; i < collider.pathCount; i++)
-            {
-                collider.SetPath(i, (Vector2[])null);
-            }
+            collider.pathCount = 0;
         }
     }
 }

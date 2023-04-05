@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace FabricWars.Assets.Scripts.UI
 {
-    public abstract class Dialog<InitData> : MonoBehaviour
-    where InitData : struct
+    public abstract class Dialog : MonoBehaviour
     {
         bool wasCursorInvisible = false;
 
-        public virtual void Build(InitData data)
+        protected virtual void Build()
         {
             if (!Cursor.visible) wasCursorInvisible = true;
             Cursor.visible = true;
@@ -22,5 +21,11 @@ namespace FabricWars.Assets.Scripts.UI
             gameObject.SetActive(false);
             TimeController.Main.UnPause();
         }
+    }
+
+    public abstract class Dialog<InitData> : Dialog
+    where InitData : struct
+    {
+        public virtual void Build(InitData data) => base.Build();
     }
 }

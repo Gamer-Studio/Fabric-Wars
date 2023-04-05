@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FabricWars.Assets.Scripts.UI
 {
@@ -14,8 +15,9 @@ namespace FabricWars.Assets.Scripts.UI
     public class InputDialog : Dialog<InputDialogData>
     {
         [SerializeField] private TextMeshProUGUI titleTMP, descriptionTMP;
+        [SerializeField] private TMP_InputField field;
+
         public Action<string> onSubmit;
-        private string _currentInputValid = "";
 
         public override void Build(InputDialogData data)
         {
@@ -25,7 +27,10 @@ namespace FabricWars.Assets.Scripts.UI
             onSubmit = data.onSubmit;
         }
 
-        public void OnInputChange(string value) => _currentInputValid = value;
-        public void OnSubmitButtonClick() => onSubmit?.Invoke(_currentInputValid);
+        public void OnSubmitButtonClick()
+        {
+            onSubmit?.Invoke(field.text);
+            Close();
+        }
     }
 }

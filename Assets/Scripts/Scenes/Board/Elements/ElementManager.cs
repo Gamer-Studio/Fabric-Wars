@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using FabricWars.Assets.Scripts.UI;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
 using FabricWars.Graphics.W2D;
+using FabricWars.Utils;
 using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;
@@ -54,22 +57,32 @@ namespace FabricWars.Scenes.Board.Elements
             );
 
             KeyBindManager.instance
-                .Bind(BindOptions.downOnly, KeyCodeUtils.Numberics)
+                .Bind(KeyCode.DownArrow)
+                .And(KeyCodeUtils.Numberics)
                 .Then(obj =>
                 {
-                    if (EVIDialogue.isActiveAndEnabled) return;
+                    if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;
 
-                    if (!KeyCodeUtils.TryToInt(obj[0], out var val) ||
-                        val is 0 or -1 ||
-                        val > slots.Count) return;
+                    DialogManager.Main.ShowInputDialog(new()
+                    {
+                        title = "Element Reconciliation Dialog",
+                        description = "input reconciliated element amount as many as you want.",
+                        onSubmit = (string result) =>
+                        {
+                            int.TryParse(result, out int amount);
+                            if (!KeyCodeUtils.TryToInt(obj[0], out var val) ||
+                                val is 0 or -1 ||
+                                val > slots.Count) return;
 
-                    var slot = slots[val - 1];
+                            var slot = slots[val - 1];
 
-                    if (Input.GetKey(KeyCode.LeftShift)) slot.Activate(GetElementInputValue(slot));
-                    else slot.Activate();
+                            if (Input.GetKey(KeyCode.LeftShift)) slot.Activate(amount);
+                            else slot.Activate();
 
-                    if (slot.elementActive) activeSlots.Add(slot);
-                    else activeSlots.Remove(slot);
+                            if (slot.elementActive) activeSlots.Add(slot);
+                            else activeSlots.Remove(slot);
+                        }
+                    });
                 });
 
             instance = this;
@@ -198,9 +211,6 @@ namespace FabricWars.Scenes.Board.Elements
                 }
             }
         }
-
-        // TODO: 이걸로 유저가 설정한 원소(Element) 수량 가져와서  ElementSlot에 해당 값만큼 설정해서 활성화하게 할 생각
-        [SerializeField] private ElementValueInputDialogue EVIDialogue;
 
         private int GetElementInputValue(ElementSlot slot)
         {

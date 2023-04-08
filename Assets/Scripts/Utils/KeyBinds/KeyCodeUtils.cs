@@ -4,7 +4,7 @@ namespace FabricWars.Utils.KeyBinds
 {
     public static class KeyCodeUtils
     {
-        public static KeyCode[]
+        public static readonly KeyCode[]
             Numberics =
             {
                 KeyCode.Alpha0,

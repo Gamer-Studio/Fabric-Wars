@@ -8,6 +8,7 @@ using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.Tilemaps;
 
@@ -55,10 +56,21 @@ namespace FabricWars.Scenes.Board.Elements
             );
 
             KeyBindManager.instance
-                .Bind(new BindOptions{onlyDown = true}, KeyCodeUtils.Numberics)
-                //.And(KeyCodeUtils.Numberics)
+                .Bind(new BindOptions{onlyDown = true})
+                .And(KeyCodeUtils.Numberics)
                 .Then(obj =>
                 {
+                    if (!Input.GetKey(KeyCode.LeftShift))
+                    {
+                        foreach (var keyCode in obj)
+                        {
+                            Debug.Log(keyCode);
+                        }
+
+                        return;
+                    }
+                    
+                    
                     if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;
 
                     DialogManager.Main.ShowInputDialog(new()

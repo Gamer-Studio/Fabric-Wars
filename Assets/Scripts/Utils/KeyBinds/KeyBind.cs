@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace FabricWars.Utils.KeyBinds
 {
@@ -8,9 +9,10 @@ namespace FabricWars.Utils.KeyBinds
         KeyCode[] GetKeys();
     }
 
+    [Serializable]
     public class KeyBind : Bind, IKeyBind
     {
-        private KeyCode _key;
+        [SerializeField] private KeyCode _key;
 
         public virtual void Init(KeyCode[] codes) => _key = codes[0];
 

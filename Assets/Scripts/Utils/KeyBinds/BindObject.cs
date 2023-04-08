@@ -15,22 +15,26 @@ namespace FabricWars.Utils.KeyBinds
         public BindOptions OnlyDown(bool value) => new() { onlyDown = value, once = once };
     }
 
+    [Serializable]
     public class BindObject
     {
         public bool once = false;
         public bool onlyDown = false;
         public int id;
+        public KeyCode[] keys;
 
         public IBind bind;
         public Action<KeyCode[], BindObject> callback = (_, _) => { };
         public Action elseCallback = () => { };
-
-        public BindObject(BindOptions options, IBind bind)
+        
+        public BindObject(BindOptions options, IBind bind, KeyCode[] keys)
         {
             once = options.once;
             onlyDown = options.onlyDown;
             this.bind = bind;
             id = KeyBindManager.instance.binds.Count;
+            
+            this.keys = keys;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FabricWars.Utils.KeyBinds
 {
     public class KeyBindManager : DDOLSingleton<KeyBindManager>
     {
-        public readonly List<BindObject> binds = new();
+        public List<BindObject> binds = new();
         private BindObject LastBind => binds.LastOrDefault();
 
         private void Update()
@@ -25,6 +25,7 @@ namespace FabricWars.Utils.KeyBinds
             
             if (bind.onlyDown && bind.bind.IsKeyDown(out var codes))
             {
+                Debug.Log(codes);
                 pass = true;
                 bind.callback(codes, bind);
                 if(bind.once) binds.Remove(bind);
@@ -51,7 +52,7 @@ namespace FabricWars.Utils.KeyBinds
         public KeyBindManager Bind<T>(params KeyCode[] keyCodes) where T : KeyBind, new() => Bind<T>(BindOptions.defaultOption, keyCodes);
         public KeyBindManager Bind<T>(BindOptions options, params KeyCode[] keyCodes) where T : KeyBind, new()
         {
-            binds.Add(new BindObject(options, CreateKeyBind<T>(keyCodes)));
+            binds.Add(new BindObject(options, CreateKeyBind<T>(keyCodes), keyCodes));
             return this;
         }
 
@@ -71,6 +72,8 @@ namespace FabricWars.Utils.KeyBinds
         public KeyBindManager And<T>(params KeyCode[] keyCodes) where T : KeyBind, new()
         {
             LastBind.bind = new AndBind(LastBind.bind, CreateKeyBind<T>(keyCodes));
+            LastBind.keys = keyCodes;
+            
             return this;
         }
 

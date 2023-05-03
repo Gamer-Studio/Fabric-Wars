@@ -14,12 +14,11 @@ namespace FabricWars.Game.Items
     {
         [SerializeField, GetSet("type")] private Item _type;
 
-        [Header("Components")] [SerializeField]
-        private SpriteRenderer spriteRenderer;
-
+        [Header("Components")] 
+        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private new PolygonCollider2D collider;
-        private Camera mainCamera => ElementManager.instance.mainCamera;
-        private Tilemap tilemap => ElementManager.instance.tilemap;
+        private static Camera mainCamera => ElementManager.instance.mainCamera;
+        private static Tilemap tilemap => ElementManager.instance.tilemap;
 
         public Item type
         {
@@ -40,20 +39,26 @@ namespace FabricWars.Game.Items
         public static ItemObject dragObj { get; private set; }
         private static ItemPointerController _pointer;
 
-        private ItemPointerController pointer
+        private static ItemPointerController pointer
         {
             get
             {
-                if (_pointer == null)
+                if (_pointer != null) return _pointer;
+                else
                 {
-                    var obj = new GameObject { name = "ItemObject_Pointer", transform = { position = Vector3.zero }, tag = "GameController", layer = 5};
+                    var obj = new GameObject
+                    {
+                        name = "ItemObject_Pointer", transform = { position = Vector3.zero }, tag = "GameController",
+                        layer = 5
+                    };
                     var col = obj.AddComponent<CircleCollider2D>();
                     obj.AddComponent<Rigidbody2D>();
                     col.radius = 0.1f;
                     col.isTrigger = true;
                     _pointer = obj.AddComponent<ItemPointerController>();
+
+                    return _pointer;
                 }
-                return _pointer;
             }
         }
 
@@ -61,7 +66,8 @@ namespace FabricWars.Game.Items
         {
             if (inputValue)
             {
-                pointer.transform.position = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition).Z(0);
+                pointer.transform.position =
+                    BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition).Z(0);
                 _dragFunc = StartCoroutine(StartDrag());
             }
             else

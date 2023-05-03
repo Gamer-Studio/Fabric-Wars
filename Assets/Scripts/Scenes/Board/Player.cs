@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Game.Entities;
+using FabricWars.Game.Items;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -45,6 +47,15 @@ namespace FabricWars.Scenes.Board
             {
                 body.AddForce(direction.Multiply(speed));
                 yield return new WaitForFixedUpdate();
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Item"))
+            {
+                var item = other.gameObject.GetComponent<ItemObject>();
+                Debug.Log(item.type.name);
             }
         }
     }

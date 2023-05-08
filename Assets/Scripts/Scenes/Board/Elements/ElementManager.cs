@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FabricWars.Assets.Scripts.UI;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
 using FabricWars.Graphics.W2D;
+using FabricWars.UI;
 using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +17,9 @@ namespace FabricWars.Scenes.Board.Elements
     {
         public static ElementManager instance { get; private set; }
 
+        [Header("Key Bindings")] 
+        private KeyCode _activateWithSelect;
+        
         private ObjectPool<ElementSlot> _pool;
         [SerializeField] private GameObject originalSlot;
         [SerializeField] private Transform slotContainer;
@@ -25,7 +27,8 @@ namespace FabricWars.Scenes.Board.Elements
         public List<ElementSlot> slots = new();
         [SerializeField] private List<ElementSlot> activeSlots = new();
 
-        [Header("Entity Builder")] public Camera mainCamera;
+        [Header("Entity Builder")] 
+        private static Camera _mainCamera;
         public Tilemap tilemap;
         [SerializeField] private Transform objectContainer;
 
@@ -36,14 +39,15 @@ namespace FabricWars.Scenes.Board.Elements
                 Destroy(this);
                 return;
             }
-
-            // Test
-            var dic = new Dictionary<string, KeyCode>();
-            JsonUtility.ToJson(dic);
-            //
-
-            mainCamera = Camera.main;
-
+            
+            // init
+            instance = this;
+            _mainCamera = Camera.main;
+            
+            // keyBind update
+            UpdateKeybinding();
+            
+            // load
             _pool = new ObjectPool<ElementSlot>(
                 () => Instantiate(originalSlot, slotContainer).GetComponent<ElementSlot>(),
                 slots.Add,
@@ -54,47 +58,7 @@ namespace FabricWars.Scenes.Board.Elements
                 },
                 null, false, 1, 10
             );
-
-            KeyBindManager.instance
-                .Bind(new BindOptions{onlyDown = true})
-                .And(KeyCodeUtils.Numberics)
-                .Then(obj =>
-                {
-                    if (!Input.GetKey(KeyCode.LeftShift))
-                    {
-                        foreach (var keyCode in obj)
-                        {
-                            Debug.Log(keyCode);
-                        }
-
-                        return;
-                    }
-                    
-                    
-                    if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;
-
-                    DialogManager.Main.ShowInputDialog(new()
-                    {
-                        title = "Element Reconciliation Dialog",
-                        description = "input reconciliated element amount as many as you want.",
-                        onSubmit = (string result) =>
-                        {
-                            int.TryParse(result, out int amount);
-                            if (!KeyCodeUtils.TryToInt(obj[0], out var val) ||
-                                val is 0 or -1 ||
-                                val > slots.Count) return;
-
-                            var slot = slots[val - 1];
-
-                            if (Input.GetKey(KeyCode.LeftShift)) slot.Activate(amount);
-                            else slot.Activate();
-
-                            if (slot.elementActive) activeSlots.Add(slot);
-                            else activeSlots.Remove(slot);
-                        }
-                    });
-                });
-
+            
             instance = this;
         }
 
@@ -102,12 +66,40 @@ namespace FabricWars.Scenes.Board.Elements
 
         private void Update()
         {
+            // Key bindings
+            
+            for (var i = 1; i < KeyCodeUtils.Numberics.Length; i++)
+            {
+                if (Input.GetKeyDown(KeyCodeUtils.Numberics[i]))
+                {
+                    if (Input.GetKey(_activateWithSelect))
+                    {
+                        if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;
+
+                        var iCopy = i - 1;
+                        DialogManager.Main.ShowInputDialog(new InputDialogData
+                        {
+                            title = "Element Reconciliation Dialog",
+                            description = "input reconciliated element amount as many as you want.",
+                            onSubmit = result =>
+                            {
+                                if(int.TryParse(result, out var amount) && iCopy < slots.Count)slots[iCopy].Activate(amount);
+                            }
+                        });
+                    }
+                    else if(i - 1 < slots.Count)
+                    {
+                        slots[i - 1].Activate();
+                    }
+                }
+            }
+            
             // Entity creation (Element craft)
             if (Input.GetMouseButtonUp(0) && tilemap != null)
             {
                 if (w2dManager == null || w2dManager.beforeTarget != null) return;
 
-                var mPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var mPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
                 if (tilemap.HasTile(mPos.XY(
                         mPos.x < 0 ? mPos.x - 0.5f : mPos.x + 0.5f,
@@ -162,6 +154,11 @@ namespace FabricWars.Scenes.Board.Elements
                     }
                 }
             }
+        }
+
+        private void UpdateKeybinding()
+        {
+            _activateWithSelect = Settings.keyMappings["elementManager.activateWithSelect"];
         }
 
         public bool TryGetSlot(Element type, out ElementSlot slot)

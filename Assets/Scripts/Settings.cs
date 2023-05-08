@@ -1,32 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace FabricWars
 {
-    public sealed class Settings
+    public static class Settings
     {
-        public static Settings instance { get; } = new ();
-        
-        public readonly Dictionary<string, KeyCode> keyMappings = new ();
+        public static string dataPath;
+        public static readonly Dictionary<string, KeyCode> keyMappings = new ()
+        {
+            ["elementManager.activateWithSelect"] = KeyCode.LeftShift
+        };
 
-        public Settings()
+        static Settings()
         {
             Debug.Log("Loading Settings");
+            dataPath = Path.Combine(Application.dataPath, "Settings");
+
+            if (File.Exists(Path.Combine(dataPath, "Keybinds.json")))
+            {
+
+                using var file = File.OpenText(Path.Combine(dataPath, "Keybinds.json"));
+                using var reader = new JsonTextReader(file);
+                foreach (var (key, token) in (JObject)JToken.ReadFrom(reader))
+                {
+                    if (token == null || !int.TryParse(token.ToString(), out var i)) continue;
+
+                    if(i < 0) continue;
+                    try
+                    {
+                        keyMappings[key] = (KeyCode)i;
+                    }
+                    catch (Exception)
+                    {
+                        Debug.Log($"keybind index {i} is not a valid key");
+                    }
+                }
+            }
+            
             //var keyData = JsonUtility.FromJson<SettingsJson>(File.ReadAllText("Settings.json"));
         }
 
-        ~Settings()
+        public static void Save()
         {
-            Debug.Log("Unloading Settings");
-
-            if (!Application.isEditor)
-            {
-                
-            }
-            else
-            {
-                Debug.Log("Not saving key mappings");
-            }
+            File.WriteAllText(Path.Combine(dataPath, "Keybinds.json"), JObject.FromObject(keyMappings).ToString(Formatting.Indented));
         }
     }
 }

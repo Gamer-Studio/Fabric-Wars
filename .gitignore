@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # Default data
 Assets/Material/Shader/Active Effect 2.mat
+Assets/Settings/Keybinds.json
+Assets/Settings/Keybinds.json.meta

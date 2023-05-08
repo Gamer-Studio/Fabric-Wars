@@ -33,6 +33,7 @@ namespace FabricWars.Scenes.Board
             players.Add(this);
 
             StartCoroutine(Move());
+            Settings.Save();
         }
 
         private void OnDestroy()

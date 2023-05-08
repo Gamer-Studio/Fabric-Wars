@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace FabricWars.Assets.Scripts.UI
+namespace FabricWars.UI
 {
     public struct BaseDialogData
     {

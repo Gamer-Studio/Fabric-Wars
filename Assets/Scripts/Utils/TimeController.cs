@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace FabricWars
+namespace FabricWars.Utils
 {
-    class TimeController : LazyDDOLSingletonMonoBehaviour<TimeController>
+    public class TimeController : LazyDDOLSingletonMonoBehaviour<TimeController>
     {
         float cachedScale;
         public bool paused = false;

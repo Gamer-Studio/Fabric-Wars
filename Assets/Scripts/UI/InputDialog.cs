@@ -1,9 +1,8 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace FabricWars.Assets.Scripts.UI
+namespace FabricWars.UI
 {
     public struct InputDialogData
     {

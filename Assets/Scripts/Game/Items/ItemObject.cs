@@ -17,7 +17,7 @@ namespace FabricWars.Game.Items
         [Header("Components")] 
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private new PolygonCollider2D collider;
-        private static Camera mainCamera => ElementManager.instance.mainCamera;
+        private static Camera mainCamera => Camera.main;
         private static Tilemap tilemap => ElementManager.instance.tilemap;
 
         public Item type

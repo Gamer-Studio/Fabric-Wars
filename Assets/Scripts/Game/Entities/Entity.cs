@@ -8,9 +8,12 @@ namespace FabricWars.Game.Entities
 {
     public partial class Entity : MonoBehaviour
     {
+        //
         [Header("Functions")]
         [SerializeField] private EntityFunction[] AddFunctionOnStartup;
         [SerializeField] private List<EntityFunction> activeFunctions = new();
+        
+        //
         private readonly Dictionary<EntityFunction, Coroutine> _functions = new ();
         
         [Header("Entity Configuration")]

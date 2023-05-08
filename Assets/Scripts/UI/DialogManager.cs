@@ -7,25 +7,38 @@ namespace FabricWars.UI
 {
     public class DialogManager : DDOLSingletonMonoBehaviour<DialogManager>
     {
-        [Header("Preset")]
-        [SerializeField] private Canvas canvas;
+        [Header("Preset")] [SerializeField] private Canvas canvas;
         [SerializeField] private GameObject baseDialogPref, inputDialogPref;
         private Dictionary<Type, Dialog> dialogCache = new();
 
         public void Show(BaseDialogData data)
         {
-            BaseDialog baseDialog = Instantiate(baseDialogPref, canvas.transform).GetComponent<BaseDialog>();
-            baseDialog.Build(data);
-            dialogCache.Add(baseDialog.GetType(), baseDialog);
+            if (!dialogCache.TryGetValue(typeof(BaseDialog), out var dialog))
+                dialogCache[typeof(BaseDialog)] =
+                    Instantiate(baseDialogPref, canvas.transform).GetComponent<BaseDialog>();
+
+            if (dialog is not BaseDialog baseDialog)
+                dialogCache[typeof(BaseDialog)] =
+                    Instantiate(baseDialogPref, canvas.transform).GetComponent<BaseDialog>();
+            else baseDialog.Build(data);
         }
+
+        private InputDialog _dialog;
 
         public void ShowInputDialog(InputDialogData data)
         {
-            InputDialog inputDialog = Instantiate(inputDialogPref, canvas.transform).GetComponent<InputDialog>();
-            inputDialog.Build(data);
-            dialogCache.Add(inputDialog.GetType(), inputDialog);
+            if (!dialogCache.TryGetValue(typeof(InputDialog), out var dialog) || dialog is not InputDialog inputDialog)
+            {
+                dialogCache[typeof(InputDialog)] =
+                    Instantiate(inputDialogPref, canvas.transform).GetComponent<InputDialog>();
+            }
+            else
+            {
+                inputDialog.Build(data);
+            }
         }
 
-        public bool IsTypeAlive<T>() where T : Dialog => dialogCache.TryGetValue(typeof(T), out Dialog dialog) && dialog.gameObject != null;
+        public bool IsTypeAlive<T>() where T : Dialog =>
+            dialogCache.TryGetValue(typeof(T), out var dialog) && dialog.gameObject != null;
     }
 }

@@ -23,9 +23,9 @@ namespace FabricWars.UI
         }
     }
 
-    public abstract class Dialog<InitData> : Dialog
-    where InitData : struct
+    public abstract class Dialog<TInitData> : Dialog
+    where TInitData : struct
     {
-        public virtual void Build(InitData data) => base.Build();
+        public virtual void Build(TInitData data) => base.Build();
     }
 }

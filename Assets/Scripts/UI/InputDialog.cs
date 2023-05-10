@@ -29,6 +29,7 @@ namespace FabricWars.UI
         public void OnSubmitButtonClick()
         {
             onSubmit?.Invoke(field.text);
+            
             Close();
         }
     }

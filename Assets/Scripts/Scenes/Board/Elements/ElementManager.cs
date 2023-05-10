@@ -74,9 +74,11 @@ namespace FabricWars.Scenes.Board.Elements
                 {
                     if (Input.GetKey(_activateWithSelect))
                     {
+                        /*
                         if (DialogManager.Main.IsTypeAlive<InputDialog>()) return;
 
                         var iCopy = i - 1;
+                        
                         DialogManager.Main.ShowInputDialog(new InputDialogData
                         {
                             title = "Element Reconciliation Dialog",
@@ -86,6 +88,7 @@ namespace FabricWars.Scenes.Board.Elements
                                 if(int.TryParse(result, out var amount) && iCopy < slots.Count)slots[iCopy].Activate(amount);
                             }
                         });
+                        */
                     }
                     else if(i - 1 < slots.Count)
                     {

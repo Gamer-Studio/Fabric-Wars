@@ -1,58 +1,24 @@
 ﻿using System;
 using FabricWars.Game.Items;
-using FabricWars.Utils.Attributes;
-using UnityEngine;
 
 namespace FabricWars.Game
 {
     [Serializable]
     public class InventorySlot
     {
-        public Item itemType;
-        public int maxCount;
-        [SerializeField, GetSet("count")] private int _count;
+        public Item item;
+        public int amount;
 
-        public int count
+        public InventorySlot(Item item, int amount)
         {
-            get => _count;
-            set
-            {
-                if (value <= 0) _count = 0;
-                else if (value >= maxCount) _count = maxCount;
-                else _count = value;
-            }
+            this.item = item;
+            this.amount = amount;
         }
 
-        public InventorySlot(Item item, int maxCount, int count)
+        public void DeConstruct(out Item item, out int itemAmount)
         {
-            itemType = item;
-            this.maxCount = maxCount;
-            this.count = count;
-        }
-
-        public static InventorySlot operator +(InventorySlot slot, int count)
-        {
-            slot.count += count;
-
-            return slot;
-        }
-
-        public static InventorySlot operator -(InventorySlot slot, int count)
-        {
-            slot.count -= count;
-            return slot;
-        }
-
-        public static InventorySlot operator *(InventorySlot slot, int multiplier)
-        {
-            slot.count *= multiplier;
-            return slot;
-        }
-
-        public void DeConstruct(out Item item, out int itemCount)
-        {
-            item = itemType;
-            itemCount = this.count;
+            item = this.item;
+            itemAmount = amount;
         }
     }
 }

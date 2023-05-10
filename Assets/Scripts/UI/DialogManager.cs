@@ -8,7 +8,8 @@ namespace FabricWars.UI
     public class DialogManager : DDOLSingletonMonoBehaviour<DialogManager>
     {
         [Header("Preset")] [SerializeField] private Canvas canvas;
-        [SerializeField] private GameObject baseDialogPref, inputDialogPref;
+        [SerializeField] private GameObject baseDialogPref;
+        [SerializeField] private GameObject inputDialogPref;
         private Dictionary<Type, Dialog> dialogCache = new();
 
         public void Show(BaseDialogData data)
@@ -23,22 +24,19 @@ namespace FabricWars.UI
             else baseDialog.Build(data);
         }
 
-        private InputDialog _dialog;
 
         public void ShowInputDialog(InputDialogData data)
         {
             if (!dialogCache.TryGetValue(typeof(InputDialog), out var dialog) || dialog is not InputDialog inputDialog)
             {
-                dialogCache[typeof(InputDialog)] =
+                dialogCache[typeof(InputDialog)] = inputDialog =
                     Instantiate(inputDialogPref, canvas.transform).GetComponent<InputDialog>();
             }
-            else
-            {
-                inputDialog.Build(data);
-            }
+
+            inputDialog.Build(data);
         }
 
         public bool IsTypeAlive<T>() where T : Dialog =>
-            dialogCache.TryGetValue(typeof(T), out var dialog) && dialog.gameObject != null;
+            dialogCache.TryGetValue(typeof(T), out var dialog) && dialog.gameObject.activeSelf;
     }
 }

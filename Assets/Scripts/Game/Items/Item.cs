@@ -14,8 +14,9 @@ namespace FabricWars.Game.Items
         [SerializeField] private SerializableDictionary<string, StringTable> contentTable;
 
         public int weight = 0;
-        public Sprite sprite;
+        public int maxAmount = 1;
         public bool canCatch = true;
+        public Sprite sprite;
         public SerializableDictionary<Element, int> elements;
 
         public ItemObject Create(Vector2 position)

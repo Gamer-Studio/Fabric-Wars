@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FabricWars.Game;
 using FabricWars.Game.Entities;
 using FabricWars.Game.Items;
 using FabricWars.Utils.Extensions;
@@ -13,6 +14,7 @@ namespace FabricWars.Scenes.Board
     public class Player : Entity
     {
         public static readonly List<Player> players = new();
+        public Inventory inventory;
         [SerializeField] private Vector2 direction;
         [SerializeField] private Rigidbody2D body;
         
@@ -56,6 +58,8 @@ namespace FabricWars.Scenes.Board
             if (other.gameObject.CompareTag("Item"))
             {
                 var item = other.gameObject.GetComponent<ItemObject>();
+                
+                
                 Debug.Log(item.type.name);
             }
         }

@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace FabricWars.Scenes.Board
 {
-    public sealed class BoardManager : MonoBehaviour
+    public sealed class GameManager : MonoBehaviour
     {
-        public static BoardManager instance { get; private set; }
+        public static GameManager instance { get; private set; }
 
         public Camera mainCamera;
         [SerializeField] private Rigidbody2D cameraTargetBody;

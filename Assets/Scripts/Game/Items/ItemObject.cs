@@ -68,7 +68,7 @@ namespace FabricWars.Game.Items
             if (inputValue)
             {
                 pointer.transform.position =
-                    BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition).Z(0);
+                    Scenes.Board.GameManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition).Z(0);
                 _dragFunc = StartCoroutine(StartDrag());
             }
             else
@@ -124,7 +124,7 @@ namespace FabricWars.Game.Items
             _bumpedItems.Add(this);
             while (true)
             {
-                var targetPos = BoardManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var targetPos = Scenes.Board.GameManager.instance.mainCamera.ScreenToWorldPoint(Input.mousePosition);
                 var prevPos = pointer.transform.position;
                 var distance = prevPos.Vector3Distance(targetPos);
 

@@ -67,7 +67,6 @@ namespace FabricWars.Editor.Utils
                 
                 default:
                 {
-                    Debug.Log(property.type);
                     EditorGUI.PropertyField(position, property, label);
                     break;
                 }

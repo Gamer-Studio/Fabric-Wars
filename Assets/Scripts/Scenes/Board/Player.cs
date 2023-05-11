@@ -53,14 +53,11 @@ namespace FabricWars.Scenes.Board
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void OnItemHit(ItemObject itemObject)
         {
-            if (other.gameObject.CompareTag("Item"))
+            if (inventory.TryAddItem(itemObject.type, 1) < 1)
             {
-                var item = other.gameObject.GetComponent<ItemObject>();
-                
-                
-                Debug.Log(item.type.name);
+                ItemManager.instance.Release(itemObject);
             }
         }
     }

@@ -20,5 +20,8 @@ namespace FabricWars.Game
             item = this.item;
             itemAmount = amount;
         }
+
+        public static bool IsNullOrEmpty(InventorySlot slot) =>
+            slot == null || slot.item == null || slot.item == Item.None || slot.amount == 0;
     }
 }

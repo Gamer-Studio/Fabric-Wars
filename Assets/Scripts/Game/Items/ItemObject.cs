@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Game.Entities.Core;
 using FabricWars.Scenes.Board;
@@ -95,13 +96,21 @@ namespace FabricWars.Game.Items
             }
         }
 
-
-        private void OnCollisionEnter2D(Collision2D col)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if (this != dragObj || !col.gameObject.CompareTag("Item")) return;
+            if (col.CompareTag("Item"))
+            {
+                if (this != dragObj) return;
 
-            var comp = col.gameObject.GetComponent<ItemObject>();
-            if (!_bumpedItems.Contains(comp) && comp.type == type) _bumpedItems.Add(comp);
+                var comp = col.gameObject.GetComponent<ItemObject>();
+                if (!_bumpedItems.Contains(comp) && comp.type == type) _bumpedItems.Add(comp);
+            }
+
+            if (col.CompareTag("Player"))
+            {
+                var player = col.GetComponent<Player>();
+                player.OnItemHit(this);
+            }
         }
 
         public static readonly List<ItemObject> _bumpedItems = new();

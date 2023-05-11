@@ -20,8 +20,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b9fff726548921141b5369af6bbc7588, type: 2}
     - {fileID: 11400000, guid: e6a98435d872d064b9790cc860162858, type: 2}
   weight: 1
-  sprite: {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
+  maxAmount: 10
   canCatch: 1
+  sprite: {fileID: 21300000, guid: 623b7af1612442a45b247ac5f678931a, type: 3}
   elements:
     m_keys:
     - {fileID: 11400000, guid: e85a4ac86d411d74bb00d76baee82049, type: 2}

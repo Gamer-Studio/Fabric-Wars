@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FabricWars.Utils.Singletons;
 using UnityEngine;
 
-namespace FabricWars.UI
+namespace FabricWars.Graphics.UI
 {
     public class DialogManager : DDOLSingletonMonoBehaviour<DialogManager>
     {

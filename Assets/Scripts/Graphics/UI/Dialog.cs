@@ -1,7 +1,7 @@
 ﻿using FabricWars.Utils;
 using UnityEngine;
 
-namespace FabricWars.UI
+namespace FabricWars.Graphics.UI
 {
     public abstract class Dialog : MonoBehaviour
     {

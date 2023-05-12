@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace FabricWars.UI
+namespace FabricWars.Graphics.UI
 {
     public struct BaseDialogData
     {

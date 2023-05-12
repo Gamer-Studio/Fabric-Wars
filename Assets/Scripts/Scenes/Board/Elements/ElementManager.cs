@@ -3,7 +3,7 @@ using System.Linq;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Recipes;
 using FabricWars.Graphics.W2D;
-using FabricWars.UI;
+using FabricWars.Graphics.UI;
 using FabricWars.Utils.Extensions;
 using FabricWars.Utils.KeyBinds;
 using SRF;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FabricWars.Utils.Extensions;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,8 +9,9 @@ namespace FabricWars.Worlds
     public class World : MonoBehaviour
     {
         public const int ChunkSize = 20;
-        public int viewDistance;
-        public Tilemap tilemap;
+        public List<Tilemap> tilemapLayers;
+        public int loadDistance;
+        public int unloadDistance;
         public TileBase[] tiles;
 
         [SerializeField] private Vector3Int previousPlayerChunk;
@@ -41,20 +43,17 @@ namespace FabricWars.Worlds
 
         private void LoadChunks()
         {
-            var newChunks = new HashSet<Vector3Int>();
-
-            for (var x = -viewDistance; x <= viewDistance; x++)
+            for (var x = -loadDistance; x <= loadDistance; x++)
             {
-                for (var y = -viewDistance; y <= viewDistance; y++)
+                for (var y = -loadDistance; y <= loadDistance; y++)
                 {
                     var chunkPos = new Vector3Int(previousPlayerChunk.x + x, previousPlayerChunk.y + y, 0);
                     if (!loadedChunks.ContainsKey(chunkPos))
                     {
-                        var newChunk = new Chunk(ChunkSize, chunkPos, tilemap, tiles);
+                        var newChunk = new Chunk(ChunkSize, chunkPos, tiles, tilemapLayers[0], tilemapLayers[1], tilemapLayers[2], tilemapLayers[3]);
+                        newChunk.Generate();
                         loadedChunks.Add(chunkPos, newChunk);
                     }
-
-                    newChunks.Add(chunkPos);
                 }
             }
 
@@ -62,7 +61,8 @@ namespace FabricWars.Worlds
 
             foreach (var (position, chunk) in loadedChunks)
             {
-                if (!newChunks.Contains(position))
+                if (position.x < previousPlayerChunk.x - unloadDistance || position.x > previousPlayerChunk.x + unloadDistance ||
+                    position.y < previousPlayerChunk.y - unloadDistance || position.y > previousPlayerChunk.y + unloadDistance)
                 {
                     chunk.Clear();
                     chunksToRemove.Add(position);

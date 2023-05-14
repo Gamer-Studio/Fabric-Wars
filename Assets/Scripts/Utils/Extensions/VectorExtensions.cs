@@ -97,6 +97,10 @@ namespace FabricWars.Utils.Extensions
         public static Vector3Int Clamp(this Vector3Int vector, Vector3Int min, Vector3Int max) => new(Math.Clamp(vector.x, min.x, max.x), Math.Clamp(vector.y, min.y, max.y), Math.Clamp(vector.z, min.z, max.z));
         public static Vector3Int Clamp(this Vector3Int vector, int min, int max) => new(Math.Clamp(vector.x, min, max), Math.Clamp(vector.y, min, max), Math.Clamp(vector.z, min, max));
 
+        public static bool In(this Vector3Int vector)
+        {
+            return false;
+        }
         public static Vector3Int Lerp(this Vector3Int vector1, Vector3Int vector2, float amount) => new(
             (int)(vector1.x + (vector2.x - vector1.x) * amount),
             (int)(vector1.y + (vector2.y - vector1.y) * amount),

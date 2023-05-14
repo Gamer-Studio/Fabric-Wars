@@ -4,6 +4,7 @@ using FabricWars.Game.Elements;
 using FabricWars.Game.Entities;
 using FabricWars.Game.Items;
 using FabricWars.Game.Recipes;
+using FabricWars.Worlds.Tiles;
 using UnityEngine;
 
 namespace FabricWars
@@ -32,6 +33,7 @@ namespace FabricWars
             Entity.Load();
             Recipe.LoadScopeRecipe(loadedElements);
             BulletComponent.Load();
+            WorldTile.Load();
         }
     }
 }

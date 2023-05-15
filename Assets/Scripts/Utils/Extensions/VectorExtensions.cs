@@ -20,6 +20,7 @@ namespace FabricWars.Utils.Extensions
         public static Vector2 Min(this Vector2 vector1, Vector2 vector2) => new(Math.Min(vector1.x, vector2.x), Math.Min(vector1.y, vector2.y));
         public static Vector2 Max(this Vector2 vector1, Vector2 vector2) => new(Math.Max(vector1.x, vector2.x), Math.Max(vector1.y, vector2.y));
         public static Vector2 Action(this Vector2 vector, Func<Vector2, Vector2> action) => action(vector);
+        public static T Action <T> (this Vector2 vector, Func<Vector2, T> action) => action(vector);
 
         #endregion Vector2
         

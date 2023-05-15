@@ -24,7 +24,6 @@ namespace FabricWars
 
             if (File.Exists(Path.Combine(dataPath, "Keybinds.json")))
             {
-
                 using var file = File.OpenText(Path.Combine(dataPath, "Keybinds.json"));
                 using var reader = new JsonTextReader(file);
                 foreach (var (key, token) in (JObject)JToken.ReadFrom(reader))

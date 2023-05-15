@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using FabricWars.Utils.Singletons;
 using UnityEngine;
+using UnityEngine.ResourceManagement.Util;
 
 namespace FabricWars.Graphics.UI
 {
-    public class DialogManager : DDOLSingletonMonoBehaviour<DialogManager>
+    public class DialogManager : ComponentSingleton<DialogManager>
     {
         [Header("Preset")] [SerializeField] private Canvas canvas;
         [SerializeField] private GameObject baseDialogPref;

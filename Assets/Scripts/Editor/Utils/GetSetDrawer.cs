@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System.Reflection;
+using FabricWars.Game.Items;
 using FabricWars.Utils.Attributes;
 using UnityEditor;
 using UnityEngine;
@@ -64,10 +65,19 @@ namespace FabricWars.Editor.Utils
                     
                     break;
                 }
+
+                /*
+                case "PPtr<$Item>":
+                {
+                    EditorGUI.ObjectField(position, property, typeof(Item));
+                    break;
+                }
+                */
                 
                 default:
                 {
                     EditorGUI.PropertyField(position, property, label);
+                    Debug.Log(property.type);
                     break;
                 }
             }

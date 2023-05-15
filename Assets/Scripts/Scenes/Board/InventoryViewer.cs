@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using FabricWars.Game;
+using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,9 +9,15 @@ namespace FabricWars.Scenes.Board
 {
     public class InventoryViewer : MonoBehaviour
     {
+        #region events
+
         public UnityEvent<bool> onStateChange;
 
-        private bool _open = false;
+        #endregion events
+
+        #region variables
+        private Inventory inventory => PlayerManager.Instance.currentPlayer.inventory;
+        [SerializeField, GetSet("open")] private bool _open = false;
         public bool open
         {
             get => _open;
@@ -16,17 +25,34 @@ namespace FabricWars.Scenes.Board
             {
                 _open = value;
                 onStateChange.Invoke(value);
-
-                if (_openCoroutine != null) StopCoroutine(_openCoroutine);
-                StartCoroutine(Open(value));
             }
         }
 
-        private Coroutine _openCoroutine;
-        private IEnumerator Open(bool hide = false)
+        [SerializeField] private RectTransform rect;
+        public float openSpeed = 16;
+
+        #endregion variables
+
+        private void Start()
         {
-            Debug.Log(hide);
-            yield break;
+            rect = transform as RectTransform;
+
+            StartCoroutine(Move());
+        }
+
+        public void PinClicked() => open = !open;
+
+        private IEnumerator Move()
+        {
+            while (true)
+            {
+                var anchor = rect.anchoredPosition;
+
+                if (open) rect.anchoredPosition = anchor.y < 100 ? anchor.Add(0, openSpeed) : anchor.Y(100);
+                else rect.anchoredPosition = anchor.y > -100 ? anchor.Add(0, -openSpeed) : anchor.Y(-100);
+
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

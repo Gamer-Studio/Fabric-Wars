@@ -1,12 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.ResourceManagement.Util;
 
 namespace FabricWars.Scenes.Board
 {
-    public sealed class PlayerManager : MonoBehaviour
+    public sealed class PlayerManager : ComponentSingleton<PlayerManager>
     {
-        public PlayerManager instance { get; private set; }
-
         public Player currentPlayer;
         
         [Header("Viewer Panels")] 
@@ -17,15 +16,7 @@ namespace FabricWars.Scenes.Board
 
         private void Awake()
         {
-            if (instance != null)
-            {
-                Destroy(this);
-                return;
-            }
-
             Settings.keyMappings.TryGetValue("playerManager_openInventory", out openInventory);
-
-            instance = this;
         }
 
         private void Update()

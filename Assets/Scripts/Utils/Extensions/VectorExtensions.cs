@@ -9,6 +9,7 @@ namespace FabricWars.Utils.Extensions
         
         public static Vector2 X(this Vector2 vector, float x) => new (x, vector.y);
         public static Vector2 Y(this Vector2 vector, float y) => new (vector.x, y);
+        public static void Alloc(this Vector2 vector, out Vector2 target) => target = vector;
         public static Vector2 Add(this Vector2 vector, float x, float y) => new (vector.x + x, vector.y + y);
         public static Vector2 Add(this Vector2 vector1, Vector2 vector2) => new(vector1.x + vector2.x, vector1.y + vector2.y);
         public static Vector2 Multiply(this Vector2 vector, float x, float y) => new(vector.x * x, vector.y * y);
@@ -18,6 +19,7 @@ namespace FabricWars.Utils.Extensions
         public static Vector2 Abs(this Vector2 vector) => new(Math.Abs(vector.x), Math.Abs(vector.y));
         public static Vector2 Min(this Vector2 vector1, Vector2 vector2) => new(Math.Min(vector1.x, vector2.x), Math.Min(vector1.y, vector2.y));
         public static Vector2 Max(this Vector2 vector1, Vector2 vector2) => new(Math.Max(vector1.x, vector2.x), Math.Max(vector1.y, vector2.y));
+        public static Vector2 Action(this Vector2 vector, Func<Vector2, Vector2> action) => action(vector);
 
         #endregion Vector2
         
@@ -68,6 +70,7 @@ namespace FabricWars.Utils.Extensions
         
         public static Vector2Int X(this Vector2Int vector, int x) => new Vector2Int(x, vector.y);
         public static Vector2Int Y(this Vector2Int vector, int y) => new Vector2Int(vector.x, y);
+        public static void Alloc(this Vector2Int vector, out Vector2Int target)=>target = vector;
         public static Vector2Int Add(this Vector2Int vector, int x, int y) => new Vector2Int(x + vector.x, y + vector.y);
         public static Vector2Int Multiply(this Vector2Int vector, int x, int y) => new Vector2Int(x * vector.x, y * vector.y);
         public static Vector2Int Abs(this Vector2Int vector) => new Vector2Int(Math.Abs(vector.x), Math.Abs(vector.y));

@@ -8,8 +8,11 @@ namespace FabricWars.Scenes.Board
     public sealed class GameManager : MonoBehaviour
     {
         public static GameManager instance { get; private set; }
-
-        public Camera mainCamera;
+        [Header("Managers")] 
+        public PlayerManager playerManager;
+        
+        private Camera _camera;
+        [Header("Components")]
         [SerializeField] private Rigidbody2D cameraTargetBody;
         public CinemachineVirtualCamera virtualCamera;
 
@@ -21,7 +24,7 @@ namespace FabricWars.Scenes.Board
                 return;
             }
 
-            if (!mainCamera) mainCamera = Camera.main;
+            if (!_camera) _camera = Camera.main;
 
             instance = this;
         }
@@ -67,11 +70,11 @@ namespace FabricWars.Scenes.Board
 
         private IEnumerator MoveCamera()
         {
-            var bPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            var bPos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
             for (;;)
             {
-                var aPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var aPos = _camera.ScreenToWorldPoint(Input.mousePosition);
 
                 cameraTargetBody.AddForce(new Vector2((bPos.x - aPos.x) * cameraMoveSpeed, (bPos.y - aPos.y) * cameraMoveSpeed));
 

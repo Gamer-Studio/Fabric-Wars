@@ -13,7 +13,8 @@ namespace FabricWars
         public static string dataPath;
         public static readonly Dictionary<string, KeyCode> keyMappings = new ()
         {
-            ["elementManager.activateWithSelect"] = KeyCode.LeftShift
+            ["elementManager.activateWithSelect"] = KeyCode.LeftShift,
+            ["playerManager_openInventory"] = KeyCode.I
         };
 
         static Settings()
@@ -41,8 +42,6 @@ namespace FabricWars
                     }
                 }
             }
-            
-            //var keyData = JsonUtility.FromJson<SettingsJson>(File.ReadAllText("Settings.json"));
         }
 
         public static void Save()

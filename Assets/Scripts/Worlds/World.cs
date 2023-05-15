@@ -8,7 +8,7 @@ namespace FabricWars.Worlds
 {
     public class World : MonoBehaviour
     {
-        public const int ChunkSize = 20;
+        public const int ChunkSize = 10;
         public List<Tilemap> tilemapLayers;
         public int loadDistance;
         public int unloadDistance;

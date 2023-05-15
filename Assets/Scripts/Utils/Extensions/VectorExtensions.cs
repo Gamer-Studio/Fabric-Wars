@@ -5,7 +5,8 @@ namespace FabricWars.Utils.Extensions
 {
     public static class VectorExtensions
     {
-        // Vector2
+        #region Vector2
+        
         public static Vector2 X(this Vector2 vector, float x) => new (x, vector.y);
         public static Vector2 Y(this Vector2 vector, float y) => new (vector.x, y);
         public static Vector2 Add(this Vector2 vector, float x, float y) => new (vector.x + x, vector.y + y);
@@ -17,8 +18,10 @@ namespace FabricWars.Utils.Extensions
         public static Vector2 Abs(this Vector2 vector) => new(Math.Abs(vector.x), Math.Abs(vector.y));
         public static Vector2 Min(this Vector2 vector1, Vector2 vector2) => new(Math.Min(vector1.x, vector2.x), Math.Min(vector1.y, vector2.y));
         public static Vector2 Max(this Vector2 vector1, Vector2 vector2) => new(Math.Max(vector1.x, vector2.x), Math.Max(vector1.y, vector2.y));
+
+        #endregion Vector2
         
-        // Vector3
+        #region Vector3
         public static Vector3 X(this Vector3 vector, float x) => new(x, vector.y, vector.z);
         public static Vector3 Y(this Vector3 vector, float y) => new(vector.x, y, vector.z);
         public static Vector3 Z(this Vector3 vector, float z) => new(vector.x, vector.y, z);
@@ -58,8 +61,11 @@ namespace FabricWars.Utils.Extensions
             x = vector.x;
             y = vector.y;
         }
+        
+        #endregion Vector3
 
-        // Vector2Int
+        #region Vector2Int
+        
         public static Vector2Int X(this Vector2Int vector, int x) => new Vector2Int(x, vector.y);
         public static Vector2Int Y(this Vector2Int vector, int y) => new Vector2Int(vector.x, y);
         public static Vector2Int Add(this Vector2Int vector, int x, int y) => new Vector2Int(x + vector.x, y + vector.y);
@@ -83,7 +89,10 @@ namespace FabricWars.Utils.Extensions
             y = vector.y;
         }
         
-        // Vector3Int
+        #endregion Vector2Int
+        
+        #region Vector3Int
+        
         public static Vector3Int X(this Vector3Int vector, int x) => new(x, vector.y, vector.z);
         public static Vector3Int Y(this Vector3Int vector, int y) => new(vector.x, y, vector.z);
         public static Vector3Int Z(this Vector3Int vector, int z) => new(vector.x, vector.y, z);
@@ -126,7 +135,10 @@ namespace FabricWars.Utils.Extensions
             y = vector.y;
         }
         
-        // 
+        #endregion Vector3Int
+        
+        #region trans
+        
         public static Vector2Int ToVector2Int(this Vector3Int vector) => new(vector.x, vector.y);
         public static Vector3Int ToVector3Int(this Vector2Int vector) => new(vector.x, vector.y, 0);
         public static Vector3Int ToVector3Int(this Vector2Int vector, int z) => new(vector.x, vector.y, z);
@@ -140,5 +152,7 @@ namespace FabricWars.Utils.Extensions
         
         public static Vector3 ToVector3(this Vector3Int vector) => new(vector.x, vector.y, vector.z);
         public static Vector3Int ToVector3Int(this Vector3 vector) => new((int)vector.x, (int)vector.y, (int)vector.z);
+        
+        #endregion trans
     }
 }

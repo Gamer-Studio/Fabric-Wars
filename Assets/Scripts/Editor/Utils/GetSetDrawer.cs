@@ -77,7 +77,7 @@ namespace FabricWars.Editor.Utils
                 default:
                 {
                     EditorGUI.PropertyField(position, property, label);
-                    Debug.Log(property.type);
+                    //Debug.Log(property.type);
                     break;
                 }
             }

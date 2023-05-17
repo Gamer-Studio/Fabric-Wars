@@ -8,6 +8,7 @@ namespace FabricWars.Game
     public class Inventory : MonoBehaviour
     {
         public UnityEvent<int> OnSlotChanged;
+        public UnityEvent<InventorySlot> OnSlotRemoved;
 
         public InventorySlot[] _slots = new InventorySlot[10];
 
@@ -25,7 +26,14 @@ namespace FabricWars.Game
 
                 if (value < _slots.Length)
                 {
-                    
+                    for (var i = value; i < _slots.Length; i++)
+                    {
+                        var slot = _slots[i];
+                        if (slot != null) OnSlotRemoved.Invoke(slot);
+                        _slots[i] = null;
+                    }
+
+                    Array.Resize(ref _slots, value);
                 }
             }
         }
@@ -38,32 +46,38 @@ namespace FabricWars.Game
         /// <returns>인벤토리에 더 이상 아이템을 추가할 수 없을 경우 그만큼 반환</returns>
         public int TryAddItem(Item item, int amount)
         {
-            for (var i = 0; i < _slots.Length; i++)
+            // Check existing slots for the same item
+            foreach (var slot in _slots)
             {
-                var slot = _slots[i];
-                if (InventorySlot.IsNullOrEmpty(slot))
+                if (slot != null && slot.item == item)
                 {
-                    _slots[i] = new InventorySlot(item, amount > item.maxAmount ? item.maxAmount : amount, this, i);
-                    amount -= item.maxAmount;
-                }
-                else if (slot.item == item)
-                {
-                    if (amount + slot.amount > item.maxAmount)
-                    {
-                        amount -= item.maxAmount - slot.amount;
-                        slot.amount = item.maxAmount;
-                    }
-                    else
-                    {
-                        slot.amount += amount;
-                        amount = 0;
-                    }
+                    var addAmount = Math.Min(amount, item.maxAmount - slot.amount);
+                    slot.amount += addAmount;
+                    amount -= addAmount;
                 }
 
-                if (amount < 1) break;
+                if (amount <= 0) break;
             }
 
-            return amount > 0 ? amount : 0;
+            // If there are still items to add, check for empty slots
+            if (amount > 0)
+            {
+                for (var i = 0; i < _slots.Length; i++)
+                {
+                    if (InventorySlot.IsNullOrEmpty(_slots[i]))
+                    {
+                        var addAmount = Math.Min(amount, item.maxAmount);
+                        _slots[i] = new InventorySlot(item, addAmount, this, i);
+                        OnSlotChanged.Invoke(i);
+                        amount -= addAmount;
+                    }
+
+                    if (amount <= 0) break;
+                }
+            }
+
+            // Return the amount of items that could not be added
+            return amount;
         }
 
         private void RemoveItem(int index, int amount)

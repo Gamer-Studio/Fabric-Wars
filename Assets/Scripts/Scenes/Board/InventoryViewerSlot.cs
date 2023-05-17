@@ -31,5 +31,14 @@ namespace FabricWars.Scenes.Board
             }
         }
         [SerializeField] private Image itemImage;
+        [SerializeField] private Image backgroundImage;
+        public bool enable { get; protected set; }
+
+        public void SetEnable(bool enable)
+        {
+            this.enable = enable;
+            backgroundImage.enabled = enable;
+            itemImage.enabled = enable;
+        }
     }
 }

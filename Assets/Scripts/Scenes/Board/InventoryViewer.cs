@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using FabricWars.Game;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
@@ -16,7 +17,6 @@ namespace FabricWars.Scenes.Board
         #endregion events
 
         #region variables
-        private Inventory inventory => PlayerManager.Instance.currentPlayer.inventory;
         [SerializeField, GetSet("open")] private bool _open = false;
         public bool open
         {
@@ -25,17 +25,21 @@ namespace FabricWars.Scenes.Board
             {
                 _open = value;
                 onStateChange.Invoke(value);
+                if (value) SyncInventory(PlayerManager.Instance.currentPlayer.inventory);
             }
         }
 
-        [SerializeField] private RectTransform rect;
         public float openSpeed = 16;
-
+        private RectTransform _rect;
+        [SerializeField] private Inventory currentSyncInventory;
+        [SerializeField] private InventoryViewerSlotBar baseBar;
+        [SerializeField] private Transform slotContainer;
+        [SerializeField] private List<InventoryViewerSlotBar> bars;
         #endregion variables
 
         private void Start()
         {
-            rect = transform as RectTransform;
+            _rect = transform as RectTransform;
 
             StartCoroutine(Move());
         }
@@ -46,13 +50,23 @@ namespace FabricWars.Scenes.Board
         {
             while (true)
             {
-                var anchor = rect.anchoredPosition;
+                var anchor = _rect.anchoredPosition;
 
-                if (open) rect.anchoredPosition = anchor.y < 100 ? anchor.Add(0, openSpeed) : anchor.Y(100);
-                else rect.anchoredPosition = anchor.y > -100 ? anchor.Add(0, -openSpeed) : anchor.Y(-100);
+                if (open) _rect.anchoredPosition = anchor.y < 100 ? anchor.Add(0, openSpeed) : anchor.Y(100);
+                else _rect.anchoredPosition = anchor.y > -100 ? anchor.Add(0, -openSpeed) : anchor.Y(-100);
 
                 yield return new WaitForFixedUpdate();
             }
+        }
+
+        public void SyncInventory(Inventory inventory)
+        {
+            if (currentSyncInventory != inventory)
+            {
+                
+            }
+            
+            currentSyncInventory = inventory;
         }
     }
 }

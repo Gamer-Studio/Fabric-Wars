@@ -9,23 +9,23 @@ namespace FabricWars.Game
     {
         public UnityEvent<int> OnSlotChanged;
 
-        public InventorySlot[] slots = new InventorySlot[10];
+        public InventorySlot[] _slots = new InventorySlot[10];
 
         public int length
         {
-            get => slots.Length;
+            get => _slots.Length;
             set
             {
-                switch (value)
+                if (value <= 0 || value == _slots.Length) return;
+                if (value > _slots.Length)
                 {
-                    case var _ when value <= 0 || value == slots.Length: return;
-                    case var _ when value > slots.Length:
-                        Array.Resize(ref slots, value);
-                        return;
-                    case var _ when value < slots.Length:
-                    {
-                        return;
-                    }
+                    Array.Resize(ref _slots, value);
+                    return;
+                }
+
+                if (value < _slots.Length)
+                {
+                    
                 }
             }
         }
@@ -38,15 +38,13 @@ namespace FabricWars.Game
         /// <returns>인벤토리에 더 이상 아이템을 추가할 수 없을 경우 그만큼 반환</returns>
         public int TryAddItem(Item item, int amount)
         {
-            for (var i = 0; i < slots.Length; i++)
+            for (var i = 0; i < _slots.Length; i++)
             {
-                var slot = slots[i];
+                var slot = _slots[i];
                 if (InventorySlot.IsNullOrEmpty(slot))
                 {
-                    slots[i] = new InventorySlot(item, amount > item.maxAmount ? item.maxAmount : amount);
+                    _slots[i] = new InventorySlot(item, amount > item.maxAmount ? item.maxAmount : amount, this, i);
                     amount -= item.maxAmount;
-
-                    OnSlotChanged.Invoke(i);
                 }
                 else if (slot.item == item)
                 {
@@ -60,8 +58,6 @@ namespace FabricWars.Game
                         slot.amount += amount;
                         amount = 0;
                     }
-
-                    OnSlotChanged.Invoke(i);
                 }
 
                 if (amount < 1) break;
@@ -72,27 +68,26 @@ namespace FabricWars.Game
 
         private void RemoveItem(int index, int amount)
         {
-            if (slots.Length <= index || slots[index] == null) return;
+            if (_slots.Length <= index || _slots[index] == null) return;
 
-            var slot = slots[index];
+            var slot = _slots[index];
 
             slot.amount -= amount;
-            if (slot.amount < 0) slots[index] = null;
-            OnSlotChanged.Invoke(index);
+            if (slot.amount < 0) _slots[index] = null;
         }
 
         public void RemoveItem(Item item, int amount)
         {
-            for (var i = slots.Length - 1; i > 0; i--)
+            for (var i = _slots.Length - 1; i > 0; i--)
             {
-                var slot = slots[i];
+                var slot = _slots[i];
                 if (slot == null || slot.item != item) continue;
 
                 var prev = slot.amount;
                 slot.amount -= amount;
                 amount -= prev;
 
-                if (slot.amount < 0) slots[i] = null;
+                if (slot.amount < 0) _slots[i] = null;
                 if (amount < 0) break;
             }
         }

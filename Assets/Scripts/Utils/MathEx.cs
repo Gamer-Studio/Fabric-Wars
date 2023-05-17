@@ -4,7 +4,7 @@ namespace FabricWars.Utils
 {
     public static class MathEx
     {
-        public static int Range(this int value, int max, int min) => value < min ? min : value > max ? max : value;
+        public static int Range(this int value, int max, int min) => Math.Clamp(value, max, min);
 
         public static int Range(this int value, int max, int min, out int overOrLack)
         {

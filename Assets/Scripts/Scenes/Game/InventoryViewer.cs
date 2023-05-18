@@ -7,7 +7,7 @@ using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FabricWars.Scenes.Board
+namespace FabricWars.Scenes.Game
 {
     public class InventoryViewer : MonoBehaviour
     {

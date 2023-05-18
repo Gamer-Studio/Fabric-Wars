@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.ResourceManagement.Util;
 
-namespace FabricWars.Scenes.Board
+namespace FabricWars.Scenes.Game
 {
     public sealed class PlayerManager : ComponentSingleton<PlayerManager>
     {

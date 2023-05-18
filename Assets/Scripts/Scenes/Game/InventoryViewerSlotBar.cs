@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FabricWars.Scenes.Board
+namespace FabricWars.Scenes.Game
 {
     public class InventoryViewerSlotBar : MonoBehaviour
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace FabricWars.Scenes.Board
+namespace FabricWars.Scenes.Game
 {
     public class Player : Entity
     {

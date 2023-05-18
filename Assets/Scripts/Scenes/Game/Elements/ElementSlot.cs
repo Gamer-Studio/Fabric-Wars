@@ -6,7 +6,7 @@ using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FabricWars.Scenes.Board.Elements
+namespace FabricWars.Scenes.Game.Elements
 {
     public class ElementSlot : MonoBehaviour
     {

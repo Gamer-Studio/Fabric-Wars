@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FabricWars.Scenes.Board.Elements
+namespace FabricWars.Scenes.Game.Elements
 {
     public class ElementValueInputDialogue : MonoBehaviour
     {

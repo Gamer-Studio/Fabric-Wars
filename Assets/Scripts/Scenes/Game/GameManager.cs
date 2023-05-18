@@ -3,7 +3,7 @@ using Cinemachine;
 using FabricWars.Game.Items;
 using UnityEngine;
 
-namespace FabricWars.Scenes.Board
+namespace FabricWars.Scenes.Game
 {
     public sealed class GameManager : MonoBehaviour
     {

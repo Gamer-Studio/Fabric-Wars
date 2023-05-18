@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Tilemaps;
 
-namespace FabricWars.Scenes.Board.Elements
+namespace FabricWars.Scenes.Game.Elements
 {
     public class ElementManager : MonoBehaviour
     {

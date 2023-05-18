@@ -1,5 +1,5 @@
 ﻿using FabricWars.Game.Entities.ETC;
-using FabricWars.Scenes.Board;
+using FabricWars.Scenes.Game;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 

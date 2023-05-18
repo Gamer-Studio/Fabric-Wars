@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using FabricWars.Game.Elements;
-using FabricWars.Scenes.Board.Elements;
+using FabricWars.Scenes.Game.Elements;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 

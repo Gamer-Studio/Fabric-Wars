@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using FabricWars.Game.Elements;
 using FabricWars.Game.Items;
-using FabricWars.Scenes.Board;
-using FabricWars.Scenes.Board.Elements;
+using FabricWars.Scenes.Game;
+using FabricWars.Scenes.Game.Elements;
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;

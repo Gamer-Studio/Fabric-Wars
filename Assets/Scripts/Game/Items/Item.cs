@@ -1,6 +1,6 @@
 ﻿using System;
 using FabricWars.Game.Elements;
-using FabricWars.Scenes.Board;
+using FabricWars.Scenes.Game;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Localization.Metadata;

@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cinemachine;
 using FabricWars.Game.Items;
+using FabricWars.Utils.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FabricWars.Scenes.Game
 {
     public sealed class GameManager : MonoBehaviour
     {
         public static GameManager instance { get; private set; }
+        
         [Header("Managers")] 
         public PlayerManager playerManager;
         
@@ -33,6 +37,11 @@ namespace FabricWars.Scenes.Game
         [SerializeField] private float maxZoomSize = 10;
         [SerializeField] private float minZoomSize = 2;
         [SerializeField] private float zoomSpeed = 2;
+
+        private void Start()
+        {
+            StartCoroutine(TimeUpdater());
+        }
 
         private void Update()
         {
@@ -83,5 +92,29 @@ namespace FabricWars.Scenes.Game
                 yield return new WaitForEndOfFrame();
             }
         }
+        
+        #region time manager
+        public UnityEvent<bool> onPause;
+
+        [SerializeField, GetSet("pause")] private bool _pause;
+
+        public bool pause
+        {
+            get => _pause;
+            set
+            {
+                _pause = value;
+                onPause.Invoke(value);
+            }
+        }
+
+        private IEnumerator TimeUpdater()
+        {
+            while (true)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+        }
+        #endregion
     }
 }

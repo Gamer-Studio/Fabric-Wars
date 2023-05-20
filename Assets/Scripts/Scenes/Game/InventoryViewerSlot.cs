@@ -2,11 +2,13 @@
 using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace FabricWars.Scenes.Game
 {
-    public class InventoryViewerSlot : MonoBehaviour
+    public class InventoryViewerSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerMoveHandler
     {
         [SerializeField, GetSet("item")] private Item _item;
         public Item item
@@ -39,6 +41,36 @@ namespace FabricWars.Scenes.Game
             this.enable = enable;
             backgroundImage.enabled = enable;
             itemImage.enabled = enable;
+        }
+
+        public void OnPointerEnter(PointerEventData data)
+        {
+        }
+
+        public void OnPointerExit(PointerEventData data)
+        {
+        }
+
+        private static InventoryViewerSlot selectedSlot = null;
+        public void OnPointerDown(PointerEventData data)
+        {
+            selectedSlot = this;
+        }
+
+        public void OnPointerMove(PointerEventData data)
+        {
+            if (selectedSlot == this)
+            {
+            }
+        }
+
+        public static void OnPointerUp()
+        {
+            if (selectedSlot != null)
+            {
+                 
+                selectedSlot = null;
+            }
         }
     }
 }

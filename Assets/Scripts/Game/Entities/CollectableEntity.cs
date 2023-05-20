@@ -43,9 +43,9 @@ namespace FabricWars.Game.Entities
                 }
             }
 
-            fillRenderer.material.SetFloat(Cutoff, dropTable.repeatCount.GetFillRatio());
+            fillRenderer.material.SetFloat(Cutoff, dropTable.durability.GetFillRatio());
 
-            if (dropTable.repeatCount.value == dropTable.repeatCount.min)
+            if (dropTable.durability.value == dropTable.durability.min)
                 SendMessage("OnBreak", SendMessageOptions.DontRequireReceiver);
         }
 

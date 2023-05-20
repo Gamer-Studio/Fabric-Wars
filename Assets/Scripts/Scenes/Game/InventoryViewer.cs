@@ -6,6 +6,7 @@ using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace FabricWars.Scenes.Game
 {
@@ -46,6 +47,14 @@ namespace FabricWars.Scenes.Game
             _rect = transform as RectTransform;
 
             StartCoroutine(Move());
+            var input = PlayerInput.GetPlayerByIndex(1);
+            if (input != null)
+            {
+                input.onActionTriggered += context =>
+                {
+                    Debug.Log(context.control.name);
+                };
+            }
         }
 
         public void PinClicked() => open = !open;

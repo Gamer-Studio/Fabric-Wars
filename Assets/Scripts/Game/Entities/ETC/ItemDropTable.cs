@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using FabricWars.Game.Items;
 using FabricWars.Utils;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Game.Entities.ETC
 {
     [Serializable]
     public class ItemDropTable
     {
-        public GaugeInt repeatCount = new(0, 1, 1);
+        public GaugeInt durability = new(0, 1, 1);
         public List<ItemDropInfo> infos = new();
 
         public ItemDropTable()
@@ -18,16 +19,16 @@ namespace FabricWars.Game.Entities.ETC
 
         public ItemDropTable(GaugeInt repeat, params ItemDropInfo[] info)
         {
-            repeatCount = repeat;
+            durability = repeat;
             infos.AddRange(info);
         }
 
         public List<(Item item, int amount)> DropItem()
         {
             var result = new List<(Item item, int amount)>();
-            if (repeatCount.value == repeatCount.min) return result;
+            if (durability.value == durability.min) return result;
             
-            repeatCount.value--;
+            durability.value--;
 
             result.AddRange(
                 from info in infos

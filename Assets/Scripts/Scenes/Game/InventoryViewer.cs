@@ -12,13 +12,7 @@ namespace FabricWars.Scenes.Game
 {
     public class InventoryViewer : MonoBehaviour
     {
-        #region events
-
         public UnityEvent<bool> onStateChange;
-
-        #endregion events
-
-        #region variables
 
         [SerializeField, GetSet("open")] private bool _open = false;
 
@@ -40,13 +34,12 @@ namespace FabricWars.Scenes.Game
         [SerializeField] private Transform slotContainer;
         [SerializeField] private List<InventoryViewerSlotBar> bars;
 
-        #endregion variables
 
         private void Start()
         {
             _rect = transform as RectTransform;
 
-            StartCoroutine(Move());
+            StartCoroutine(ViewerSlide());
             var input = PlayerInput.GetPlayerByIndex(1);
             if (input != null)
             {
@@ -59,14 +52,14 @@ namespace FabricWars.Scenes.Game
 
         public void PinClicked() => open = !open;
 
-        private IEnumerator Move()
+        private IEnumerator ViewerSlide()
         {
             while (true)
             {
                 var anchor = _rect.anchoredPosition;
 
-                if (open) _rect.anchoredPosition = anchor.y < 100 ? anchor.Add(0, openSpeed) : anchor.Y(100);
-                else _rect.anchoredPosition = anchor.y > -100 ? anchor.Add(0, -openSpeed) : anchor.Y(-100);
+                if (open) _rect.anchoredPosition = anchor.y < 99 ? anchor.Add(0, openSpeed) : anchor.Y(100);
+                else _rect.anchoredPosition = anchor.y > -99 ? anchor.Add(0, -openSpeed) : anchor.Y(-100);
 
                 yield return new WaitForFixedUpdate();
             }
@@ -132,8 +125,7 @@ namespace FabricWars.Scenes.Game
         {
             var slotData = currentSyncInventory._slots[index];
 
-            var line = Math.DivRem(index, 10, out var i);
-            var slotObj = bars[line].slots[i];
+            var slotObj = bars[Math.DivRem(index, 10, out var i)].slots[i];
             slotObj.item = slotData.item;
         }
     }

@@ -13,9 +13,6 @@ namespace FabricWars.Utils.Extensions
         public static Vector2 Add(this Vector2 vector, float x, float y) => new (vector.x + x, vector.y + y);
         public static Vector2 Add(this Vector2 vector1, Vector2 vector2) => new(vector1.x + vector2.x, vector1.y + vector2.y);
         public static Vector2 Multiply(this Vector2 vector, float x, float y) => new(vector.x * x, vector.y * y);
-
-        public static Vector2 Multiply(this Vector2 vector, float multiplier) =>
-            new(vector.x * multiplier, vector.y * multiplier);
         public static Vector2 Abs(this Vector2 vector) => new(Math.Abs(vector.x), Math.Abs(vector.y));
         public static Vector2 Min(this Vector2 vector1, Vector2 vector2) => new(Math.Min(vector1.x, vector2.x), Math.Min(vector1.y, vector2.y));
         public static Vector2 Max(this Vector2 vector1, Vector2 vector2) => new(Math.Max(vector1.x, vector2.x), Math.Max(vector1.y, vector2.y));

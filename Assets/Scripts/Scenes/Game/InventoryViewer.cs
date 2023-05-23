@@ -7,6 +7,7 @@ using FabricWars.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace FabricWars.Scenes.Game
 {
@@ -15,7 +16,6 @@ namespace FabricWars.Scenes.Game
         public UnityEvent<bool> onStateChange;
 
         [SerializeField, GetSet("open")] private bool _open = false;
-
         public bool open
         {
             get => _open;
@@ -27,6 +27,9 @@ namespace FabricWars.Scenes.Game
             }
         }
 
+        [Header("KeyBinds"), SerializeField] 
+        private KeyCode openInventory;
+
         public float openSpeed = 16;
         private RectTransform _rect;
         [SerializeField] private Inventory currentSyncInventory;
@@ -37,17 +40,15 @@ namespace FabricWars.Scenes.Game
 
         private void Start()
         {
+            Settings.keyMappings.TryGetValue("playerManager.openInventory", out openInventory);
             _rect = transform as RectTransform;
 
             StartCoroutine(ViewerSlide());
-            var input = PlayerInput.GetPlayerByIndex(1);
-            if (input != null)
-            {
-                input.onActionTriggered += context =>
-                {
-                    Debug.Log(context.control.name);
-                };
-            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(openInventory)) open = !open;
         }
 
         public void PinClicked() => open = !open;

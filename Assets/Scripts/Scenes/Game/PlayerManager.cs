@@ -10,19 +10,17 @@ namespace FabricWars.Scenes.Game
         [Header("Viewer Panels")] 
         public InventoryViewer inventoryViewer;
 
-        [Header("KeyBinds")] 
-        public KeyCode openInventory, interaction1, interaction2;
+        [Header("KeyBinds"), SerializeField] 
+        public KeyCode interaction1, interaction2;
 
         private void Awake()
         {
-            Settings.keyMappings.TryGetValue("playerManager.openInventory", out openInventory);
             Settings.keyMappings.TryGetValue("playerManager.interaction1", out interaction1);
             Settings.keyMappings.TryGetValue("playerManager.interaction2", out interaction2);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(openInventory)) inventoryViewer.open = !inventoryViewer.open;
 
             if (currentPlayer != null)
             {

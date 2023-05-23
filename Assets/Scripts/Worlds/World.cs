@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FabricWars.Utils.Extensions;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,7 +7,7 @@ namespace FabricWars.Worlds
 {
     public class World : MonoBehaviour
     {
-        public const int ChunkSize = 10;
+        public readonly int chunkSize = 10;
         public List<Tilemap> tilemapLayers;
         public int loadDistance;
         public int unloadDistance;
@@ -20,7 +19,7 @@ namespace FabricWars.Worlds
 
         private void Start()
         {
-            playerTransform = Camera.main.transform;
+            playerTransform = Camera.main.transform; // 이건 null 일 수가 있나....?
             previousPlayerChunk = WorldToChunkPosition(playerTransform.position);
             LoadChunks();
         }
@@ -35,9 +34,10 @@ namespace FabricWars.Worlds
             }
         }
 
-        private static Vector3Int WorldToChunkPosition(Vector3 worldPos)
+        public Vector3Int WorldToChunkPosition(Vector3 position)
         {
-            return new Vector3Int(Mathf.FloorToInt(worldPos.x / ChunkSize), Mathf.FloorToInt(worldPos.y / ChunkSize),
+            var worldPos = transform.position;
+            return new Vector3Int(Mathf.FloorToInt((position.x - worldPos.x) / chunkSize), Mathf.FloorToInt((position.y - worldPos.y) / chunkSize),
                 0);
         }
 
@@ -50,7 +50,7 @@ namespace FabricWars.Worlds
                     var chunkPos = new Vector3Int(previousPlayerChunk.x + x, previousPlayerChunk.y + y, 0);
                     if (!loadedChunks.ContainsKey(chunkPos))
                     {
-                        var newChunk = new Chunk(ChunkSize, chunkPos, tiles, tilemapLayers[0], tilemapLayers[1], tilemapLayers[2], tilemapLayers[3]);
+                        var newChunk = new Chunk(this, chunkPos, tiles);
                         newChunk.Generate();
                         loadedChunks.Add(chunkPos, newChunk);
                     }

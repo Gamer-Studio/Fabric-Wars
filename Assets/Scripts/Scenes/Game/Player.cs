@@ -60,5 +60,15 @@ namespace FabricWars.Scenes.Game
                 ItemManager.instance.Release(itemObject);
             }
         }
+
+        public void Interaction_1()
+        {
+            
+        }
+
+        public void Interaction_2()
+        {
+            
+        }
     }
 }

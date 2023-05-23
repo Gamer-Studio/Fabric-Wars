@@ -11,10 +11,13 @@ namespace FabricWars
     public static class Settings
     {
         public static string dataPath;
-        public static readonly Dictionary<string, KeyCode> keyMappings = new ()
+
+        public static readonly Dictionary<string, KeyCode> keyMappings = new()
         {
             ["elementManager.activateWithSelect"] = KeyCode.LeftShift,
-            ["playerManager_openInventory"] = KeyCode.I
+            ["playerManager.openInventory"] = KeyCode.I,
+            ["playerManager.interaction1"] = KeyCode.E,
+            ["playerManager.interaction2"] = KeyCode.F
         };
 
         static Settings()
@@ -30,7 +33,7 @@ namespace FabricWars
                 {
                     if (token == null || !int.TryParse(token.ToString(), out var i)) continue;
 
-                    if(i < 0) continue;
+                    if (i < 0) continue;
                     try
                     {
                         keyMappings[key] = (KeyCode)i;
@@ -45,7 +48,8 @@ namespace FabricWars
 
         public static void Save()
         {
-            File.WriteAllText(Path.Combine(dataPath, "Keybinds.json"), JObject.FromObject(keyMappings).ToString(Formatting.Indented));
+            File.WriteAllText(Path.Combine(dataPath, "Keybinds.json"),
+                JObject.FromObject(keyMappings).ToString(Formatting.Indented));
         }
     }
 }

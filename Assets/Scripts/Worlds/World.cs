@@ -7,7 +7,8 @@ namespace FabricWars.Worlds
 {
     public class World : MonoBehaviour
     {
-        public readonly int chunkSize = 10;
+        [SerializeField] private int _chunkSize = 10;
+        public int chunkSize => _chunkSize;
         public List<Tilemap> tilemapLayers;
         public int loadDistance;
         public int unloadDistance;
@@ -34,10 +35,10 @@ namespace FabricWars.Worlds
             }
         }
 
-        public Vector3Int WorldToChunkPosition(Vector3 position)
+        private Vector3Int WorldToChunkPosition(Vector3 position)
         {
-            var worldPos = transform.position;
-            return new Vector3Int(Mathf.FloorToInt((position.x - worldPos.x) / chunkSize), Mathf.FloorToInt((position.y - worldPos.y) / chunkSize),
+            var targetPos = position - transform.position;
+            return new Vector3Int(Mathf.FloorToInt(targetPos.x / chunkSize), Mathf.FloorToInt(targetPos.y / chunkSize),
                 0);
         }
 

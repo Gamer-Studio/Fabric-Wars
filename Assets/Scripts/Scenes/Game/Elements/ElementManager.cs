@@ -222,11 +222,6 @@ namespace FabricWars.Scenes.Game.Elements
             }
         }
 
-        private int GetElementInputValue(ElementSlot slot)
-        {
-            return 0;
-        }
-
         public IEnumerable<(Element element, int value)> GetActiveElements()
         {
             return from slot in activeSlots

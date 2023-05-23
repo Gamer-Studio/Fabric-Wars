@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FabricWars.Editor.UI
 {
-    [CustomEditor(typeof(Object), true)]
+    [CustomEditor(typeof(Object), true), CanEditMultipleObjects]
     public class EditorButtonDrawer : UnityEditor.Editor
     {
         private readonly List<(MethodInfo, ButtonAttribute)> _buttons = new();

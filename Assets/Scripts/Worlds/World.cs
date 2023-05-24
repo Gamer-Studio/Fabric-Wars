@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using FabricWars.Graphics.EditorUI;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 
 namespace FabricWars.Worlds
 {
     public class World : MonoBehaviour
     {
-        [SerializeField] private int _chunkSize = 10;
+        [Header("ChunkLoader")] [SerializeField]
+        private int _chunkSize = 10;
+
         public int chunkSize => _chunkSize;
         public List<Tilemap> tilemapLayers;
         public int loadDistance;
@@ -16,13 +22,14 @@ namespace FabricWars.Worlds
 
         [SerializeField] private Vector3Int previousPlayerChunk;
         [SerializeField] private Transform playerTransform;
-        [SerializeField] private SerializableDictionary<Vector3Int, Chunk> loadedChunks = new ();
+        [SerializeField] private SerializableDictionary<Vector3Int, Chunk> loadedChunks = new();
 
         private void Start()
         {
             playerTransform = Camera.main.transform; // 이건 null 일 수가 있나....?
             previousPlayerChunk = WorldToChunkPosition(playerTransform.position);
             LoadChunks();
+            StartCoroutine(TimeUpdater());
         }
 
         private void Update()
@@ -62,8 +69,10 @@ namespace FabricWars.Worlds
 
             foreach (var (position, chunk) in loadedChunks)
             {
-                if (position.x < previousPlayerChunk.x - unloadDistance || position.x > previousPlayerChunk.x + unloadDistance ||
-                    position.y < previousPlayerChunk.y - unloadDistance || position.y > previousPlayerChunk.y + unloadDistance)
+                if (position.x < previousPlayerChunk.x - unloadDistance ||
+                    position.x > previousPlayerChunk.x + unloadDistance ||
+                    position.y < previousPlayerChunk.y - unloadDistance ||
+                    position.y > previousPlayerChunk.y + unloadDistance)
                 {
                     chunk.Clear();
                     chunksToRemove.Add(position);
@@ -73,6 +82,33 @@ namespace FabricWars.Worlds
             foreach (var removeChunkPos in chunksToRemove)
             {
                 loadedChunks.Remove(removeChunkPos);
+            }
+        }
+
+        [Header("Time System")]
+        public UnityEvent onDayPass;
+
+        public Light2D globalLight;
+        
+        private const int OneDay = 8 * 2; //  분 단위
+        public (float max, float min) brightness = (0.1f, 0.8f);
+        [SerializeField] private int _currentTime = 0;
+
+        private IEnumerator TimeUpdater()
+        {
+            while (true)
+            {
+                _currentTime++;
+                globalLight.intensity =
+                    _currentTime * 2 < OneDay ? 0.125f * _currentTime : 1 - (0.125f * (_currentTime - OneDay / 2));
+
+                if (_currentTime > OneDay)
+                {
+                    _currentTime = 0;
+                    onDayPass.Invoke();
+                }
+
+                yield return new WaitForSeconds(2);
             }
         }
     }

@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Reflection;
 using FabricWars.Game.Items;
+using FabricWars.Utils;
 using FabricWars.Utils.Serialization;
 using UnityEditor;
 using UnityEngine;
@@ -88,7 +89,7 @@ namespace FabricWars.Editor.Utils
             }
             else if (attr.dirty || !isProperty)
             {
-                var parent = GetParentObject(property.propertyPath, property.serializedObject.targetObject);
+                var parent = ObjectUtil.GetParentObject(property.propertyPath, property.serializedObject.targetObject);
 
                 var type = parent.GetType();
                 var info = type.GetProperty(attr.name);
@@ -99,21 +100,6 @@ namespace FabricWars.Editor.Utils
                     info.SetValue(parent, isProperty ? fieldInfo.GetValue(parent) : value, null);
 
                 attr.dirty = false;
-            }
-        }
-
-        private static object GetParentObject(string path, object obj)
-        {
-            while (true)
-            {
-                var fields = path.Split('.');
-
-                if (fields.Length == 1) return obj;
-
-                var info = obj.GetType().GetField(fields[0], BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                obj = info.GetValue(obj);
-
-                path = string.Join(".", fields, 1, fields.Length - 1);
             }
         }
     }

@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using System.Reflection;
 using FabricWars.Game.Items;
-using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Serialization;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using FabricWars.Game.Elements;
-using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;

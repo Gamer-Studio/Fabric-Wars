@@ -1,6 +1,6 @@
 ﻿using FabricWars.Game.Items;
-using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;

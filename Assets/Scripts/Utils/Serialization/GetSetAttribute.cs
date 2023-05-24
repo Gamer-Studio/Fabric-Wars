@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FabricWars.Utils.Attributes
+namespace FabricWars.Utils.Serialization
 {
     public sealed class GetSetAttribute : PropertyAttribute
     {

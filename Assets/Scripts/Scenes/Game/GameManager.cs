@@ -2,7 +2,7 @@
 using System.Collections;
 using Cinemachine;
 using FabricWars.Game.Items;
-using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 

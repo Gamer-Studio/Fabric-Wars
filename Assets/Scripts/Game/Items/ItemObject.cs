@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using FabricWars.Game.Entities.Core;
 using FabricWars.Scenes.Game;
 using FabricWars.Scenes.Game.Elements;
-using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

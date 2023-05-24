@@ -1,8 +1,8 @@
 ﻿using FabricWars.Game.Elements;
 using FabricWars.Graphics.Shaders;
 using FabricWars.Utils;
-using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 

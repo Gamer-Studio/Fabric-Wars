@@ -1,5 +1,5 @@
 using System;
-using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 

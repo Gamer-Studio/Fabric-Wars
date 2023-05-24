@@ -1,7 +1,7 @@
 ﻿using System;
 using FabricWars.Game.Items;
 using FabricWars.Utils;
-using FabricWars.Utils.Attributes;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 
 namespace FabricWars.Game

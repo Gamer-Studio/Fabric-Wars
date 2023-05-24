@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Game;
-using FabricWars.Utils.Attributes;
 using FabricWars.Utils.Extensions;
+using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;

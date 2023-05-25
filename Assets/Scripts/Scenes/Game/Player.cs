@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FabricWars.Game;
 using FabricWars.Game.Entities;
 using FabricWars.Game.Items;
-using FabricWars.Utils.Extensions;
 using UnityEngine;
 
 namespace FabricWars.Scenes.Game

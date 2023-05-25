@@ -3,7 +3,7 @@
 namespace FabricWars.Utils.Serialization
 {
     [Serializable]
-    public class SerializableContainer <T>
+    public class SerializableContainer <T> where T : new()
     {
         public T content;
 
@@ -11,7 +11,7 @@ namespace FabricWars.Utils.Serialization
         {
             this.content = content;
         }
-        public SerializableContainer() : this(default){}
+        public SerializableContainer() : this(new()) {}
         
         public static implicit operator T(SerializableContainer<T> container) => container.content;
         public static implicit operator SerializableContainer<T>(T content) => new() { content = content };

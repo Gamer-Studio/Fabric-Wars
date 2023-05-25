@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using FabricWars.Graphics.EditorUI;
 using FabricWars.Utils.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
@@ -85,13 +84,12 @@ namespace FabricWars.Worlds
             }
         }
 
-        [Header("Time System")]
-        public UnityEvent onDayPass;
+        [Header("Time System")] public UnityEvent onDayPass;
 
         public Light2D globalLight;
-        
+
         private const int OneDay = 8 * 2; //  분 단위
-        public (float max, float min) brightness = (0.1f, 0.8f);
+        public SerializableContainer<(float max, float min)> brightness = (0.1f, 0.8f);
         [SerializeField] private int _currentTime = 0;
 
         private IEnumerator TimeUpdater()

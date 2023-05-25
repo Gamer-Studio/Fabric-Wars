@@ -13,7 +13,7 @@ namespace FabricWars.Utils.Serialization
         }
         public SerializableContainer() : this(default){}
         
-        public static explicit operator T(SerializableContainer<T> container) => container.content;
-        public static explicit operator SerializableContainer<T>(T content) => new() { content = content };
+        public static implicit operator T(SerializableContainer<T> container) => container.content;
+        public static implicit operator SerializableContainer<T>(T content) => new() { content = content };
     }
 }

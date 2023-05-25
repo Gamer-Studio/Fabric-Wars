@@ -88,25 +88,29 @@ namespace FabricWars.Worlds
 
         public Light2D globalLight;
 
-        private const int OneDay = 8 * 2; //  분 단위
-        public SerializableContainer<(float max, float min)> brightness = (0.1f, 0.8f);
+        private const int HalfDay = 8; //  분 단위
+        public (float max, float min) brightness = (0.6f, 0.05f);
         [SerializeField] private int _currentTime = 0;
 
         private IEnumerator TimeUpdater()
         {
+            var brightnessChange = (brightness.max - brightness.min) / HalfDay;
+
             while (true)
             {
                 _currentTime++;
-                globalLight.intensity =
-                    _currentTime * 2 < OneDay ? 0.125f * _currentTime : 1 - (0.125f * (_currentTime - OneDay / 2));
-
-                if (_currentTime > OneDay)
+                
+                if (_currentTime > HalfDay * 2)
                 {
                     _currentTime = 0;
                     onDayPass.Invoke();
+                    continue;
                 }
+                
+                globalLight.intensity = brightness.min + brightnessChange *
+                    (_currentTime < HalfDay ? _currentTime : HalfDay * 2 - _currentTime);
 
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
             }
         }
     }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1406091d894acd9711751cffa069fe, type: 3}
-  m_Name: Basic Chunk Generator
+  m_Script: {fileID: 11500000, guid: 16d7018fbb304f208f185e50761e9f60, type: 3}
+  m_Name: Basic
   m_EditorClassIdentifier: 
   tile: {fileID: 11400000, guid: 198e3aa688610a444aba8b6bc0e3bf85, type: 2}

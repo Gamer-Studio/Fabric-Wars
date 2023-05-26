@@ -27,5 +27,12 @@ namespace FabricWars.Worlds.Chunks
                 new TileBase[chunkSize * chunkSize]);
             OnClear.Invoke();
         }
+
+        public void Deconstruct(out Chunk chunk, out List<Tilemap> worldLayers, out int size)
+        {
+            chunk = this;
+            worldLayers = layers;
+            size = chunkSize;
+        }
     }
 }

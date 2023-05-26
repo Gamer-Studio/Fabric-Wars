@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,11 +7,18 @@ namespace FabricWars.Utils.Extensions
 {
     public static class TilemapExtensions
     {
-        public static void SetTiles(this Tilemap tilemap, Vector3Int start, Vector3Int end, Func<Vector3Int, TileBase> generator)
+        public static void SetTiles(this Tilemap tilemap, Vector3Int startPos, Vector3Int size, Func<Vector3Int, TileBase> generator)
         {
-            //var tiles = Enumerable.Repeat(tile, range.Length).ToArray();
-            //tilemap.SetTiles(range, tiles);
-            //tilemap.SetTilesBlock();
+            var bound = new BoundsInt(startPos, size);
+            var tiles = new TileBase[size.x * size.y];
+            for (var x = startPos.x; x < startPos.x + size.x; x++)
+            {
+                for (var y = startPos.y; y < startPos.y + size.y; y++)
+                {
+                    tiles[x * size.y + y] = generator(new Vector3Int(x, y));
+                }
+            }
+            tilemap.SetTilesBlock(bound, tiles.ToArray());
         }
 
         public static Vector3Int ToTilemapPosition(this Tilemap tilemap, Vector3 worldPosition)

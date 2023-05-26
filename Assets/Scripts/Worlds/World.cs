@@ -75,7 +75,7 @@ namespace FabricWars.Worlds
                     position.y < previousPlayerChunk.y - unloadDistance ||
                     position.y > previousPlayerChunk.y + unloadDistance)
                 {
-                    chunk.Clear();
+                    chunk.Dispose();
                     chunksToRemove.Add(position);
                 }
             }

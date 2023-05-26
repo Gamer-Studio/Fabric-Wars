@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 namespace FabricWars.Worlds.Chunks
@@ -8,10 +9,11 @@ namespace FabricWars.Worlds.Chunks
     [Serializable]
     public class Chunk
     {
-        public Vector3Int position;
         public readonly World world;
         private int chunkSize => world.chunkSize;
         private List<Tilemap> layers => world.tilemapLayers;
+        public UnityEvent OnClear;
+        public Vector3Int position;
 
         public Chunk(World world, Vector3Int position)
         {
@@ -19,10 +21,11 @@ namespace FabricWars.Worlds.Chunks
             this.world = world;
         }
 
-        public void Clear()
+        public void Dispose()
         {
-            var bounds = new BoundsInt(position * chunkSize, new Vector3Int(chunkSize, chunkSize, 1));
-            layers[1].SetTilesBlock(bounds, new TileBase[chunkSize * chunkSize]);
+            layers[1].SetTilesBlock(new BoundsInt(position * chunkSize, new Vector3Int(chunkSize, chunkSize, 1)),
+                new TileBase[chunkSize * chunkSize]);
+            OnClear.Invoke();
         }
     }
 }

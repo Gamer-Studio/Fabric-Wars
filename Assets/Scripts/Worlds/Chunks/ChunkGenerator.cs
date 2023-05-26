@@ -1,5 +1,4 @@
-﻿using FabricWars.Utils.Extensions;
-using FabricWars.Worlds.Tiles;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,12 +11,13 @@ namespace FabricWars.Worlds.Chunks
 
         public virtual Chunk Generate(World world, Vector3Int position)
         {
+            Debug.Log(position);
             var chunkSize = world.chunkSize;
             var layers = world.tilemapLayers;
             var resultChunk = new Chunk(world, position);
 
-            var startPos = new Vector3Int(position.x * chunkSize, position.y * chunkSize);
-            layers[1].SetTiles(startPos, startPos.Add(chunkSize - 1, chunkSize - 1, 0), tile);
+            layers[1].SetTilesBlock(new BoundsInt(position * chunkSize, new Vector3Int(chunkSize, chunkSize, 1)),
+                Enumerable.Repeat(tile, chunkSize * chunkSize).ToArray());
 
             return resultChunk;
         }

@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using FabricWars.Jobs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,11 +8,11 @@ namespace FabricWars.Utils.Extensions
 {
     public static class TilemapExtensions
     {
-        public static void SetTiles(this Tilemap tilemap, Vector3Int start, Vector3Int end, TileBase tile)
+        public static void SetTiles(this Tilemap tilemap, Vector3Int start, Vector3Int end, Func<Vector3Int, TileBase> generator)
         {
-            var range = Vector3IntRange.Create(start, end).ToArray();
-            var tiles = Enumerable.Repeat(tile, range.Length).ToArray();
-            tilemap.SetTiles(range, tiles);
+            //var tiles = Enumerable.Repeat(tile, range.Length).ToArray();
+            //tilemap.SetTiles(range, tiles);
+            //tilemap.SetTilesBlock();
         }
 
         public static Vector3Int ToTilemapPosition(this Tilemap tilemap, Vector3 worldPosition)

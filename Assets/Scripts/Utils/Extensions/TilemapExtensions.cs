@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FabricWars.Jobs;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,7 +9,7 @@ namespace FabricWars.Utils.Extensions
     {
         public static void SetTiles(this Tilemap tilemap, Vector3Int start, Vector3Int end, TileBase tile)
         {
-            var range = VectorExtensions.Range(start, end);
+            var range = Vector3IntRange.Create(start, end).ToArray();
             var tiles = Enumerable.Repeat(tile, range.Length).ToArray();
             tilemap.SetTiles(range, tiles);
         }

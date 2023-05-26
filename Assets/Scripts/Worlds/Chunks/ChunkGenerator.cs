@@ -1,13 +1,14 @@
 ﻿using FabricWars.Utils.Extensions;
 using FabricWars.Worlds.Tiles;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace FabricWars.Worlds.Chunks
 {
     [CreateAssetMenu(fileName = "new Chunk Generator", menuName = "World/Chunk/Basic Chunk Generator")]
     public class ChunkGenerator : ScriptableObject
     {
-        public WorldTile tile;
+        public TileBase tile;
 
         public virtual Chunk Generate(World world, Vector3Int position)
         {

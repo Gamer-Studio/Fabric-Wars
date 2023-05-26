@@ -191,35 +191,6 @@ namespace FabricWars.Utils.Extensions
             y = vector.y;
         }
 
-        public static Vector3Int[] Range(Vector3Int start, Vector3Int end)
-        {
-            Vector3Int startPos = start.Min(end), endPos = startPos.Max(end);
-            var result = new Vector3Int[(endPos.x - startPos.x) * (endPos.y - startPos.y) * (endPos.z - startPos.z)];
-            var index = 0;
-            
-            for (var x = startPos.x; x < endPos.x; x++)
-            {
-                for (var y = startPos.y; y < endPos.y; y++)
-                {
-                    if (startPos.z != 0 || endPos.z != 0)
-                    {
-                        for (var z = startPos.z; z < endPos.z; z++)
-                        {
-                            result[index] = new Vector3Int(x, y, z);
-                            index++;
-                        }
-                    }
-                    else
-                    {
-                        result[index] = new Vector3Int(x, y, startPos.z);
-                        index++;
-                    }
-                }
-            }
-
-            return result;
-        }
-
         #endregion Vector3Int
 
         #region trans

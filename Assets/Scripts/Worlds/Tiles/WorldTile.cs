@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 namespace FabricWars.Worlds.Tiles
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(fileName = "new World Tile", menuName = "World/Tile/Basic Tile")]
     public partial class WorldTile : RuleTile<WorldTile.Neighbor>
     {
         public float slowness = 0;

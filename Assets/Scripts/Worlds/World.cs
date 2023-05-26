@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using FabricWars.Utils.Serialization;
+using FabricWars.Worlds.Chunks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -10,10 +11,12 @@ namespace FabricWars.Worlds
 {
     public class World : MonoBehaviour
     {
-        [Header("ChunkLoader")] [SerializeField]
-        private int _chunkSize = 10;
-
+        [Header("ChunkLoader")] 
+        [SerializeField] private int _chunkSize = 10;
         public int chunkSize => _chunkSize;
+        public ChunkGenerator baseGenerator;
+        public bool isInfinite = true;
+        
         public List<Tilemap> tilemapLayers;
         public int loadDistance;
         public int unloadDistance;
@@ -55,10 +58,9 @@ namespace FabricWars.Worlds
                 for (var y = -loadDistance; y <= loadDistance; y++)
                 {
                     var chunkPos = new Vector3Int(previousPlayerChunk.x + x, previousPlayerChunk.y + y, 0);
-                    if (!loadedChunks.ContainsKey(chunkPos))
+                    if (!loadedChunks.ContainsKey(chunkPos) && isInfinite)
                     {
-                        var newChunk = new Chunk(this, chunkPos, tiles);
-                        newChunk.Generate();
+                        var newChunk = baseGenerator.Generate(this, chunkPos); //new Chunk(this, chunkPos, tiles);
                         loadedChunks.Add(chunkPos, newChunk);
                     }
                 }
@@ -110,7 +112,7 @@ namespace FabricWars.Worlds
                 globalLight.intensity = brightness.min + brightnessChange *
                     (_currentTime < HalfDay ? _currentTime : HalfDay * 2 - _currentTime);
 
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(60);
             }
         }
     }

@@ -39,15 +39,13 @@ namespace FabricWars.Game.Entities.Core
             }
         }
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             if (!defaultInstance) defaultInstance = this;
         }
 
-        protected override void Start()
+        private void Start()
         {
-            base.Start();
 
             ElementManager.instance.AddSlot(Element.Karma, 10, out _);
         }

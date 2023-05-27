@@ -17,10 +17,8 @@ namespace FabricWars.Scenes.Game
         [SerializeField] private Rigidbody2D body;
         [SerializeField] private LineRenderer line;
         
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
-
             if (body == null) body = GetComponent<Rigidbody2D>();
 
             players.Add(this);
